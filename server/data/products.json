@@ -1,0 +1,498 @@
+[
+  {
+    "id": "prod_7674630856404684052",
+    "name": "Nommi Abt The childhood",
+    "price": 13.5,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "Nommi",
+    "series": "About The Childhood",
+    "description": "Nommi Abt The childhood plush doll blind box by TOP TOY x SURE FUN. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.31,
+      "xmin": 0.03,
+      "ymax": 0.86,
+      "xmax": 0.94
+    },
+    "originalScreenshotUrl": "/uploads/originals/7674630856404684052_original.png",
+    "croppedImageUrl": "/uploads/cropped/7674630856404684052_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7674630856404684052",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Nommi",
+      "Abt The childhood",
+      "Plush Dolls",
+      "TOP TOY",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7675390908237352213",
+    "name": "Mega Space molly V2",
+    "price": 4,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Action Figures",
+    "brand": "Pop Mart",
+    "series": "Mega Space Molly",
+    "description": "Mega Space molly V2 series 02 collectible figure in yellow astronaut suit. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.42,
+      "xmin": 0.18,
+      "ymax": 0.85,
+      "xmax": 0.82
+    },
+    "originalScreenshotUrl": "/uploads/originals/7675390908237352213_original.png",
+    "croppedImageUrl": "/uploads/cropped/7675390908237352213_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7675390908237352213",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Pop Mart",
+      "Mega Space molly V2",
+      "Action Figures",
+      "Astronaut",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7675392583178128660",
+    "name": "Nommi Pinky Energy",
+    "price": 14,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "Nommi",
+    "series": "Pinky Energy",
+    "description": "Nommi Pinky Energy plush doll blind box. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.35,
+      "xmin": 0.18,
+      "ymax": 0.88,
+      "xmax": 0.82
+    },
+    "originalScreenshotUrl": "/uploads/originals/7675392583178128660_original.png",
+    "croppedImageUrl": "/uploads/cropped/7675392583178128660_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7675392583178128660",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Nommi",
+      "Pinky Energy",
+      "Plush Dolls",
+      "TOP TOY",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7675019183867841812",
+    "name": "SKULLPANDA The Sound",
+    "price": 4,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Blind Box",
+    "brand": "Pop Mart",
+    "series": "Skullpanda",
+    "description": "SKULLPANDA The Sound series collectible blind box figure. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.4,
+      "xmin": 0.06,
+      "ymax": 0.82,
+      "xmax": 0.94
+    },
+    "originalScreenshotUrl": "/uploads/originals/7675019183867841812_original.png",
+    "croppedImageUrl": "/uploads/cropped/7675019183867841812_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7675019183867841812",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Pop Mart",
+      "Skullpanda",
+      "The Sound",
+      "Blind Box",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7675018044170652949",
+    "name": "Baby Three weirdly adorable mini",
+    "price": 9,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "Baby Three",
+    "series": "Weirdly Adorable",
+    "description": "Baby Three weirdly adorable mini plush doll series. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.38,
+      "xmin": 0.16,
+      "ymax": 0.82,
+      "xmax": 0.8
+    },
+    "originalScreenshotUrl": "/uploads/originals/7675018044170652949_original.png",
+    "croppedImageUrl": "/uploads/cropped/7675018044170652949_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7675018044170652949",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Baby Three",
+      "weirdly adorable mini",
+      "Plush Dolls",
+      "Mini",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7674631770985336085",
+    "name": "Stitch blindbox",
+    "price": 5,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "Disney",
+    "series": "Stitch Sleep Series",
+    "description": "Stitch blindbox Eat Something Before Sleep vinyl plush toy. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.44,
+      "xmin": 0.16,
+      "ymax": 0.96,
+      "xmax": 0.86
+    },
+    "originalScreenshotUrl": "/uploads/originals/7674631770985336085_original.png",
+    "croppedImageUrl": "/uploads/cropped/7674631770985336085_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7674631770985336085",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Disney",
+      "Stitch blindbox",
+      "Plush Dolls",
+      "Nightcap",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7674475508981206293",
+    "name": "Molly Baking Time Mini",
+    "price": 4.5,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Blind Box",
+    "brand": "Pop Mart",
+    "series": "Molly Baking Time",
+    "description": "Molly Baking Time Carb-Lover series mini claw machine collectible box. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.44,
+      "xmin": 0.12,
+      "ymax": 0.92,
+      "xmax": 0.86
+    },
+    "originalScreenshotUrl": "/uploads/originals/7674475508981206293_original.png",
+    "croppedImageUrl": "/uploads/cropped/7674475508981206293_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7674475508981206293",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Pop Mart",
+      "Molly Baking Time",
+      "Carb Lover",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7674473498621857045",
+    "name": "Molly Baking Time",
+    "price": 11,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Blind Box",
+    "brand": "Pop Mart",
+    "series": "Molly Baking Time",
+    "description": "Molly Baking Time Carb Lover series figures with chef hat and loaf toast box. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.45,
+      "xmin": 0.1,
+      "ymax": 0.86,
+      "xmax": 0.66
+    },
+    "originalScreenshotUrl": "/uploads/originals/7674473498621857045_original.png",
+    "croppedImageUrl": "/uploads/cropped/7674473498621857045_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7674473498621857045",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Pop Mart",
+      "Molly Baking Time",
+      "Carb Lover",
+      "Figures",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7664252590699416853",
+    "name": "Baby Three Pocket bunny Treasure",
+    "price": 7.5,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "Baby Three",
+    "series": "Pocket Bunny Treasure",
+    "description": "Baby Three Pocket bunny Treasure plush blind box with yellow bonnet. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.38,
+      "xmin": 0.14,
+      "ymax": 0.85,
+      "xmax": 0.87
+    },
+    "originalScreenshotUrl": "/uploads/originals/7664252590699416853_original.png",
+    "croppedImageUrl": "/uploads/cropped/7664252590699416853_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7664252590699416853",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Baby Three",
+      "Pocket bunny Treasure",
+      "Plush Dolls",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7663905196409376021",
+    "name": "Cries Baby animal Kindergarten",
+    "price": 7,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "Crie Baby",
+    "series": "Animal Kindergarten",
+    "description": "Cries Baby animal Kindergarten plush doll pendant blind box. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.33,
+      "xmin": 0.08,
+      "ymax": 0.9,
+      "xmax": 0.9
+    },
+    "originalScreenshotUrl": "/uploads/originals/7663905196409376021_original.png",
+    "croppedImageUrl": "/uploads/cropped/7663905196409376021_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7663905196409376021",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Crie Baby",
+      "Cries Baby animal Kindergarten",
+      "Plush Dolls",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7663903914055503124",
+    "name": "Samuel Ocean",
+    "price": 5,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "MEI YI YOU ART TOY",
+    "series": "Samuel Ocean",
+    "description": "Samuel Ocean shark hooded plush doll blind box. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.46,
+      "xmin": 0.08,
+      "ymax": 0.93,
+      "xmax": 0.84
+    },
+    "originalScreenshotUrl": "/uploads/originals/7663903914055503124_original.png",
+    "croppedImageUrl": "/uploads/cropped/7663903914055503124_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7663903914055503124",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "MEI YI YOU",
+      "Samuel Ocean",
+      "Shark",
+      "Plush Dolls",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7660905168304737556",
+    "name": "Baby Molly",
+    "price": 11,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Blind Box",
+    "brand": "Pop Mart",
+    "series": "Baby Molly",
+    "description": "Baby Molly When I Was Three original POP MART art toy collectible figures. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.42,
+      "xmin": 0.12,
+      "ymax": 0.88,
+      "xmax": 0.85
+    },
+    "originalScreenshotUrl": "/uploads/originals/7660905168304737556_original.png",
+    "croppedImageUrl": "/uploads/cropped/7660905168304737556_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7660905168304737556",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Pop Mart",
+      "Baby Molly",
+      "Art Toy",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7660713566617488661",
+    "name": "Fox & Bunny",
+    "price": 12,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "Disney",
+    "series": "Zootopia",
+    "description": "Fox & Bunny Nick Wilde & Judy Hopps plush doll series. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.38,
+      "xmin": 0.1,
+      "ymax": 0.88,
+      "xmax": 0.88
+    },
+    "originalScreenshotUrl": "/uploads/originals/7660713566617488661_original.png",
+    "croppedImageUrl": "/uploads/cropped/7660713566617488661_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7660713566617488661",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Disney",
+      "Fox & Bunny",
+      "Zootopia",
+      "Plush Dolls",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7660475956859129108",
+    "name": "Baby Three Zodiac",
+    "price": 10,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "Baby Three",
+    "series": "Zodiac Signs",
+    "description": "Baby Three Zodiac constellation plush doll keychain series. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.4,
+      "xmin": 0.1,
+      "ymax": 0.88,
+      "xmax": 0.88
+    },
+    "originalScreenshotUrl": "/uploads/originals/7660475956859129108_original.png",
+    "croppedImageUrl": "/uploads/cropped/7660475956859129108_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7660475956859129108",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Baby Three",
+      "Baby Three Zodiac",
+      "Plush Dolls",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7660001603688221973",
+    "name": "Babytree Lolita's Dream",
+    "price": 9,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "Baby Three",
+    "series": "Lolita's Dream",
+    "description": "Babytree Lolita's Dream mini plush doll blind box. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.41,
+      "xmin": 0.13,
+      "ymax": 0.95,
+      "xmax": 0.85
+    },
+    "originalScreenshotUrl": "/uploads/originals/7660001603688221973_original.png",
+    "croppedImageUrl": "/uploads/cropped/7660001603688221973_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7660001603688221973",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Baby Three",
+      "Babytree Lolita's Dream",
+      "Mini",
+      "Plush Dolls",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7658833670031101204",
+    "name": "Yumi Bestie EDM festival",
+    "price": 5.5,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "DOTEBABY",
+    "series": "YuMi EDM Festival",
+    "description": "Yumi Bestie EDM festival vinyl plush blind box with headphones. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.42,
+      "xmin": 0.26,
+      "ymax": 0.78,
+      "xmax": 0.81
+    },
+    "originalScreenshotUrl": "/uploads/originals/7658833670031101204_original.png",
+    "croppedImageUrl": "/uploads/cropped/7658833670031101204_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7658833670031101204",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "DOTEBABY",
+      "Yumi Bestie EDM festival",
+      "Plush Dolls",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7633292229603396884",
+    "name": "Mega Space Molly emoji",
+    "price": 4,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Action Figures",
+    "brand": "Pop Mart",
+    "series": "Space Molly Emoji",
+    "description": "Mega Space Molly emoji series 100% collectible figure blind box. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.39,
+      "xmin": 0.14,
+      "ymax": 0.84,
+      "xmax": 0.82
+    },
+    "originalScreenshotUrl": "/uploads/originals/7633292229603396884_original.png",
+    "croppedImageUrl": "/uploads/cropped/7633292229603396884_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7633292229603396884",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Pop Mart",
+      "Mega Space Molly emoji",
+      "Action Figures",
+      "In Stock"
+    ]
+  },
+  {
+    "id": "prod_7631985422482017556",
+    "name": "Baby Three Lily Rabbit Town",
+    "price": 8,
+    "currency": "USD",
+    "stockStatus": "in_stock",
+    "category": "Plush Dolls",
+    "brand": "Baby Three",
+    "series": "Lily Rabbit Town",
+    "description": "Baby Three Lily Rabbit Town gen 3 plush doll blind box. Available in stock.",
+    "boxBoundingBox": {
+      "ymin": 0.19,
+      "xmin": 0.03,
+      "ymax": 0.92,
+      "xmax": 0.97
+    },
+    "originalScreenshotUrl": "/uploads/originals/7631985422482017556_original.png",
+    "croppedImageUrl": "/uploads/cropped/7631985422482017556_cropped.webp",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7631985422482017556",
+    "scrapedAt": "2026-08-23T01:30:00.000Z",
+    "tags": [
+      "Baby Three",
+      "Baby Three Lily Rabbit Town",
+      "Plush Dolls",
+      "In Stock"
+    ]
+  }
+]
