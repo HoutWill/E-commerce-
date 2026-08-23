@@ -24,12 +24,12 @@ export interface Product {
   boundingBox?: BoundingBox;
   tiktokVideoUrl?: string;
   tiktokPostId?: string;
-  contactTelegram: string;
-  contactFacebook: string;
-  angleMatched: boolean;
-  confidence: number;
+  contactTelegram?: string;
+  contactFacebook?: string;
+  angleMatched?: boolean;
+  confidence?: number;
   createdAt: string;
-  updatedAt: string;
+  updatedAt?: string;
   featured?: boolean;
 }
 
