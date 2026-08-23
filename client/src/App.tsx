@@ -207,8 +207,8 @@ export function App() {
 
       </main>
 
-      {/* Rich Footer with Admin Gate Link */}
-      <Footer onOpenAdmin={() => setIsAdminRequested(true)} />
+      {/* Rich Footer */}
+      <Footer />
 
       {/* Floating Bottom Navigation Bar for iPhone & iPad */}
       <BottomNav />

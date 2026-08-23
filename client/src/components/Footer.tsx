@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Send, ShieldCheck, Flame, Truck, Lock, MapPin, ExternalLink } from 'lucide-react';
+import { Send, ShieldCheck, Flame, Truck, MapPin, ExternalLink } from 'lucide-react';
 
-interface FooterProps {
-  onOpenAdmin?: () => void;
-}
-
-export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
+export const Footer: React.FC = () => {
   const [settings, setSettings] = useState({
     storeName: 'CLASSY BLING',
     address: 'Street 271, Sangkat Phsar Doeum Thkov, Khan Chamkarmon, Phnom Penh, Cambodia',
@@ -31,24 +27,24 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
   }, []);
 
   return (
-    <footer className="border-t border-slate-200 dark:border-zinc-800 bg-[#FAF7F2] dark:bg-zinc-950 text-slate-700 dark:text-zinc-300 select-none pb-20 lg:pb-0 transition-colors">
+    <footer className="border-t border-stone-200/80 dark:border-zinc-800/80 bg-[#FAF7F2] dark:bg-zinc-950 text-slate-700 dark:text-zinc-300 select-none pb-24 lg:pb-0 transition-colors">
       
       {/* 1. Top Social Follow Banner */}
-      <div className="border-b border-slate-200 dark:border-zinc-800/80 py-4 sm:py-5 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex items-center justify-between sm:justify-start gap-6">
+      <div className="border-b border-stone-200/70 dark:border-zinc-800/80 py-4 sm:py-5 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto flex items-center justify-between sm:justify-start gap-5">
           
           <span className="text-xs sm:text-sm font-black uppercase tracking-wider text-slate-900 dark:text-white">
             FOLLOW US ON
           </span>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5 sm:gap-3">
             {/* Facebook */}
             <a
               href={settings.facebookUrl}
               target="_blank"
               rel="noreferrer"
               aria-label="Facebook"
-              className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-200 hover:text-blue-600 transition-colors"
+              className="p-2 rounded-full bg-stone-200/60 dark:bg-zinc-900 hover:bg-blue-50 dark:hover:bg-blue-950/40 text-slate-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               title="Follow on Facebook"
             >
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -62,7 +58,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
-              className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-200 hover:text-pink-600 transition-colors"
+              className="p-2 rounded-full bg-stone-200/60 dark:bg-zinc-900 hover:bg-pink-50 dark:hover:bg-pink-950/40 text-slate-700 dark:text-zinc-300 hover:text-pink-600 dark:hover:text-pink-400 transition-colors"
               title="Follow on Instagram"
             >
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -76,7 +72,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
               target="_blank"
               rel="noreferrer"
               aria-label="TikTok"
-              className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-200 hover:text-black dark:hover:text-white transition-colors"
+              className="p-2 rounded-full bg-stone-200/60 dark:bg-zinc-900 hover:bg-slate-900 hover:text-white dark:hover:bg-zinc-800 text-slate-700 dark:text-zinc-300 transition-colors"
               title="Follow on TikTok"
             >
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -90,7 +86,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
               target="_blank"
               rel="noreferrer"
               aria-label="Telegram"
-              className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-zinc-800 text-slate-800 dark:text-zinc-200 hover:text-[#229ED9] transition-colors"
+              className="p-2 rounded-full bg-stone-200/60 dark:bg-zinc-900 hover:bg-[#229ED9]/10 text-slate-700 dark:text-zinc-300 hover:text-[#229ED9] transition-colors"
               title="Order on Telegram"
             >
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -106,42 +102,48 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
           
-          {/* Column 1: Brand & Physical Location Pin */}
+          {/* Column 1: Brand & Physical Location Badge */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
               <img
                 src="/logo_crisp.png"
                 alt="Classy Bling Logo"
-                className="w-11 h-11 rounded-xl object-contain bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-700 shadow-xs"
+                className="w-11 h-11 rounded-xl object-contain bg-white dark:bg-zinc-900 border border-stone-200 dark:border-zinc-800 shadow-xs"
               />
               <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white font-display">
                 {settings.storeName}
               </span>
             </div>
+            
             <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed">
               Curated viral TikTok blind boxes, luxury plush charms, and authentic designer art toys directly indexed from live unboxing streams.
             </p>
 
-            {/* Location Address & Map Pin */}
-            <div className="p-3 rounded-2xl bg-white/70 dark:bg-zinc-900 border border-[#E0D7C6]/60 dark:border-zinc-800 space-y-1.5 text-xs">
-              <div className="flex items-start gap-2 text-slate-700 dark:text-zinc-300 font-bold">
-                <MapPin className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
-                <span className="leading-snug">{settings.address}</span>
+            {/* Seamless Blended Location Address & Map Pin */}
+            <div className="p-3.5 rounded-2xl bg-stone-200/50 dark:bg-zinc-900/60 border border-stone-300/40 dark:border-zinc-800 space-y-2 text-xs">
+              <div className="flex items-start gap-2.5 text-slate-800 dark:text-zinc-200 font-semibold">
+                <div className="w-6 h-6 rounded-lg bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <MapPin className="w-3.5 h-3.5" />
+                </div>
+                <span className="leading-snug pt-0.5">{settings.address}</span>
               </div>
+
               {settings.googleMapsUrl && (
-                <a
-                  href={settings.googleMapsUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-[11px] text-blue-600 dark:text-blue-400 font-extrabold hover:underline pt-0.5 ml-6"
-                >
-                  <span>📍 Pin on Google Maps</span>
-                  <ExternalLink className="w-3 h-3" />
-                </a>
+                <div className="pl-8.5">
+                  <a
+                    href={settings.googleMapsUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-zinc-800 text-slate-800 dark:text-zinc-200 hover:text-rose-600 dark:hover:text-rose-400 font-bold shadow-2xs border border-stone-300/50 dark:border-zinc-700/60 transition-all text-[11px]"
+                  >
+                    <span>View on Google Maps</span>
+                    <ExternalLink className="w-3 h-3 text-slate-400" />
+                  </a>
+                </div>
               )}
             </div>
 
-            <div className="flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 pt-1">
+            <div className="flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 pt-0.5">
               <ShieldCheck className="w-4 h-4 shrink-0" />
               <span>100% Genuine Factory Sealed Guarantee</span>
             </div>
@@ -154,28 +156,28 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
             </h4>
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
-                <a href="#pop-now" className="hover:text-[#229ED9] transition-colors flex items-center gap-1.5">
+                <a href="#pop-now" className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors flex items-center gap-1.5">
                   <Flame className="w-3.5 h-3.5 text-[#E50012] shrink-0 fill-current" />
                   <span>Baby Three Zodiac Plush</span>
                 </a>
               </li>
               <li>
-                <a href="#pop-now" className="hover:text-[#229ED9] transition-colors">
+                <a href="#pop-now" className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">
                   MEGA SPACE MOLLY 100%
                 </a>
               </li>
               <li>
-                <a href="#pop-now" className="hover:text-[#229ED9] transition-colors">
+                <a href="#pop-now" className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">
                   Nommi Pinky Energy Series
                 </a>
               </li>
               <li>
-                <a href="#pop-now" className="hover:text-[#229ED9] transition-colors">
+                <a href="#pop-now" className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">
                   Disney Stitch Sweet Dreams
                 </a>
               </li>
               <li>
-                <a href="#pop-now" className="hover:text-[#229ED9] transition-colors">
+                <a href="#pop-now" className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">
                   Molly Baking Time Collection
                 </a>
               </li>
@@ -204,7 +206,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
                   href={settings.tiktokUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-black dark:hover:text-white transition-colors"
+                  className="hover:text-slate-900 dark:hover:text-white transition-colors"
                 >
                   TikTok Live: {settings.tiktokHandle}
                 </a>
@@ -224,28 +226,17 @@ export const Footer: React.FC<FooterProps> = ({ onOpenAdmin }) => {
         </div>
       </div>
 
-      {/* 3. Bottom Copyright & Admin Access Bar */}
-      <div className="border-t border-slate-200 dark:border-zinc-800/80 py-6 px-4 sm:px-6 lg:px-8 bg-slate-100/50 dark:bg-zinc-950">
+      {/* 3. Bottom Copyright Bar (Completely Public, No Admin Console link) */}
+      <div className="border-t border-stone-200/80 dark:border-zinc-800/80 py-6 px-4 sm:px-6 lg:px-8 bg-stone-100/60 dark:bg-zinc-950">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-zinc-400">
           <p>© 2026 {settings.storeName}. All rights reserved.</p>
           
-          <div className="flex items-center gap-4 font-medium">
+          <div className="flex items-center gap-3 font-medium">
             <span>Verified Authenticity</span>
             <span>•</span>
             <span>Fast Dispatch</span>
             <span>•</span>
-            
-            {/* Admin Console Toggle */}
-            {onOpenAdmin && (
-              <button
-                onClick={onOpenAdmin}
-                className="inline-flex items-center gap-1 text-slate-400 hover:text-slate-900 dark:hover:text-white font-bold transition-colors cursor-pointer"
-                title="Open Admin Product Control Center"
-              >
-                <Lock className="w-3 h-3" />
-                <span>Admin Console</span>
-              </button>
-            )}
+            <span>100% Genuine</span>
           </div>
         </div>
       </div>
