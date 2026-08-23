@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Send, ShieldCheck, Flame, Truck, MapPin, ExternalLink } from 'lucide-react';
+import { TikTokIcon } from './icons/TikTokIcon';
 
 export const Footer: React.FC = () => {
   const [settings, setSettings] = useState({
@@ -72,12 +73,10 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noreferrer"
               aria-label="TikTok"
-              className="p-2 rounded-full bg-stone-200/60 dark:bg-zinc-900 hover:bg-slate-900 hover:text-white dark:hover:bg-zinc-800 text-slate-700 dark:text-zinc-300 transition-colors"
+              className="p-2 rounded-full bg-stone-200/60 dark:bg-zinc-900 hover:bg-slate-900 hover:text-white dark:hover:bg-zinc-800 text-slate-900 dark:text-white transition-colors flex items-center justify-center"
               title="Follow on TikTok"
             >
-              <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.47 6.27 6.27 0 0 0 1.95-4.5V8.09a8.28 8.28 0 0 0 4.82 1.55V6.19a4.85 4.85 0 0 1-1-.05v.55z"/>
-              </svg>
+              <TikTokIcon className="w-4 h-4" />
             </a>
 
             {/* Telegram */}
@@ -206,9 +205,10 @@ export const Footer: React.FC = () => {
                   href={settings.tiktokUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-slate-900 dark:hover:text-white transition-colors"
+                  className="hover:text-slate-900 dark:hover:text-white transition-colors flex items-center gap-2"
                 >
-                  TikTok Live: {settings.tiktokHandle}
+                  <TikTokIcon className="w-4 h-4 shrink-0 text-slate-800 dark:text-zinc-200" />
+                  <span>TikTok Live: {settings.tiktokHandle}</span>
                 </a>
               </li>
               <li className="flex items-center gap-2 text-slate-600 dark:text-zinc-400">

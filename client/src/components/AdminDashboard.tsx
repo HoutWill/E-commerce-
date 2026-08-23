@@ -48,6 +48,7 @@ import {
   Compass,
   User
 } from 'lucide-react';
+import { TikTokIcon } from './icons/TikTokIcon';
 
 interface AdminDashboardProps {
   onClose: () => void;
@@ -1879,7 +1880,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
                     {/* TikTok */}
                     <div>
-                      <label className="block uppercase text-[10px] text-[#FE2C55] mb-1">TikTok Handle</label>
+                      <label className="flex items-center gap-1.5 uppercase text-[10px] text-[#FE2C55] mb-1 font-bold">
+                        <TikTokIcon className="w-3.5 h-3.5" />
+                        <span>TikTok Handle</span>
+                      </label>
                       <input
                         type="text"
                         value={settings.tiktokHandle}
@@ -1889,7 +1893,10 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     </div>
 
                     <div>
-                      <label className="block uppercase text-[10px] text-[#FE2C55] mb-1">TikTok Profile URL</label>
+                      <label className="flex items-center gap-1.5 uppercase text-[10px] text-[#FE2C55] mb-1 font-bold">
+                        <TikTokIcon className="w-3.5 h-3.5" />
+                        <span>TikTok Profile URL</span>
+                      </label>
                       <input
                         type="text"
                         value={settings.tiktokUrl}
