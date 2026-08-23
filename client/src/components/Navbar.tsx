@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Sun, Moon, Flame, Home, Package, Sparkles } from 'lucide-react';
+import { TikTokIcon } from './icons/TikTokIcon';
 
 interface NavbarProps {
   theme: 'light' | 'dark';
@@ -23,27 +24,27 @@ export const Navbar: React.FC<NavbarProps> = ({
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full py-2.5 sm:py-3 px-3 sm:px-6 lg:px-8 bg-white/95 dark:bg-[#121214]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-zinc-800 transition-colors">
+    <header className="sticky top-0 z-40 w-full py-2 sm:py-3 px-3 sm:px-6 lg:px-8 bg-white/95 dark:bg-[#121214]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-zinc-800 transition-colors">
       <div className="max-w-7xl mx-auto flex items-center justify-between h-11 sm:h-14">
         
         {/* Left: Vibrant High-Contrast Logo & Brand Name */}
         <a
           href="#home"
           onClick={() => scrollTo('home', 'home')}
-          className="flex items-center gap-2.5 sm:gap-3 group select-none"
+          className="flex items-center gap-2 sm:gap-3 group select-none shrink-0"
         >
           {/* Logo Badge */}
-          <div className="relative w-9 h-9 sm:w-11 sm:h-11 rounded-2xl overflow-hidden shadow-xs border border-rose-200/80 dark:border-rose-500/30 bg-white p-0.5 group-hover:scale-105 transition-all flex items-center justify-center shrink-0">
+          <div className="relative w-8 h-8 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl overflow-hidden shadow-xs border border-rose-200/80 dark:border-rose-500/30 bg-white p-0.5 group-hover:scale-105 transition-all flex items-center justify-center shrink-0">
             <img
               src="/logo_crisp.png"
               alt="Classy Bling Logo"
-              className="w-full h-full object-cover rounded-xl"
+              className="w-full h-full object-cover rounded-lg sm:rounded-xl"
               loading="eager"
             />
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="text-base sm:text-2xl font-black tracking-tight font-display leading-tight text-slate-900 dark:text-white group-hover:text-rose-500 transition-colors">
+            <span className="text-sm sm:text-2xl font-black tracking-tight font-display leading-tight text-slate-900 dark:text-white group-hover:text-rose-500 transition-colors">
               CLASSY BLING
             </span>
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 fill-amber-400 animate-pulse hidden sm:inline-block" />
@@ -94,10 +95,23 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         </nav>
 
-        {/* Right: Clean Action Controls */}
-        <div className="flex items-center gap-2 sm:gap-2.5">
+        {/* Right: Clean Action Controls (TikTok, Telegram, Theme) */}
+        <div className="flex items-center gap-1.5 sm:gap-2.5">
           
-          {/* Telegram Order Pill Button (Desktop only) */}
+          {/* TikTok Official Live Link Button (OG Icon + Label) */}
+          <a
+            href="https://www.tiktok.com/@classy.bling"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="TikTok Live"
+            title="Watch TikTok Live @classy.bling"
+            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-black hover:bg-neutral-900 text-white transition-all shadow-xs hover:scale-105 active:scale-95 border border-zinc-800"
+          >
+            <TikTokIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+            <span className="text-[11px] sm:text-xs font-black tracking-tight">TikTok</span>
+          </a>
+
+          {/* Telegram Order Pill Button (Desktop & Tablet) */}
           <a
             href="https://t.me/+85592917831"
             target="_blank"
@@ -117,12 +131,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             onClick={onToggleTheme}
             aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-300 border border-slate-200/80 dark:border-zinc-700/80 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-2xs cursor-pointer"
+            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-300 border border-slate-200/80 dark:border-zinc-700/80 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-2xs cursor-pointer shrink-0"
           >
             {theme === 'dark' ? (
-              <Sun className="w-4.5 h-4.5 text-amber-400 fill-amber-400" />
+              <Sun className="w-4 h-4 text-amber-400 fill-amber-400" />
             ) : (
-              <Moon className="w-4.5 h-4.5 text-slate-700 dark:text-zinc-200" />
+              <Moon className="w-4 h-4 text-slate-700 dark:text-zinc-200" />
             )}
           </button>
 
