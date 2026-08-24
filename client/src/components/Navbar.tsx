@@ -44,14 +44,14 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           <div className="flex items-center gap-1.5">
-            <span className="text-sm sm:text-2xl font-black tracking-tight font-display leading-tight text-slate-900 dark:text-white group-hover:text-rose-500 transition-colors">
+            <span className="text-sm sm:text-2xl font-black tracking-tight font-display leading-tight text-slate-900 dark:text-white group-hover:text-[#229ED9] dark:group-hover:text-[#38bdf8] transition-colors">
               CLASSY BLING
             </span>
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 fill-amber-400 animate-pulse hidden sm:inline-block" />
           </div>
         </a>
 
-        {/* Center: 3-Item Capsule Nav Links (Home, POP NOW, Catalog) for Laptop/Desktop */}
+        {/* Center: 3-Item Capsule Nav Links for Laptop/Desktop */}
         <nav className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100/90 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-xs font-bold tracking-wide">
           
           {/* 1. Home */}
@@ -98,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Right: Clean Action Controls (TikTok, Telegram, Theme) */}
         <div className="flex items-center gap-1.5 sm:gap-2.5">
           
-          {/* TikTok Official Live Link Button (OG Icon + Label) */}
+          {/* TikTok Official Live Link Button */}
           <a
             href="https://www.tiktok.com/@classy.bling"
             target="_blank"
@@ -126,7 +126,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <span>Telegram</span>
           </a>
 
-          {/* Theme Toggle Button (Crisp on Phone & Desktop) */}
+          {/* Theme Toggle Button */}
           <button
             onClick={onToggleTheme}
             aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}

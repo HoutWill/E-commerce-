@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useTransition } from 'react';
 import { Product } from './types';
 import { api } from './services/api';
 import { Navbar } from './components/Navbar';
@@ -38,14 +38,24 @@ export function App() {
   const [brands, setBrands] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Filters
+  // Filters & Debounced Search
   const [search, setSearch] = useState('');
+  const [debouncedSearch, setDebouncedSearch] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedSubFilter, setSelectedSubFilter] = useState('all');
   const [sort, setSort] = useState('newest');
 
+  // Debounce search query by 250ms to prevent spamming network requests
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [search]);
+
   // Modals & Admin Gate / Dashboard
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [isPopNowModalOpen, setIsPopNowModalOpen] = useState(false);
   
   // Check if admin route / param requested (adminGate=true, admin=true, or /adminGate)
   const isInitialAdminRequested = () => {
@@ -60,7 +70,10 @@ export function App() {
   });
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
-  // Verify token on mount or when token changes
+  // Computed modal active state for hiding floating BottomNav
+  const isAnyModalOpen = Boolean(selectedProduct || isPopNowModalOpen || isAdminRequested);
+
+  // Verify admin token on mount
   useEffect(() => {
     const verifyToken = async () => {
       const token = sessionStorage.getItem('classybling_admin_token');
@@ -79,6 +92,12 @@ export function App() {
       }
     };
     verifyToken();
+  }, []);
+
+  // Fetch Categories & Brands ONCE on mount (cached in memory)
+  useEffect(() => {
+    api.getCategories().then(setCategories).catch(() => {});
+    api.getBrands().then(setBrands).catch(() => {});
   }, []);
 
   const handleAdminLoginSuccess = (token: string) => {
@@ -101,14 +120,12 @@ export function App() {
 
   const loadData = async () => {
     try {
-      setIsLoading(true);
-
       let minPrice: number | undefined = undefined;
       let maxPrice: number | undefined = undefined;
       let inStockOnly = false;
       let categoryFilter = selectedCategory !== 'All' ? selectedCategory : undefined;
 
-      // Handle sub-filter icon rail values
+      // Handle sub-filter values
       if (selectedSubFilter === 'plush') {
         categoryFilter = 'Plush Dolls';
       } else if (selectedSubFilter === 'box') {
@@ -124,22 +141,16 @@ export function App() {
         minPrice = 15;
       }
 
-      const [prodRes, catRes, brandRes] = await Promise.all([
-        api.getProducts({
-          search: search || undefined,
-          category: categoryFilter,
-          inStockOnly,
-          minPrice,
-          maxPrice,
-          sort
-        }),
-        api.getCategories(),
-        api.getBrands()
-      ]);
+      const prodRes = await api.getProducts({
+        search: debouncedSearch || undefined,
+        category: categoryFilter,
+        inStockOnly,
+        minPrice,
+        maxPrice,
+        sort
+      });
 
       setProducts(prodRes.products);
-      setCategories(catRes);
-      setBrands(brandRes);
     } catch (err) {
       console.error('Error loading catalog data:', err);
     } finally {
@@ -149,7 +160,7 @@ export function App() {
 
   useEffect(() => {
     loadData();
-  }, [search, selectedCategory, selectedSubFilter, sort]);
+  }, [debouncedSearch, selectedCategory, selectedSubFilter, sort]);
 
   const handleUpdateProduct = async (id: string, updates: Partial<Product>) => {
     try {
@@ -181,15 +192,15 @@ export function App() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 pb-24 md:pb-16 space-y-4">
+      <main className="flex-1 pb-20 md:pb-16 space-y-3 sm:space-y-4">
         
-        {/* Clean Promotional Carousel Banner */}
+        {/* Promotional Carousel Banner with Touch Swipe */}
         <PromoCarousel />
 
         {/* 3D Pop Up "POP NOW" Section */}
-        <PopNowSection />
+        <PopNowSection onModalChange={setIsPopNowModalOpen} />
 
-        {/* Main Catalog Area with Top Horizontal Category Tabs & Left Vertical Icon Rail */}
+        {/* Main Catalog Area */}
         <CatalogSection
           products={products}
           isLoading={isLoading}
@@ -210,8 +221,8 @@ export function App() {
       {/* Rich Footer */}
       <Footer />
 
-      {/* Floating Bottom Navigation Bar for iPhone & iPad */}
-      <BottomNav />
+      {/* Floating Bottom Navigation Bar for Mobile Phones & Tablets */}
+      <BottomNav isHidden={isAnyModalOpen} />
 
       {/* Customer Product Detail Modal */}
       <ProductModal

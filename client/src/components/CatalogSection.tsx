@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Product } from '../types';
 import { ProductCard } from './ProductCard';
 import { 
@@ -11,7 +11,6 @@ import {
   CheckCircle2, 
   Search, 
   X, 
-  LayoutGrid,
   Loader2,
   PackageOpen
 } from 'lucide-react';
@@ -34,7 +33,6 @@ interface CatalogSectionProps {
 export const CatalogSection: React.FC<CatalogSectionProps> = ({
   products,
   isLoading,
-  categories,
   selectedCategory,
   onSelectCategory,
   selectedSubFilter,
@@ -45,7 +43,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
   onSortChange,
   onOpenModal,
 }) => {
-  // Top category tabs matching screenshot
+  // Top category tabs
   const topTabs = [
     { label: 'All Items', value: 'All' },
     { label: 'Plush Dolls', value: 'Plush Dolls' },
@@ -54,7 +52,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
     { label: 'POP NOW Drops', value: 'POP NOW' },
   ];
 
-  // Left vertical sub-filter icon rail matching screenshot
+  // Sub-filter items
   const iconRailItems = [
     { label: 'All', value: 'all', icon: Plus },
     { label: 'Plush', value: 'plush', icon: Heart },
@@ -76,18 +74,18 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
   };
 
   return (
-    <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6" id="catalog">
+    <section className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6" id="catalog">
       
-      {/* Top Header Category Tabs matching screenshot (Beverages / Bakery / Retail style) */}
-      <div className="border-b border-slate-200 dark:border-zinc-800 mb-6 overflow-x-auto no-scrollbar">
-        <div className="flex items-center gap-6 sm:gap-10 pb-0.5 min-w-max">
+      {/* Top Header Category Tabs */}
+      <div className="border-b border-slate-200 dark:border-zinc-800 mb-4 sm:mb-6 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-4 sm:gap-10 pb-0.5 min-w-max">
           {topTabs.map((tab) => {
-            const isActive = selectedCategory.toLowerCase() === tab.value.toLowerCase() || (tab.value === 'POP NOW' && false);
+            const isActive = selectedCategory.toLowerCase() === tab.value.toLowerCase() && tab.value !== 'POP NOW';
             return (
               <button
                 key={tab.value}
                 onClick={() => handleTopTabClick(tab.value)}
-                className={`pb-3 text-sm sm:text-base font-bold transition-all relative whitespace-nowrap ${
+                className={`pb-2.5 sm:pb-3 text-xs sm:text-base font-bold transition-all relative whitespace-nowrap ${
                   isActive
                     ? 'text-[#229ED9] dark:text-[#38bdf8] font-black'
                     : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
@@ -103,15 +101,15 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
         </div>
       </div>
 
-      {/* Search Bar & Quick Controls */}
-      <div className="flex flex-col sm:flex-row items-center gap-3 mb-6">
+      {/* Search Bar & Sort Controls */}
+      <div className="flex flex-col sm:flex-row items-center gap-2.5 sm:gap-3 mb-4 sm:mb-6">
         <div className="relative flex-1 w-full">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
           <input
             type="text"
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Search products by character, series, or brand..."
+            placeholder="Search character, series, or brand..."
             className="w-full pl-10 pr-10 py-2.5 rounded-xl border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 text-xs sm:text-sm focus:outline-none focus:border-[#229ED9] transition-colors"
           />
           {search && (
@@ -125,7 +123,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
         </div>
 
         {/* Sort Select */}
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-end">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
           <span className="text-xs font-bold text-slate-400 dark:text-zinc-500 uppercase">Sort:</span>
           <select
             value={sort}
@@ -140,11 +138,33 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
         </div>
       </div>
 
-      {/* Two Column Layout: Left Icon Rail + Right Product Grid matching screenshot */}
+      {/* Mobile Horizontal Sub-filter Chips (< sm screens) */}
+      <div className="flex sm:hidden overflow-x-auto gap-2 pb-3 mb-2 no-scrollbar select-none">
+        {iconRailItems.map((item) => {
+          const Icon = item.icon;
+          const isSelected = selectedSubFilter === item.value;
+          return (
+            <button
+              key={item.value}
+              onClick={() => onSelectSubFilter(item.value)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shrink-0 transition-all ${
+                isSelected
+                  ? 'bg-[#229ED9] text-white shadow-xs'
+                  : 'bg-slate-100 dark:bg-zinc-900 text-slate-600 dark:text-zinc-400 border border-slate-200/80 dark:border-zinc-800'
+              }`}
+            >
+              <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-white' : 'text-slate-500 dark:text-zinc-400'}`} />
+              <span>{item.label}</span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Two Column Layout on Desktop: Left Icon Rail + Right Grid */}
       <div className="flex items-start gap-4 sm:gap-6">
         
-        {/* Left Subcategory Vertical Icon Rail */}
-        <div className="flex flex-col gap-3 shrink-0 py-1 select-none w-14 sm:w-16">
+        {/* Left Subcategory Vertical Icon Rail (hidden on mobile phone, shown on sm+) */}
+        <div className="hidden sm:flex flex-col gap-3 shrink-0 py-1 select-none w-14 sm:w-16">
           {iconRailItems.map((item) => {
             const Icon = item.icon;
             const isSelected = selectedSubFilter === item.value;
@@ -170,22 +190,22 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
           })}
         </div>
 
-        {/* Right Product Grid */}
-        <div className="flex-1">
+        {/* Product Grid Area - Full width on phone */}
+        <div className="flex-1 w-full">
           
           {isLoading ? (
-            <div className="py-20 flex flex-col items-center justify-center space-y-4">
-              <Loader2 className="w-8 h-8 text-[#229ED9] animate-spin" />
-              <p className="text-sm font-semibold text-slate-500 dark:text-zinc-400">
+            <div className="py-16 sm:py-20 flex flex-col items-center justify-center space-y-3">
+              <Loader2 className="w-7 h-7 text-[#229ED9] animate-spin" />
+              <p className="text-xs sm:text-sm font-semibold text-slate-500 dark:text-zinc-400">
                 Loading products...
               </p>
             </div>
           ) : products.length === 0 ? (
-            <div className="py-16 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 mx-auto flex items-center justify-center text-slate-400 dark:text-zinc-500 mb-4 shadow-xs">
-                <PackageOpen className="w-8 h-8" />
+            <div className="py-14 text-center">
+              <div className="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 mx-auto flex items-center justify-center text-slate-400 dark:text-zinc-500 mb-3 shadow-xs">
+                <PackageOpen className="w-7 h-7" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+              <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
                 No matching products
               </h3>
               <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">
@@ -193,7 +213,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
               {products.map((product) => (
                 <ProductCard
                   key={product.id}

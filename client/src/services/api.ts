@@ -3,24 +3,36 @@ import { INITIAL_PRODUCTS, INITIAL_CATEGORIES, INITIAL_BRANDS } from '../data/in
 
 const API_BASE = '/api';
 const LOCAL_STORAGE_KEY = 'cb_store_products_v1';
+const REQUEST_TIMEOUT_MS = 3500; // 3.5s timeout to prevent hanging on cold backend
+
+// In-memory cache for ultra-fast instant lookups
+let inMemoryProductsCache: Product[] | null = null;
+let inMemoryCategoriesCache: string[] | null = null;
+let inMemoryBrandsCache: string[] | null = null;
 
 function getLocalProducts(): Product[] {
+  if (inMemoryProductsCache && inMemoryProductsCache.length > 0) {
+    return inMemoryProductsCache;
+  }
   try {
     const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
+        inMemoryProductsCache = parsed;
         return parsed;
       }
     }
   } catch {
     // ignore
   }
+  inMemoryProductsCache = INITIAL_PRODUCTS;
   localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(INITIAL_PRODUCTS));
   return INITIAL_PRODUCTS;
 }
 
 function saveLocalProducts(products: Product[]): void {
+  inMemoryProductsCache = products;
   try {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(products));
   } catch {
@@ -31,6 +43,20 @@ function saveLocalProducts(products: Product[]): void {
 function getAuthHeader(): Record<string, string> {
   const token = localStorage.getItem('classybling_admin_token') || sessionStorage.getItem('classybling_admin_token');
   return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+// Fetch with automatic timeout so cold backends don't stall the UI
+async function fetchWithTimeout(url: string, options?: RequestInit, timeoutMs = REQUEST_TIMEOUT_MS): Promise<Response> {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(url, { ...options, signal: controller.signal });
+    clearTimeout(timeoutId);
+    return res;
+  } catch (err) {
+    clearTimeout(timeoutId);
+    throw err;
+  }
 }
 
 export const api = {
@@ -53,7 +79,7 @@ export const api = {
       if (params?.maxPrice !== undefined) query.append('maxPrice', params.maxPrice.toString());
       if (params?.sort) query.append('sort', params.sort);
 
-      const res = await fetch(`${API_BASE}/products?${query.toString()}`);
+      const res = await fetchWithTimeout(`${API_BASE}/products?${query.toString()}`);
       if (res.ok) {
         const data = await res.json();
         if (data && Array.isArray(data.products) && data.products.length > 0) {
@@ -62,14 +88,14 @@ export const api = {
         }
       }
     } catch {
-      // Backend unavailable / Static Hosting Fallback
+      // Backend timeout or offline / static hosting: instantly fall back to memory/local storage
     }
 
-    // Client-side Filter & Sort Fallback
+    // Instant Client-side Filter & Sort Fallback (0ms latency)
     let list = [...getLocalProducts()];
 
     if (params?.search) {
-      const q = params.search.toLowerCase();
+      const q = params.search.toLowerCase().trim();
       list = list.filter(p => 
         p.name.toLowerCase().includes(q) || 
         p.brand.toLowerCase().includes(q) ||
@@ -111,7 +137,7 @@ export const api = {
 
   async getProduct(id: string): Promise<Product> {
     try {
-      const res = await fetch(`${API_BASE}/products/${id}`);
+      const res = await fetchWithTimeout(`${API_BASE}/products/${id}`);
       if (res.ok) return res.json();
     } catch {
       // ignore
@@ -123,7 +149,7 @@ export const api = {
 
   async createProduct(productData: Partial<Product>): Promise<Product> {
     try {
-      const res = await fetch(`${API_BASE}/products`, {
+      const res = await fetchWithTimeout(`${API_BASE}/products`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
         body: JSON.stringify(productData)
@@ -164,7 +190,7 @@ export const api = {
 
   async updateProduct(id: string, updates: Partial<Product>): Promise<Product> {
     try {
-      const res = await fetch(`${API_BASE}/products/${id}`, {
+      const res = await fetchWithTimeout(`${API_BASE}/products/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
         body: JSON.stringify(updates)
@@ -188,7 +214,7 @@ export const api = {
 
   async deleteProduct(id: string): Promise<void> {
     try {
-      await fetch(`${API_BASE}/products/${id}`, {
+      await fetchWithTimeout(`${API_BASE}/products/${id}`, {
         method: 'DELETE',
         headers: { ...getAuthHeader() }
       });
@@ -201,37 +227,51 @@ export const api = {
   },
 
   async getCategories(): Promise<string[]> {
+    if (inMemoryCategoriesCache && inMemoryCategoriesCache.length > 0) {
+      return inMemoryCategoriesCache;
+    }
     try {
-      const res = await fetch(`${API_BASE}/categories`);
+      const res = await fetchWithTimeout(`${API_BASE}/categories`);
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) return data;
+        if (Array.isArray(data) && data.length > 0) {
+          inMemoryCategoriesCache = data;
+          return data;
+        }
       }
     } catch {
       // ignore
     }
+    inMemoryCategoriesCache = INITIAL_CATEGORIES;
     return INITIAL_CATEGORIES;
   },
 
   async getBrands(): Promise<string[]> {
+    if (inMemoryBrandsCache && inMemoryBrandsCache.length > 0) {
+      return inMemoryBrandsCache;
+    }
     try {
-      const res = await fetch(`${API_BASE}/brands`);
+      const res = await fetchWithTimeout(`${API_BASE}/brands`);
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) return data;
+        if (Array.isArray(data) && data.length > 0) {
+          inMemoryBrandsCache = data;
+          return data;
+        }
       }
     } catch {
       // ignore
     }
+    inMemoryBrandsCache = INITIAL_BRANDS;
     return INITIAL_BRANDS;
   },
 
   async startScraping(handle: string, maxVideos: number): Promise<void> {
-    const res = await fetch(`${API_BASE}/scrape/start`, {
+    const res = await fetchWithTimeout(`${API_BASE}/scrape/start`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
       body: JSON.stringify({ handle, maxVideos })
-    });
+    }, 15000);
     if (!res.ok) {
       const err = await res.json().catch(() => ({}));
       throw new Error(err.error || 'Failed to start scraper');
@@ -240,7 +280,7 @@ export const api = {
 
   async getScrapeStatus(): Promise<BotStatus> {
     try {
-      const res = await fetch(`${API_BASE}/scrape/status`);
+      const res = await fetchWithTimeout(`${API_BASE}/scrape/status`);
       if (res.ok) return res.json();
     } catch {
       // ignore
@@ -257,11 +297,11 @@ export const api = {
   },
 
   async processSingleVideo(videoUrl: string): Promise<{ success: boolean; product?: Product; message?: string }> {
-    const res = await fetch(`${API_BASE}/scrape/single-video`, {
+    const res = await fetchWithTimeout(`${API_BASE}/scrape/single-video`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...getAuthHeader() },
       body: JSON.stringify({ videoUrl })
-    });
+    }, 30000);
     return res.json();
   },
 
@@ -270,11 +310,11 @@ export const api = {
     formData.append('frame', file);
     if (videoUrl) formData.append('videoUrl', videoUrl);
 
-    const res = await fetch(`${API_BASE}/scrape/upload-frame`, {
+    const res = await fetchWithTimeout(`${API_BASE}/scrape/upload-frame`, {
       method: 'POST',
       headers: { ...getAuthHeader() },
       body: formData
-    });
+    }, 30000);
     return res.json();
   },
 
@@ -289,11 +329,11 @@ export const api = {
     isLocked?: boolean;
   }> {
     try {
-      const res = await fetch(`${API_BASE}/admin/login`, {
+      const res = await fetchWithTimeout(`${API_BASE}/admin/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(credentials)
-      });
+      }, 5000);
       if (res.ok) {
         return res.json();
       }
@@ -331,9 +371,9 @@ export const api = {
     admin?: { email: string; role: string; expiresAt: number };
   }> {
     try {
-      const res = await fetch(`${API_BASE}/admin/verify`, {
+      const res = await fetchWithTimeout(`${API_BASE}/admin/verify`, {
         headers: { Authorization: `Bearer ${token}` }
-      });
+      }, 3000);
       if (res.ok) return res.json();
     } catch {
       // Static fallback
@@ -356,14 +396,14 @@ export const api = {
 
   async logoutAdmin(token?: string): Promise<void> {
     try {
-      await fetch(`${API_BASE}/admin/logout`, {
+      await fetchWithTimeout(`${API_BASE}/admin/logout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           ...(token ? { Authorization: `Bearer ${token}` } : {})
         },
         body: JSON.stringify({ token })
-      });
+      }, 3000);
     } catch {
       // ignore
     }

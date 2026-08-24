@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface BannerSlide {
@@ -36,6 +36,7 @@ export const PromoCarousel: React.FC = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
 
   // Auto rotate every 5 seconds
   useEffect(() => {
@@ -46,14 +47,29 @@ export const PromoCarousel: React.FC = () => {
     return () => clearInterval(timer);
   }, [isPaused, slides.length]);
 
-  const handlePrev = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handlePrev = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  const handleNext = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const handleNext = (e?: React.MouseEvent) => {
+    e?.stopPropagation();
     setCurrentIndex((prev) => (prev + 1) % slides.length);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (diff > 40) {
+      handleNext();
+    } else if (diff < -40) {
+      handlePrev();
+    }
+    touchStartX.current = null;
   };
 
   const handleBannerClick = () => {
@@ -65,15 +81,17 @@ export const PromoCarousel: React.FC = () => {
 
   return (
     <section
-      className="w-full relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-2 select-none"
+      className="w-full relative max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-4 pb-1 sm:pb-2 select-none"
       id="promotions"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Banner Container */}
+      {/* Banner Container with Touch Swipe */}
       <div
         onClick={handleBannerClick}
-        className="relative w-full aspect-[21/9] sm:aspect-[2.39/1] min-h-[200px] sm:min-h-[280px] md:min-h-[360px] rounded-2xl md:rounded-3xl overflow-hidden border border-slate-200 dark:border-zinc-800 shadow-md bg-slate-100 dark:bg-zinc-900 group cursor-pointer"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className="relative w-full aspect-[16/9] sm:aspect-[2.39/1] min-h-[170px] sm:min-h-[280px] md:min-h-[360px] rounded-2xl md:rounded-3xl overflow-hidden border border-slate-200 dark:border-zinc-800 shadow-md bg-slate-100 dark:bg-zinc-900 group cursor-pointer"
       >
         {/* Slides Images */}
         {slides.map((slide, index) => (
@@ -92,26 +110,26 @@ export const PromoCarousel: React.FC = () => {
           </div>
         ))}
 
-        {/* Left Arrow Navigation */}
+        {/* Left Arrow Navigation (visible on hover / tablet+) */}
         <button
           onClick={handlePrev}
           aria-label="Previous Slide"
-          className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-black/30 hover:bg-black/60 dark:bg-zinc-900/60 dark:hover:bg-zinc-900/90 text-white backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg"
+          className="hidden sm:flex absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-black/30 hover:bg-black/60 dark:bg-zinc-900/60 dark:hover:bg-zinc-900/90 text-white backdrop-blur-sm border border-white/20 items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg"
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
-        {/* Right Arrow Navigation */}
+        {/* Right Arrow Navigation (visible on hover / tablet+) */}
         <button
           onClick={handleNext}
           aria-label="Next Slide"
-          className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-black/30 hover:bg-black/60 dark:bg-zinc-900/60 dark:hover:bg-zinc-900/90 text-white backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg"
+          className="hidden sm:flex absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-black/30 hover:bg-black/60 dark:bg-zinc-900/60 dark:hover:bg-zinc-900/90 text-white backdrop-blur-sm border border-white/20 items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg"
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
         </button>
 
         {/* Top-Right Slide Indicator Dots */}
-        <div className="absolute top-4 right-4 sm:top-5 sm:right-6 z-20 flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/10">
+        <div className="absolute top-3 right-3 sm:top-5 sm:right-6 z-20 flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2 sm:px-2.5 py-1 rounded-full border border-white/10">
           {slides.map((_, idx) => (
             <button
               key={idx}
@@ -122,7 +140,7 @@ export const PromoCarousel: React.FC = () => {
               aria-label={`Go to slide ${idx + 1}`}
               className={`transition-all rounded-full ${
                 idx === currentIndex
-                  ? 'w-5 sm:w-6 h-1.5 sm:h-2 bg-[#E50012]'
+                  ? 'w-4 sm:w-6 h-1.5 sm:h-2 bg-[#E50012]'
                   : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/50 hover:bg-white/80'
               }`}
             />
