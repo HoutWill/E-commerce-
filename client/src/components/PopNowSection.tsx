@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Send, Sparkles, X, ShieldCheck, Eye, Flame, Rotate3d } from 'lucide-react';
-import { ThreeDBoxViewer } from './ThreeDBoxViewer';
+import { ChevronLeft, ChevronRight, Send, Sparkles, X, ShieldCheck, Flame } from 'lucide-react';
 
 interface PopBoxItem {
   id: string;
@@ -133,7 +132,7 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
             <span>POP NOW</span>
           </div>
           <h2 className="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase font-display">
-            3D Studio Picker
+            POP NOW Drops
           </h2>
         </div>
 
@@ -148,13 +147,13 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
         </div>
       </div>
 
-      {/* 3D Pop Up Carousel Container */}
+      {/* Pop Up Carousel Container */}
       <div className="relative group">
         
         {/* Left Arrow Button (Desktop/Tablet) */}
         <button
           onClick={() => scroll('left')}
-          aria-label="Previous 3D Blind Box"
+          aria-label="Previous Blind Box"
           className="hidden sm:flex absolute -left-2 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/90 dark:bg-zinc-900/90 text-slate-800 dark:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 shadow-md border border-slate-200 dark:border-zinc-700 items-center justify-center transition-all hover:scale-110 active:scale-95"
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -163,7 +162,7 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
         {/* Right Arrow Button (Desktop/Tablet) */}
         <button
           onClick={() => scroll('right')}
-          aria-label="Next 3D Blind Box"
+          aria-label="Next Blind Box"
           className="hidden sm:flex absolute -right-2 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/90 dark:bg-zinc-900/90 text-slate-800 dark:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 shadow-md border border-slate-200 dark:border-zinc-700 items-center justify-center transition-all hover:scale-110 active:scale-95"
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -180,7 +179,7 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
               className="snap-start shrink-0 w-[210px] sm:w-[270px] flex flex-col items-center text-center group/card cursor-pointer bg-slate-50/60 dark:bg-zinc-900/40 p-3 sm:p-4 rounded-2xl border border-slate-200/70 dark:border-zinc-800/80 hover:border-slate-300 dark:hover:border-zinc-700 transition-all"
               onClick={() => setSelectedBox(box)}
             >
-              {/* 3D Box Container with Pop Up Lift Effect */}
+              {/* Product Box Image Container */}
               <div className="relative aspect-[3/4] w-full rounded-xl bg-white dark:bg-zinc-950 p-2 sm:p-3 flex items-center justify-center mb-3 transition-all duration-300 transform group-hover/card:-translate-y-2 group-hover/card:scale-102 border border-slate-200/60 dark:border-zinc-800/60 shadow-xs">
                 <img
                   src={box.image}
@@ -188,12 +187,6 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
                   className="w-full h-full object-contain filter drop-shadow-md group-hover/card:drop-shadow-xl transition-all"
                   loading="lazy"
                 />
-
-                {/* Quick 3D Pop view hover tag */}
-                <div className="absolute top-2 right-2 bg-slate-900/85 dark:bg-black/85 text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md backdrop-blur-xs flex items-center gap-1 shadow-xs">
-                  <Rotate3d className="w-3 h-3 text-rose-400" />
-                  <span>3D View</span>
-                </div>
               </div>
 
               {/* Product Title */}
@@ -215,10 +208,9 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
                   e.stopPropagation();
                   setSelectedBox(box);
                 }}
-                className="w-full py-2 px-3 rounded-xl border border-slate-900 dark:border-zinc-300 bg-transparent text-slate-900 dark:text-zinc-100 text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:bg-slate-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-slate-900 transition-all active:scale-95 shadow-xs flex items-center justify-center gap-1.5"
+                className="w-full py-2 px-3 rounded-xl border border-slate-900 dark:border-zinc-300 bg-transparent text-slate-900 dark:text-zinc-100 text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:bg-slate-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-slate-900 transition-all active:scale-95 shadow-xs"
               >
-                <Rotate3d className="w-3.5 h-3.5" />
-                <span>3D View & Pick</span>
+                Pick Now
               </button>
 
             </div>
@@ -227,12 +219,12 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
 
         {/* Mobile Swipe Hint */}
         <div className="sm:hidden flex items-center justify-center gap-1 text-[11px] font-medium text-slate-400 dark:text-zinc-500 pt-1">
-          <span>← Swipe to discover more 3D boxes →</span>
+          <span>← Swipe to discover more series →</span>
         </div>
 
       </div>
 
-      {/* 3D Pop Up Inspection Modal - Powered by Real Interactive ThreeDBoxViewer */}
+      {/* Pop Up Inspection Modal */}
       {selectedBox && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-slate-900/80 dark:bg-black/90 backdrop-blur-md animate-fade-in select-none"
@@ -247,8 +239,8 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
             <div className="p-3.5 sm:p-4 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between bg-slate-50/90 dark:bg-zinc-950/90 shrink-0">
               <div className="flex items-center gap-2 sm:gap-2.5">
                 <div className="px-2 py-0.5 rounded bg-[#E50012] text-white text-[10px] font-black uppercase tracking-wider shrink-0 flex items-center gap-1">
-                  <Rotate3d className="w-3 h-3" />
-                  <span>3D STUDIO</span>
+                  <Flame className="w-3 h-3 fill-current" />
+                  <span>POP NOW</span>
                 </div>
                 <div>
                   <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white line-clamp-1">
@@ -269,12 +261,21 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
               </button>
             </div>
 
-            {/* Modal Body - 3D Interactive Stage & Box Details */}
-            <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:items-start no-scrollbar">
+            {/* Modal Body */}
+            <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:items-center no-scrollbar">
               
-              {/* Interactive 3D Blind Box Stage */}
-              <div className="w-full">
-                <ThreeDBoxViewer box={selectedBox} />
+              {/* Product Box Showcase */}
+              <div className="w-full max-h-[240px] sm:max-h-[340px] aspect-square rounded-2xl bg-gradient-to-b from-[#FAF7F2] to-slate-100 dark:from-zinc-950 dark:to-zinc-900 border border-slate-200/80 dark:border-zinc-800 p-4 sm:p-6 flex items-center justify-center overflow-hidden shadow-inner relative group">
+                <img
+                  src={selectedBox.image}
+                  alt={selectedBox.name}
+                  className="w-full h-full object-contain filter drop-shadow-xl transform hover:scale-105 transition-transform"
+                />
+
+                <div className="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold flex items-center gap-1">
+                  <ShieldCheck className="w-3 h-3 text-emerald-400" />
+                  <span>Sealed Box</span>
+                </div>
               </div>
 
               {/* Box Details & Telegram Direct Pick */}
