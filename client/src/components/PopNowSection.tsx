@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Send, Sparkles, X, ShieldCheck, Eye, Flame } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Send, Sparkles, X, ShieldCheck, Eye, Flame, Rotate3d } from 'lucide-react';
+import { ThreeDBoxViewer } from './ThreeDBoxViewer';
 
 interface PopBoxItem {
   id: string;
@@ -190,7 +191,7 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
 
                 {/* Quick 3D Pop view hover tag */}
                 <div className="absolute top-2 right-2 bg-slate-900/85 dark:bg-black/85 text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-md backdrop-blur-xs flex items-center gap-1 shadow-xs">
-                  <Eye className="w-3 h-3 text-amber-400" />
+                  <Rotate3d className="w-3 h-3 text-rose-400" />
                   <span>3D View</span>
                 </div>
               </div>
@@ -214,9 +215,10 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
                   e.stopPropagation();
                   setSelectedBox(box);
                 }}
-                className="w-full py-2 px-3 rounded-xl border border-slate-900 dark:border-zinc-300 bg-transparent text-slate-900 dark:text-zinc-100 text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:bg-slate-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-slate-900 transition-all active:scale-95 shadow-xs"
+                className="w-full py-2 px-3 rounded-xl border border-slate-900 dark:border-zinc-300 bg-transparent text-slate-900 dark:text-zinc-100 text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:bg-slate-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-slate-900 transition-all active:scale-95 shadow-xs flex items-center justify-center gap-1.5"
               >
-                Pick 3D Box
+                <Rotate3d className="w-3.5 h-3.5" />
+                <span>3D View & Pick</span>
               </button>
 
             </div>
@@ -230,26 +232,27 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
 
       </div>
 
-      {/* 3D Pop Up Inspection Modal - Elevated for Mobile Phones & Desktop */}
+      {/* 3D Pop Up Inspection Modal - Powered by Real Interactive ThreeDBoxViewer */}
       {selectedBox && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-slate-900/80 dark:bg-black/90 backdrop-blur-md animate-fade-in select-none"
           onClick={() => setSelectedBox(null)}
         >
           <div
-            className="relative w-full max-w-2xl max-h-[92vh] sm:max-h-[88vh] rounded-3xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-2xl overflow-hidden flex flex-col my-auto transition-all"
+            className="relative w-full max-w-2xl max-h-[94vh] sm:max-h-[90vh] rounded-3xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-2xl overflow-hidden flex flex-col my-auto transition-all"
             onClick={(e) => e.stopPropagation()}
           >
             
             {/* Modal Header */}
-            <div className="p-3.5 sm:p-5 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between bg-slate-50/90 dark:bg-zinc-950/90 shrink-0">
+            <div className="p-3.5 sm:p-4 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between bg-slate-50/90 dark:bg-zinc-950/90 shrink-0">
               <div className="flex items-center gap-2 sm:gap-2.5">
-                <div className="px-2 py-0.5 rounded bg-[#E50012] text-white text-[10px] font-black uppercase tracking-wider shrink-0">
-                  POP NOW
+                <div className="px-2 py-0.5 rounded bg-[#E50012] text-white text-[10px] font-black uppercase tracking-wider shrink-0 flex items-center gap-1">
+                  <Rotate3d className="w-3 h-3" />
+                  <span>3D STUDIO</span>
                 </div>
                 <div>
                   <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white line-clamp-1">
-                    3D Studio Blind Box Picker
+                    {selectedBox.name}
                   </h3>
                   <p className="text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400 line-clamp-1">
                     {selectedBox.brand} • {selectedBox.series}
@@ -266,29 +269,19 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
               </button>
             </div>
 
-            {/* Modal Body - Smooth Scroll Container on Phone */}
-            <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:items-center no-scrollbar">
+            {/* Modal Body - 3D Interactive Stage & Box Details */}
+            <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:items-start no-scrollbar">
               
-              {/* 3D Standing Box Media Showcase */}
-              <div className="w-full max-h-[220px] sm:max-h-[380px] aspect-square sm:aspect-[3/4] rounded-2xl bg-gradient-to-b from-slate-100 to-slate-200/80 dark:from-zinc-950 dark:to-zinc-900/90 border border-slate-200 dark:border-zinc-800 p-3 sm:p-6 flex items-center justify-center overflow-hidden shadow-inner relative group">
-                <img
-                  src={selectedBox.image}
-                  alt={selectedBox.name}
-                  className="w-full h-full object-contain filter drop-shadow-2xl transform hover:scale-105 transition-transform"
-                />
-                
-                {/* 3D Studio Tag */}
-                <div className="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold flex items-center gap-1">
-                  <Sparkles className="w-3 h-3 text-amber-400" />
-                  <span>3D Studio Box</span>
-                </div>
+              {/* Interactive 3D Blind Box Stage */}
+              <div className="w-full">
+                <ThreeDBoxViewer box={selectedBox} />
               </div>
 
               {/* Box Details & Telegram Direct Pick */}
-              <div className="space-y-3.5 sm:space-y-4 flex flex-col justify-between">
+              <div className="space-y-3.5 sm:space-y-4 flex flex-col justify-between pt-1">
                 
                 <div>
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center gap-2 mb-1.5">
                     <span className="text-[11px] font-black text-[#E50012] uppercase tracking-wider">
                       {selectedBox.brand}
                     </span>
