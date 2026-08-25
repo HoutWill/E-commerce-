@@ -86,6 +86,13 @@ export const PromoCarousel: React.FC = () => {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
+      {/* Top Message Banner */}
+      <div className="mb-3 sm:mb-4 px-4 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-pink-500/10 via-rose-500/10 to-amber-500/10 dark:from-pink-500/20 dark:via-rose-500/15 dark:to-amber-500/15 border border-pink-200/80 dark:border-pink-900/40 text-center shadow-sm backdrop-blur-sm">
+        <p className="text-center font-display text-sm sm:text-base md:text-lg font-medium text-slate-800 dark:text-zinc-100 leading-relaxed max-w-3xl mx-auto">
+          Hey , if you seeing this , i just want to let you use this for free , i hope you interest but you dont seem to interest so i just dont want to rush , the fact is just we can work it and complete the product. well i guess thats it . Doing this as a friend to help in needed. :)
+        </p>
+      </div>
+
       {/* Banner Container with Touch Swipe */}
       <div
         onClick={handleBannerClick}
@@ -97,9 +104,8 @@ export const PromoCarousel: React.FC = () => {
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-              index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-            }`}
+            className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${index === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+              }`}
           >
             <img
               src={slide.image}
@@ -138,11 +144,10 @@ export const PromoCarousel: React.FC = () => {
                 setCurrentIndex(idx);
               }}
               aria-label={`Go to slide ${idx + 1}`}
-              className={`transition-all rounded-full ${
-                idx === currentIndex
-                  ? 'w-4 sm:w-6 h-1.5 sm:h-2 bg-[#E50012]'
-                  : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/50 hover:bg-white/80'
-              }`}
+              className={`transition-all rounded-full ${idx === currentIndex
+                ? 'w-4 sm:w-6 h-1.5 sm:h-2 bg-[#E50012]'
+                : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/50 hover:bg-white/80'
+                }`}
             />
           ))}
         </div>
