@@ -42,7 +42,7 @@ def render_photorealistic_studio_3d_box(
     front_pil = ImageEnhance.Color(front_pil).enhance(1.08)
     front_pil = ImageEnhance.Sharpness(front_pil).enhance(1.15)
 
-    # 2. Studio Canvas (1024x1024)
+    # 2. Studio Shelf Back-Wall & Ambient Lighting (1024x1024)
     canvas_size = 1024
     canvas = Image.new("RGBA", (canvas_size, canvas_size))
     draw = ImageDraw.Draw(canvas)
@@ -55,55 +55,67 @@ def render_photorealistic_studio_3d_box(
     }
     top_c, bot_c = bg_centers.get(bg_theme, bg_centers["soft_studio"])
 
-    for y in range(canvas_size):
-        ratio = y / canvas_size
+    # Draw Back-wall Ambient Gradient
+    shelf_horizon_y = 780
+    for y in range(shelf_horizon_y):
+        ratio = y / shelf_horizon_y
         r = int(top_c[0] + (bot_c[0] - top_c[0]) * ratio)
         g = int(top_c[1] + (bot_c[1] - top_c[1]) * ratio)
         b = int(top_c[2] + (bot_c[2] - top_c[2]) * ratio)
         draw.line([(0, y), (canvas_size, y)], fill=(r, g, b, 255))
 
-    # 3. 3D Studio Podium
-    podium_cx = canvas_size // 2
-    podium_cy = 820
-    podium_rx = 380
-    podium_ry = 65
-    podium_height = 55
+    # Soft Back-Wall Spot Glow
+    spot_glow = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
+    sgdraw = ImageDraw.Draw(spot_glow)
+    sgdraw.ellipse([canvas_size // 2 - 320, shelf_horizon_y - 560,
+                    canvas_size // 2 + 320, shelf_horizon_y + 80],
+                   fill=(255, 255, 255, 60))
+    spot_glow = spot_glow.filter(ImageFilter.GaussianBlur(50))
+    canvas = Image.alpha_composite(canvas, spot_glow)
 
-    # Podium ambient shadow
-    podium_ambient = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
-    padraw = ImageDraw.Draw(podium_ambient)
-    padraw.ellipse([podium_cx - podium_rx - 30, podium_cy + podium_height - 20,
-                    podium_cx + podium_rx + 30, podium_cy + podium_height + 50],
-                   fill=(0, 0, 0, 40))
-    podium_ambient = podium_ambient.filter(ImageFilter.GaussianBlur(25))
-    canvas = Image.alpha_composite(canvas, podium_ambient)
+    # 3. Boutique White Shelf Plank Floor (y = 780 to 920)
+    shelf_surface = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
+    ssdraw = ImageDraw.Draw(shelf_surface)
+    
+    # Top shelf flat surface
+    for y in range(shelf_horizon_y, 900):
+        ratio = (y - shelf_horizon_y) / 120.0
+        r = int(255 - 12 * ratio)
+        g = int(255 - 12 * ratio)
+        b = int(255 - 10 * ratio)
+        ssdraw.line([(0, y), (canvas_size, y)], fill=(r, g, b, 255))
 
-    # Podium body
-    p_body = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
-    pbdraw = ImageDraw.Draw(p_body)
-    for x in range(podium_cx - podium_rx, podium_cx + podium_rx):
-        nx = (x - (podium_cx - podium_rx)) / (2 * podium_rx)
-        shade = int(246 - 20 * math.sin(nx * math.pi))
-        pbdraw.line([(x, podium_cy), (x, podium_cy + podium_height)], fill=(shade, shade, shade, 255))
+    # Shelf Horizon line highlight
+    ssdraw.line([(0, shelf_horizon_y), (canvas_size, shelf_horizon_y)], fill=(255, 255, 255, 240), width=2)
 
-    pbdraw.ellipse([podium_cx - podium_rx, podium_cy + podium_height - podium_ry,
-                    podium_cx + podium_rx, podium_cy + podium_height + podium_ry], fill=(228, 225, 222, 255))
-    pbdraw.ellipse([podium_cx - podium_rx, podium_cy - podium_ry,
-                    podium_cx + podium_rx, podium_cy + podium_ry], fill=(255, 255, 255, 255))
+    # Shelf Front Bevel Lip (y = 900 to 930)
+    for y in range(900, 930):
+        ratio = (y - 900) / 30.0
+        shade = int(230 - 25 * ratio)
+        ssdraw.line([(0, y), (canvas_size, y)], fill=(shade, shade, shade + 2, 255))
 
-    canvas = Image.alpha_composite(canvas, p_body)
+    # Shelf Front Top Highlight Edge
+    ssdraw.line([(0, 900), (canvas_size, 900)], fill=(255, 255, 255, 220), width=1)
 
-    # 4. Box Position & Shadows
+    # Under-shelf shadow area (y = 930 to 1024)
+    for y in range(930, canvas_size):
+        ratio = (y - 930) / 94.0
+        shade = int(200 + 30 * ratio)
+        ssdraw.line([(0, y), (canvas_size, y)], fill=(shade, shade, shade, 255))
+
+    canvas = Image.alpha_composite(canvas, shelf_surface)
+
+    # 4. Box Position & Shelf Contact Shadow
     box_base_x = (canvas_size - (target_box_w + depth_w)) // 2
-    box_base_y = 780
+    box_base_y = shelf_horizon_y
 
-    # Contact shadow on podium
+    # Contact shadow on shelf surface
     box_shadow = Image.new("RGBA", (canvas_size, canvas_size), (0, 0, 0, 0))
     bsdraw = ImageDraw.Draw(box_shadow)
-    bsdraw.ellipse([box_base_x - 15, box_base_y - 18,
-                    box_base_x + target_box_w + depth_w + 15, box_base_y + 24],
+    bsdraw.ellipse([box_base_x - 20, box_base_y - 12,
+                    box_base_x + target_box_w + depth_w + 20, box_base_y + 30],
                    fill=(0, 0, 0, 110))
-    box_shadow = box_shadow.filter(ImageFilter.GaussianBlur(12))
+    box_shadow = box_shadow.filter(ImageFilter.GaussianBlur(14))
     canvas = Image.alpha_composite(canvas, box_shadow)
 
     # 5. 3D Box Geometry Points

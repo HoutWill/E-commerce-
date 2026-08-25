@@ -101,7 +101,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
         </div>
       </div>
 
-      {/* Search Bar & Sort Controls (Aligned in one responsive row) */}
+      {/* Search Bar & Sort Controls */}
       <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
         <div className="relative flex-1">
           <Search className="absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
@@ -138,10 +138,10 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
         </div>
       </div>
 
-      {/* Two Column Signature Layout (Left Vertical Icon Rail + Right Product Grid) on BOTH Phone & Desktop */}
+      {/* Two Column Signature Layout (Left Vertical Icon Rail + Right Product Grid) */}
       <div className="flex items-start gap-2.5 sm:gap-6">
         
-        {/* Left Subcategory Vertical Icon Rail (Visible on BOTH Phone and Desktop) */}
+        {/* Left Subcategory Vertical Icon Rail */}
         <div className="flex flex-col gap-2 sm:gap-3 shrink-0 py-0.5 select-none w-11 sm:w-16">
           {iconRailItems.map((item) => {
             const Icon = item.icon;
@@ -168,7 +168,7 @@ export const CatalogSection: React.FC<CatalogSectionProps> = ({
           })}
         </div>
 
-        {/* Right Product Grid */}
+        {/* Right Main Product Grid */}
         <div className="flex-1 w-full min-w-0">
           
           {isLoading ? (

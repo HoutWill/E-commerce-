@@ -232,6 +232,16 @@ app.get('/api/brands', (req: Request, res: Response) => {
   res.json(db.getBrands());
 });
 
+// Store Settings Endpoints
+app.get('/api/settings', (req: Request, res: Response) => {
+  res.json(db.getSettings());
+});
+
+app.put('/api/settings', adminMutationLimiter, AuthService.requireAuth, (req: Request, res: Response) => {
+  const updated = db.updateSettings(req.body);
+  res.json(updated);
+});
+
 // ==========================================
 // TikTok Scraper Control Endpoints (Protected)
 // ==========================================

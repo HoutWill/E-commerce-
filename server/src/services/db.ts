@@ -112,6 +112,45 @@ export class ProductDatabase {
     }
     return Array.from(set);
   }
+
+  public getSettings(): any {
+    const settingsFile = path.join(DATA_DIR, 'settings.json');
+    if (fs.existsSync(settingsFile)) {
+      try {
+        const raw = fs.readFileSync(settingsFile, 'utf-8');
+        return JSON.parse(raw);
+      } catch (e) {
+        console.error('Error reading settings.json:', e);
+      }
+    }
+    return {
+      ownerName: 'Xiao yi',
+      ownerRole: 'SHOP_OWNER',
+      storeName: 'CLASSY BLING',
+      tagline: 'Viral Blind Boxes & Luxury Plush Charms',
+      locationName: 'Classy Bling Flagship Showroom',
+      address: 'Street 271, Sangkat Phsar Doeum Thkov, Khan Chamkarmon, Phnom Penh, Cambodia',
+      googleMapsUrl: 'https://maps.google.com/?q=11.5368,104.9124',
+      telegramPhone: '092917831 (+85592917831)',
+      telegramUsername: '@classybling_order',
+      telegramUrl: 'https://t.me/+85592917831',
+      tiktokHandle: '@classy.bling',
+      tiktokUrl: 'https://www.tiktok.com/@classy.bling',
+      facebookName: 'Classy Bling Cambodia',
+      facebookUrl: 'https://facebook.com',
+      instagramHandle: '@classybling.kh',
+      instagramUrl: 'https://instagram.com',
+      khrRate: 4100
+    };
+  }
+
+  public updateSettings(updates: any): any {
+    const settingsFile = path.join(DATA_DIR, 'settings.json');
+    const current = this.getSettings();
+    const merged = { ...current, ...updates };
+    fs.writeFileSync(settingsFile, JSON.stringify(merged, null, 2), 'utf-8');
+    return merged;
+  }
 }
 
 export const db = new ProductDatabase();

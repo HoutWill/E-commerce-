@@ -33,6 +33,23 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onOpenModal }
     >
       {/* 3D Product Image Container */}
       <div className="relative aspect-square w-full rounded-xl bg-[#f7f5f2] dark:bg-zinc-950 border border-slate-200/60 dark:border-zinc-800/60 overflow-hidden flex items-center justify-center transition-all duration-300 group-hover:shadow-sm">
+        
+        {/* Stock Status Badge */}
+        <div className="absolute top-2 left-2 z-10">
+          <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] sm:text-[10px] font-black uppercase tracking-wider shadow-xs ${
+            product.stockStatus === 'In Stock'
+              ? 'bg-emerald-500 text-white'
+              : product.stockStatus === 'Low Stock'
+              ? 'bg-amber-500 text-white'
+              : product.stockStatus === 'Pre-order'
+              ? 'bg-sky-500 text-white'
+              : 'bg-rose-500 text-white'
+          }`}>
+            <span className="w-1.5 h-1.5 rounded-full bg-white" />
+            {product.stockStatus || 'In Stock'}
+          </span>
+        </div>
+
         <img
           src={displayImage}
           alt={product.name}

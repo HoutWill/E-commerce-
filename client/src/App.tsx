@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useTransition } from 'react';
 import { Product } from './types';
 import { api } from './services/api';
+import { INITIAL_PRODUCTS, INITIAL_CATEGORIES, INITIAL_BRANDS } from './data/initialProducts';
 import { Navbar } from './components/Navbar';
 import { PromoCarousel } from './components/PromoCarousel';
 import { PopNowSection } from './components/PopNowSection';
@@ -33,10 +34,11 @@ export function App() {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
-  const [brands, setBrands] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // Instant 0ms Initial State from local cache / presets
+  const [products, setProducts] = useState<Product[]>(() => INITIAL_PRODUCTS);
+  const [categories, setCategories] = useState<string[]>(() => INITIAL_CATEGORIES);
+  const [brands, setBrands] = useState<string[]>(() => INITIAL_BRANDS);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Filters & Debounced Search
   const [search, setSearch] = useState('');

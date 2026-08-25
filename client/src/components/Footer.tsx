@@ -16,15 +16,24 @@ export const Footer: React.FC = () => {
   });
 
   useEffect(() => {
-    const saved = localStorage.getItem('classybling_store_settings');
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        setSettings(prev => ({ ...prev, ...parsed }));
-      } catch (e) {
-        // fallback
+    const loadSettings = async () => {
+      const saved = localStorage.getItem('classybling_store_settings');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          setSettings(prev => ({ ...prev, ...parsed }));
+        } catch (e) {}
       }
-    }
+    };
+    loadSettings();
+
+    const handleUpdate = (e: any) => {
+      if (e.detail) {
+        setSettings(prev => ({ ...prev, ...e.detail }));
+      }
+    };
+    window.addEventListener('classybling_settings_updated', handleUpdate);
+    return () => window.removeEventListener('classybling_settings_updated', handleUpdate);
   }, []);
 
   return (

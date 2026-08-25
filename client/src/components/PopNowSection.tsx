@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Send, Sparkles, X, ShieldCheck, Flame } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Send, Sparkles, X, ShieldCheck, Flame, Pause, Play } from 'lucide-react';
 
 interface PopBoxItem {
   id: string;
@@ -19,6 +19,7 @@ interface PopNowSectionProps {
 export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedBox, setSelectedBox] = useState<PopBoxItem | null>(null);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     onModalChange?.(Boolean(selectedBox));
@@ -26,90 +27,143 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
 
   const popBoxes: PopBoxItem[] = [
     {
-      id: 'baby_three_zodiac',
-      name: 'Baby Three Zodiac Series - Vinyl Plush Pendant Blind Box',
-      series: 'Baby Three Zodiac 12 Signs',
+      id: 'labubu_macaron',
+      name: 'Pop Mart Labubu Tasty Macarons Series',
+      series: 'The Monsters Tasty Macarons',
+      brand: 'Pop Mart',
+      price: 19.50,
+      image: '/3d_boxes/labubu_macaron_box_ai.jpg',
+      secretRate: '1/72 Secret Chestnut Macaron Chase',
+      description: 'Viral fluffy vinyl plush monster with mischievous sharp tooth smile holding a strawberry macaron.'
+    },
+    {
+      id: 'crybaby_concert',
+      name: 'Pop Mart CRYBABY Sunset Concert Series',
+      series: 'Sunset Concert Rock Band',
+      brand: 'Pop Mart',
+      price: 16.50,
+      image: '/3d_boxes/crybaby_concert_box_ai.jpg',
+      secretRate: '1/144 Ultra Rare Golden Guitarist',
+      description: 'Rockstar blonde girl in leather jacket with electric guitar, star tears, and band accessories.'
+    },
+    {
+      id: 'zootopia_fox',
+      name: 'Disney Zootopia Nick Wilde Series 1',
+      series: 'Zootopia Art Toy Collection',
+      brand: 'Disney x Pop Mart',
+      price: 14.00,
+      image: '/3d_boxes/zootopia_fox_box_ai.jpg',
+      secretRate: '1/72 Secret Gold Badge Officer',
+      description: 'Official Disney licensed Nick Wilde collectible in green shirt and tie on white studio podium.'
+    },
+    {
+      id: 'kuromi_dreamland',
+      name: 'Sanrio Kuromi Dreamland Starry Series',
+      series: 'Kuromi Star Magic Vol. 1',
+      brand: 'Sanrio',
+      price: 12.50,
+      image: '/3d_boxes/kuromi_dreamland_box_ai.jpg',
+      secretRate: '1/96 Secret Midnight Glitter Chase',
+      description: 'Sanrio licensed gothic jester hat Kuromi with magical star wand on a pastel lavender podium.'
+    },
+    {
+      id: 'kfc_dimoo',
+      name: 'Pop Mart KFC x DIMOO Aviator Series',
+      series: 'Pilot Colonel 35th Anniversary',
+      brand: 'Pop Mart x KFC',
+      price: 14.00,
+      image: '/3d_boxes/kfc_dimoo_box_ai.jpg',
+      secretRate: '1/144 Golden Colonel Secret',
+      description: 'Limited edition DIMOO pilot in aviator jacket with cloud hair and signature fried chicken bucket.'
+    },
+    {
+      id: 'hirono_mischief',
+      name: 'Pop Mart Hirono Little Mischief Series',
+      series: 'Hirono Streetwear Edition',
+      brand: 'Pop Mart',
+      price: 15.00,
+      image: '/3d_boxes/hirono_mischief_box_ai.jpg',
+      secretRate: '1/72 The Vagrant Secret Chase',
+      description: 'Moody expressive boy in oversized textured streetwear hoodie on a minimalist concrete pedestal.'
+    },
+    {
+      id: 'yumi_dream',
+      name: 'YuMi Dreamy Girl Collection Vol. 1',
+      series: 'Pastel Gothic Lolita Series',
+      brand: 'DOTEBABY',
+      price: 14.00,
+      image: '/3d_boxes/yumi_dream_box_ai.jpg',
+      secretRate: '1/72 Secret Starlight Princess',
+      description: 'Anime twintail pink haired cutie in lolita dress with silver foil star accents on studio podium.'
+    },
+    {
+      id: 'baby_three_bunny',
+      name: 'Baby Three 3-Year-Old Cutie Series',
+      series: 'Cutie Plush Series',
       brand: 'Baby Three',
       price: 12.50,
-      image: '/3d_boxes/baby_three_zodiac_studio_box_1787476804515.jpg',
-      secretRate: '1/72 Secret Chase (Golden Dragon)',
-      description: 'Tactile plush doll with moving animated eyes, plush fur suit, and sealed foil blind bag.'
+      image: '/3d_boxes/baby_three_bunny_box_ai.jpg',
+      secretRate: '1/72 Secret Fluffy Angel Bunny',
+      description: 'Soft pastel plush bunny doll with large glossy starry eyes and cute lace collar.'
     },
     {
-      id: 'mega_space_molly',
-      name: 'MEGA SPACE MOLLY 100% Series 02 - Collector Blind Box',
-      series: 'Space Molly Explorer Edition',
-      brand: 'Pop Mart',
-      price: 18.00,
-      image: '/3d_boxes/mega_space_molly_box_1787473086799.jpg',
-      secretRate: '1/144 Ultra Rare Galaxy Chase',
-      description: 'Iconic space helmet with openable glass visor, metallic spacesuit paint, and movable blaster.'
-    },
-    {
-      id: 'nommi_pinky_energy',
-      name: 'Nommi Pinky Energy Series - Soft Plush Charm Blind Box',
-      series: 'Nommi High Energy Collection',
-      brand: 'TOP TOY x SURE FUN',
-      price: 14.00,
-      image: '/3d_boxes/nommi_pinky_energy_box_1787473059976.jpg',
-      secretRate: '1/96 Secret Sweet Berry Chase',
-      description: 'Super soft weighted plush charm with embroidered facial features and gold chain clasp.'
-    },
-    {
-      id: 'baby_three_lolita',
-      name: 'Baby Three Lolita Dream Series - Doll Plush Pendant Blind Box',
-      series: 'Lolita Tea Party Edition',
-      brand: 'Baby Three',
+      id: 'cinnamoroll_bakery',
+      name: 'Sanrio Cinnamoroll Cloud Bakery Series',
+      series: 'Sweet Pastry Collection',
+      brand: 'Sanrio',
       price: 13.00,
-      image: '/3d_boxes/baby_three_lolita_dream_box_1787473539024.jpg',
-      secretRate: '1/72 Secret Royal Princess Chase',
-      description: 'Delicate lace ruffled dress with bonnet, soft pastel colorway, and rotating liquid eyes.'
+      image: '/3d_boxes/cinnamoroll_bakery_box_ai.jpg',
+      secretRate: '1/96 Rainbow Cupcake Chase',
+      description: 'Fluffy white puppy Cinnamoroll wearing a baker chef hat holding a warm cinnamon pastry roll.'
     },
     {
-      id: 'molly_baking_time',
-      name: 'Molly Baking Time Series - Vinyl Art Toy Blind Box',
-      series: 'Molly Sweet Bakery',
+      id: 'mini_animal',
+      name: 'Baby Three Mini Animal Party Series',
+      series: 'Mini Animals Vol. 1',
+      brand: 'Baby Three',
+      price: 14.00,
+      image: '/3d_boxes/mini_animal_box_ai.jpg',
+      secretRate: '1/72 Secret Golden Panda',
+      description: 'Chibi baby panda in sweet animal onesie on a soft lavender studio display.'
+    },
+    {
+      id: 'fantasy_world',
+      name: 'Fantasy World Pastel Plush Bunny',
+      series: 'Pastel Fantasy Series',
+      brand: 'Baby Three',
+      price: 14.00,
+      image: '/3d_boxes/fantasy_world_box_ai.jpg',
+      secretRate: '1/72 Secret Glitter Wing Fairy',
+      description: 'Dreamy sky-blue and pastel pink fairy bunny with sparkling eyes and delicate wings.'
+    },
+    {
+      id: 'samuel_ocean',
+      name: 'Samuel Ocean Series Shark Hood',
+      series: 'Deep Ocean Friends',
+      brand: 'MEI YI YOU ART TOY',
+      price: 13.00,
+      image: '/3d_boxes/samuel_ocean_box_ai.jpg',
+      secretRate: '1/96 Secret Hammerhead Chase',
+      description: 'Plush doll in cute blue shark hooded onesie with white teeth on an ocean gradient studio pedestal.'
+    },
+    {
+      id: 'skullpanda_sound',
+      name: 'Pop Mart SKULLPANDA The Sound Series',
+      series: 'The Sound Avant-Garde',
       brand: 'Pop Mart',
-      price: 15.50,
-      image: '/3d_boxes/molly_baking_time_box_1787473509030.jpg',
-      secretRate: '1/144 Golden Croissant Secret',
-      description: 'Chef apron and bakery utensils accessory kit with detailed matte vinyl finish.'
-    },
-    {
-      id: 'stitch_sleep_box',
-      name: 'Disney Stitch Sweet Dreams - Plush Pendant Blind Box',
-      series: 'Stitch Sleepy Series',
-      brand: 'Disney x Pop Mart',
-      price: 13.50,
-      image: '/3d_boxes/stitch_sleep_box_1787473179186.jpg',
-      secretRate: '1/72 Sleeping Nightcap Chase',
-      description: 'Plush sleepy stitch with pajama cap, soft pillow accessory, and authentic Disney hologram seal.'
-    },
-    {
-      id: 'baby_molly_baby_tabby',
-      name: 'Baby Molly Baby Tabby Series - Vinyl Figure Blind Box',
-      series: 'Baby Molly Kitten Club',
-      brand: 'Pop Mart',
-      price: 16.00,
-      image: '/3d_boxes/baby_molly_baby_tabby_box_1787473570037.jpg',
-      secretRate: '1/144 Calico Cat Secret',
-      description: 'Cute kitten ears hoodie with baby pacifier and soft flocked tail.'
-    },
-    {
-      id: 'yumi_edm_festival',
-      name: 'Yumi EDM Festival Series - Cyber Vinyl Blind Box',
-      series: 'Yumi Neon Beats',
-      brand: 'Yumi Studio',
       price: 15.00,
-      image: '/3d_boxes/yumi_edm_festival_box_1787473599903.jpg',
-      secretRate: '1/96 Holographic DJ Secret',
-      description: 'Glow-in-the-dark headphones and neon rave outfit with UV reactive paint.'
+      image: '/3d_boxes/skullpanda_sound_box_ai.jpg',
+      secretRate: '1/144 The Silence Secret Chase',
+      description: 'Matte black box with iridescent holographic lettering featuring avant-garde earbuds cyber girl.'
     }
   ];
 
+  // Duplicate for seamless infinite loop
+  const loopBoxes = [...popBoxes, ...popBoxes];
+
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const scrollAmount = direction === 'left' ? -300 : 300;
+      const scrollAmount = direction === 'left' ? -340 : 340;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
@@ -121,14 +175,14 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
   };
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8" id="pop-now">
+    <section className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 overflow-hidden" id="pop-now">
       
       {/* Section Header */}
       <div className="flex flex-col items-center justify-center text-center mb-5 sm:mb-8 space-y-1.5">
         <div className="flex items-center gap-2 sm:gap-2.5">
           {/* Red POP NOW badge */}
           <div className="px-2 py-0.5 sm:py-1 rounded bg-[#E50012] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs flex items-center gap-1">
-            <Flame className="w-3 h-3 fill-current" />
+            <Flame className="w-3 h-3 fill-current animate-pulse" />
             <span>POP NOW</span>
           </div>
           <h2 className="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase font-display">
@@ -136,7 +190,7 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
           </h2>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <a
             href="#catalog"
             onClick={handleExploreMore}
@@ -144,47 +198,64 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
           >
             Explore More Series &gt;
           </a>
+
+          {/* Pause / Play Loop Toggle */}
+          <button
+            onClick={() => setIsPaused(!isPaused)}
+            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-600 dark:text-zinc-300 transition-all cursor-pointer"
+            title={isPaused ? "Resume Auto Scroll" : "Pause Auto Scroll"}
+          >
+            {isPaused ? <Play className="w-3 h-3 fill-current" /> : <Pause className="w-3 h-3" />}
+            <span>{isPaused ? "Play" : "Pause"}</span>
+          </button>
         </div>
       </div>
 
-      {/* Pop Up Carousel Container */}
-      <div className="relative group">
+      {/* Pop Up Carousel Container with Left/Right Arrows */}
+      <div 
+        className="relative group/track overflow-hidden py-2"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         
         {/* Left Arrow Button (Desktop/Tablet) */}
         <button
           onClick={() => scroll('left')}
           aria-label="Previous Blind Box"
-          className="hidden sm:flex absolute -left-2 sm:-left-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/90 dark:bg-zinc-900/90 text-slate-800 dark:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 shadow-md border border-slate-200 dark:border-zinc-700 items-center justify-center transition-all hover:scale-110 active:scale-95"
+          className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-zinc-900/95 text-slate-800 dark:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 shadow-xl border border-slate-200/80 dark:border-zinc-700 items-center justify-center transition-all hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs"
         >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+          <ChevronLeft className="w-6 h-6" />
         </button>
 
         {/* Right Arrow Button (Desktop/Tablet) */}
         <button
           onClick={() => scroll('right')}
           aria-label="Next Blind Box"
-          className="hidden sm:flex absolute -right-2 sm:-right-5 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/90 dark:bg-zinc-900/90 text-slate-800 dark:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 shadow-md border border-slate-200 dark:border-zinc-700 items-center justify-center transition-all hover:scale-110 active:scale-95"
+          className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-zinc-900/95 text-slate-800 dark:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 shadow-xl border border-slate-200/80 dark:border-zinc-700 items-center justify-center transition-all hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs"
         >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+          <ChevronRight className="w-6 h-6" />
         </button>
 
-        {/* Scrollable Track */}
+        {/* Animated Infinite Loop Scroll Track */}
         <div
           ref={scrollRef}
-          className="flex gap-4 sm:gap-6 overflow-x-auto pb-4 pt-2 px-1 scroll-smooth no-scrollbar snap-x snap-mandatory"
+          className={`flex gap-4 sm:gap-6 pb-4 pt-2 px-1 ${
+            isPaused ? 'overflow-x-auto no-scrollbar scroll-smooth' : 'animate-loop-scroll'
+          }`}
+          style={isPaused ? { animationPlayState: 'paused' } : undefined}
         >
-          {popBoxes.map((box) => (
+          {loopBoxes.map((box, idx) => (
             <div
-              key={box.id}
-              className="snap-start shrink-0 w-[210px] sm:w-[270px] flex flex-col items-center text-center group/card cursor-pointer bg-slate-50/60 dark:bg-zinc-900/40 p-3 sm:p-4 rounded-2xl border border-slate-200/70 dark:border-zinc-800/80 hover:border-slate-300 dark:hover:border-zinc-700 transition-all"
+              key={`${box.id}-${idx}`}
+              className="shrink-0 w-[220px] sm:w-[270px] flex flex-col items-center text-center group/card cursor-pointer bg-white dark:bg-zinc-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-xs hover:shadow-xl hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-300"
               onClick={() => setSelectedBox(box)}
             >
               {/* Product Box Image Container */}
-              <div className="relative aspect-[3/4] w-full rounded-xl bg-white dark:bg-zinc-950 p-2 sm:p-3 flex items-center justify-center mb-3 transition-all duration-300 transform group-hover/card:-translate-y-2 group-hover/card:scale-102 border border-slate-200/60 dark:border-zinc-800/60 shadow-xs">
+              <div className="relative aspect-[1/1] w-full rounded-xl bg-slate-50 dark:bg-zinc-950 p-2 sm:p-2.5 flex items-center justify-center mb-3 transition-all duration-300 transform group-hover/card:-translate-y-2 group-hover/card:scale-102 border border-slate-100 dark:border-zinc-800/80 overflow-hidden">
                 <img
                   src={box.image}
                   alt={box.name}
-                  className="w-full h-full object-contain filter drop-shadow-md group-hover/card:drop-shadow-xl transition-all"
+                  className="w-full h-full object-contain filter drop-shadow-sm group-hover/card:drop-shadow-lg transition-all"
                   loading="lazy"
                 />
               </div>
@@ -208,7 +279,7 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
                   e.stopPropagation();
                   setSelectedBox(box);
                 }}
-                className="w-full py-2 px-3 rounded-xl border border-slate-900 dark:border-zinc-300 bg-transparent text-slate-900 dark:text-zinc-100 text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:bg-slate-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-slate-900 transition-all active:scale-95 shadow-xs"
+                className="w-full py-2 px-3 rounded-xl border border-slate-900 dark:border-zinc-300 bg-transparent text-slate-900 dark:text-zinc-100 text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:bg-slate-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-slate-900 transition-all active:scale-95 shadow-xs cursor-pointer"
               >
                 Pick Now
               </button>
@@ -219,7 +290,7 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
 
         {/* Mobile Swipe Hint */}
         <div className="sm:hidden flex items-center justify-center gap-1 text-[11px] font-medium text-slate-400 dark:text-zinc-500 pt-1">
-          <span>← Swipe to discover more series →</span>
+          <span>← Auto-scrolling loop • Touch to inspect →</span>
         </div>
 
       </div>
@@ -255,102 +326,73 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
               <button
                 onClick={() => setSelectedBox(null)}
                 aria-label="Close modal"
-                className="p-2 rounded-full text-slate-400 hover:text-slate-700 dark:text-zinc-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-zinc-800 transition-colors shrink-0"
+                className="p-2 rounded-full text-slate-400 hover:text-slate-700 dark:text-zinc-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-zinc-800 transition-colors shrink-0 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Modal Body */}
-            <div className="p-4 sm:p-6 overflow-y-auto overscroll-contain space-y-4 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 sm:items-center no-scrollbar">
-              
-              {/* Product Box Showcase */}
-              <div className="w-full max-h-[240px] sm:max-h-[340px] aspect-square rounded-2xl bg-gradient-to-b from-[#FAF7F2] to-slate-100 dark:from-zinc-950 dark:to-zinc-900 border border-slate-200/80 dark:border-zinc-800 p-4 sm:p-6 flex items-center justify-center overflow-hidden shadow-inner relative group">
+            <div className="p-4 sm:p-6 overflow-y-auto flex-1 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 bg-slate-50/40 dark:bg-zinc-900/40">
+              {/* Product Box Image */}
+              <div className="w-48 sm:w-60 shrink-0 aspect-[1/1] rounded-2xl bg-white dark:bg-zinc-950 p-3 border border-slate-200/80 dark:border-zinc-800 flex items-center justify-center shadow-lg">
                 <img
                   src={selectedBox.image}
                   alt={selectedBox.name}
-                  className="w-full h-full object-contain filter drop-shadow-xl transform hover:scale-105 transition-transform"
+                  className="w-full h-full object-contain filter drop-shadow-md"
                 />
-
-                <div className="absolute bottom-2.5 left-2.5 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold flex items-center gap-1">
-                  <ShieldCheck className="w-3 h-3 text-emerald-400" />
-                  <span>Sealed Box</span>
-                </div>
               </div>
 
-              {/* Box Details & Telegram Direct Pick */}
-              <div className="space-y-3.5 sm:space-y-4 flex flex-col justify-between pt-1">
-                
+              {/* Product Details */}
+              <div className="flex-1 flex flex-col justify-between space-y-3 sm:space-y-4 text-left w-full">
                 <div>
-                  <div className="flex items-center gap-2 mb-1.5">
-                    <span className="text-[11px] font-black text-[#E50012] uppercase tracking-wider">
-                      {selectedBox.brand}
-                    </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-slate-100 dark:bg-zinc-800 text-slate-600 dark:text-zinc-300 font-bold">
-                      {selectedBox.series}
-                    </span>
-                  </div>
-                  
-                  <h4 className="text-sm sm:text-lg font-bold text-slate-900 dark:text-white leading-snug">
+                  <span className="inline-block px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+                    In Stock • Ready to Ship
+                  </span>
+                  <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight">
                     {selectedBox.name}
                   </h4>
-                  
-                  <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1.5 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 mt-1 leading-relaxed">
                     {selectedBox.description}
                   </p>
                 </div>
 
-                {/* Chase Rate & Authenticity */}
-                <div className="space-y-1.5 sm:space-y-2 p-2.5 sm:p-3 rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200/80 dark:border-zinc-800 text-xs">
-                  <div className="flex items-center gap-2 text-amber-600 dark:text-amber-400 font-bold text-[11px] sm:text-xs">
-                    <Sparkles className="w-3.5 h-3.5 shrink-0" />
-                    <span>{selectedBox.secretRate}</span>
-                  </div>
-                  <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-bold text-[11px] sm:text-xs">
-                    <ShieldCheck className="w-3.5 h-3.5 shrink-0" />
-                    <span>100% Genuine Sealed Factory Box</span>
-                  </div>
+                {/* Secret Chase Rate */}
+                <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center gap-2 text-amber-700 dark:text-amber-300 text-xs font-bold">
+                  <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
+                  <span>{selectedBox.secretRate}</span>
                 </div>
 
                 {/* Price Display */}
-                <div className="p-3 rounded-2xl bg-slate-100/80 dark:bg-zinc-800/80 border border-slate-200 dark:border-zinc-700/80 flex items-center justify-between">
-                  <div>
-                    <div className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">
-                      ${selectedBox.price.toFixed(2)} USD
-                    </div>
-                    <div className="text-xs font-black text-[#229ED9]">
-                      ~ {Math.round(selectedBox.price * 4100).toLocaleString()} ៛
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-bold text-slate-500 dark:text-zinc-400 uppercase tracking-tight text-right">
-                    Direct Pick
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl font-black text-slate-900 dark:text-white">
+                    ${selectedBox.price.toFixed(2)}
+                  </span>
+                  <span className="text-xs sm:text-sm font-bold text-[#229ED9]">
+                    ({Math.round(selectedBox.price * 4100).toLocaleString()} ៛)
                   </span>
                 </div>
 
-                {/* Action Order Button */}
-                <div className="pt-1">
-                  <a
-                    href={`https://t.me/+85592917831?text=${encodeURIComponent(
-                      `Hello Classy Bling! I want to Pick & Unbox:\n📦 Product: ${selectedBox.name}\n💰 Price: $${selectedBox.price.toFixed(2)} USD (~${Math.round(selectedBox.price * 4100).toLocaleString()} ៛)\nSeries: ${selectedBox.series}`
-                    )}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-full py-3.5 px-4 rounded-xl bg-[#229ED9] hover:bg-[#1d8cc2] text-white font-black text-xs sm:text-sm uppercase tracking-wide flex items-center justify-center gap-2 shadow-lg shadow-blue-500/25 transition-all hover:scale-[1.01] active:scale-[0.98] min-h-[48px]"
-                  >
-                    <Send className="w-4 h-4 fill-current" />
-                    <span>Pick & Order on Telegram</span>
-                  </a>
-                  <p className="text-[10px] sm:text-[11px] text-center text-slate-400 dark:text-zinc-500 font-medium mt-1.5">
-                    Fast Telegram dispatch • Instant verification
-                  </p>
-                </div>
-
+                {/* Order Action Button */}
+                <a
+                  href={`https://t.me/+85592917831?text=${encodeURIComponent(`Hello Classy Bling! I want to pick & order: ${selectedBox.name} ($${selectedBox.price.toFixed(2)})`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-3 px-4 rounded-xl bg-[#229ED9] hover:bg-[#1e8bc0] text-white font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 cursor-pointer"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>Direct Order via Telegram</span>
+                </a>
               </div>
+            </div>
 
+            {/* Modal Footer */}
+            <div className="p-3 border-t border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 flex items-center justify-center gap-2 text-[11px] text-slate-500 dark:text-zinc-400 shrink-0">
+              <ShieldCheck className="w-4 h-4 text-emerald-500" />
+              <span>100% Guaranteed Authentic • Brand New Sealed Blind Box</span>
             </div>
 
           </div>
-
         </div>
       )}
 

@@ -131,6 +131,9 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const [latitude, setLatitude] = useState(11.5368);
   const [longitude, setLongitude] = useState(104.9124);
   const [isLocating, setIsLocating] = useState(false);
+  const [locationSearchQuery, setLocationSearchQuery] = useState('');
+  const [isSearchingLocation, setIsSearchingLocation] = useState(false);
+  const [locationSearchResults, setLocationSearchResults] = useState<Array<{ display_name: string; lat: string; lon: string }>>([]);
 
   // Data states
   const [products, setProducts] = useState<Product[]>([]);
@@ -184,14 +187,25 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   const loadAdminData = async () => {
     try {
       setIsLoading(true);
-      const [prodRes, catRes, brandRes] = await Promise.all([
+      const [prodRes, catRes, brandRes, settingsRes] = await Promise.all([
         api.getProducts(),
         api.getCategories(),
-        api.getBrands()
+        api.getBrands(),
+        api.getSettings()
       ]);
       setProducts(prodRes.products);
       setCategories(catRes);
       setBrands(brandRes);
+      if (settingsRes && typeof settingsRes === 'object') {
+        setSettings(settingsRes);
+        if (settingsRes.googleMapsUrl) {
+          const match = settingsRes.googleMapsUrl.match(/q=([0-9.-]+),([0-9.-]+)/);
+          if (match) {
+            setLatitude(parseFloat(match[1]) || 11.5368);
+            setLongitude(parseFloat(match[2]) || 104.9124);
+          }
+        }
+      }
     } catch (err) {
       console.error('Failed to load admin data:', err);
     } finally {
@@ -433,11 +447,17 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   };
 
   // Save Settings handler
-  const handleSaveSettings = (e: React.FormEvent) => {
+  const handleSaveSettings = async (e: React.FormEvent) => {
     e.preventDefault();
-    localStorage.setItem('classybling_store_settings', JSON.stringify(settings));
-    setSettingsSavedToast(true);
-    setTimeout(() => setSettingsSavedToast(false), 3000);
+    try {
+      await api.updateSettings(settings);
+      window.dispatchEvent(new CustomEvent('classybling_settings_updated', { detail: settings }));
+      setSettingsSavedToast(true);
+      setTimeout(() => setSettingsSavedToast(false), 3500);
+    } catch (err) {
+      console.error('Failed to save settings:', err);
+      alert('Error saving settings. Please try again.');
+    }
   };
 
   // GPS Locate Me Handler
@@ -481,6 +501,119 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
+  };
+
+  // Smart Google Maps coordinate and URL parser
+  const parseGoogleMapsCoords = (text: string): { lat: number; lng: number } | null => {
+    if (!text) return null;
+    const clean = text.trim();
+
+    // 1. Google Maps Place format with 3d/4d coordinates: !3d11.523898!4d104.8247774
+    const placeMatch = clean.match(/!3d([0-9.-]+)!4d([0-9.-]+)/);
+    if (placeMatch) {
+      const lat = parseFloat(placeMatch[1]);
+      const lng = parseFloat(placeMatch[2]);
+      if (!isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
+        return { lat, lng };
+      }
+    }
+
+    // 2. Plain coordinate pair: "11.5368, 104.9124", "11.5368,104.9124", "11.5368 104.9124"
+    const plainCoordMatch = clean.match(/^[-+]?([0-9]+(?:\.[0-9]+)?)[,\s]+[-+]?([0-9]+(?:\.[0-9]+)?)$/);
+    if (plainCoordMatch) {
+      const lat = parseFloat(plainCoordMatch[1]);
+      const lng = parseFloat(plainCoordMatch[2]);
+      if (!isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
+        return { lat, lng };
+      }
+    }
+
+    // 3. Google Maps URL query / location: ?q=11.5368,104.9124 or @11.5368,104.9124
+    const urlMatch = clean.match(/[@?&](?:q|ll|query|center|daddr)?=?([0-9.-]+)[,%2C\s]+([0-9.-]+)/i) ||
+                     clean.match(/@([0-9.-]+),([0-9.-]+)/);
+    if (urlMatch) {
+      const lat = parseFloat(urlMatch[1]);
+      const lng = parseFloat(urlMatch[2]);
+      if (!isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
+        return { lat, lng };
+      }
+    }
+
+    return null;
+  };
+
+  // Location Search Handler (Supports address, landmark, coordinates, or Google Maps URL)
+  const handleSearchLocation = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    const query = locationSearchQuery.trim();
+    if (!query) return;
+
+    // Check if query is a coordinate pair or Google Maps URL
+    const parsedCoords = parseGoogleMapsCoords(query);
+    if (parsedCoords) {
+      const { lat, lng } = parsedCoords;
+      setLatitude(lat);
+      setLongitude(lng);
+      const mapsUrl = `https://maps.google.com/?q=${lat},${lng}`;
+      setSettings(prev => ({
+        ...prev,
+        googleMapsUrl: mapsUrl,
+        address: prev.address || `${lat.toFixed(6)}, ${lng.toFixed(6)}, Phnom Penh, Cambodia`
+      }));
+
+      // Reverse geocode coordinate to get street address
+      try {
+        const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`);
+        const data = await res.json();
+        if (data && data.display_name) {
+          setSettings(prev => ({
+            ...prev,
+            address: data.display_name,
+            locationName: prev.locationName || data.display_name.split(',')[0],
+            googleMapsUrl: mapsUrl
+          }));
+        }
+      } catch {}
+
+      setLocationSearchResults([]);
+      setLocationSearchQuery('');
+      return;
+    }
+
+    // Otherwise standard search
+    setIsSearchingLocation(true);
+    try {
+      const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=6&addressdetails=1`);
+      const data = await res.json();
+      if (Array.isArray(data) && data.length > 0) {
+        setLocationSearchResults(data);
+      } else {
+        setLocationSearchResults([]);
+        alert(`No locations found for "${query}". Please try another street, landmark, or coordinates.`);
+      }
+    } catch (err) {
+      console.error('Location search error:', err);
+      alert('Error searching for location. Please check your network connection.');
+    } finally {
+      setIsSearchingLocation(false);
+    }
+  };
+
+  // Select a search result
+  const handleSelectSearchResult = (item: { display_name: string; lat: string; lon: string }) => {
+    const lat = parseFloat(item.lat);
+    const lng = parseFloat(item.lon);
+    setLatitude(lat);
+    setLongitude(lng);
+    const mapsUrl = `https://maps.google.com/?q=${lat},${lng}`;
+    setSettings(prev => ({
+      ...prev,
+      address: item.display_name,
+      locationName: prev.locationName || item.display_name.split(',')[0],
+      googleMapsUrl: mapsUrl
+    }));
+    setLocationSearchResults([]);
+    setLocationSearchQuery('');
   };
 
   // Quick Preset Location Handler
@@ -1723,6 +1856,89 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     </button>
                   </div>
 
+                  {/* Location Search Bar & Geocoder */}
+                  <div className="space-y-2">
+                    <label className="block uppercase text-[10px] font-bold text-slate-500 dark:text-zinc-400">
+                      Search Any Address, Mall, or Landmark
+                    </label>
+                    <div className="relative">
+                      <div className="flex gap-2">
+                        <div className="relative flex-1">
+                          <input
+                            type="text"
+                            value={locationSearchQuery}
+                            onChange={(e) => setLocationSearchQuery(e.target.value)}
+                            onKeyDown={(e) => {
+                              if (e.key === 'Enter') {
+                                e.preventDefault();
+                                handleSearchLocation();
+                              }
+                            }}
+                            placeholder="Type an address, street, or landmark (e.g. Aeon Mall, BKK1, Street 271, Toul Tom Poung)..."
+                            className="w-full pl-10 pr-10 py-2.5 rounded-2xl border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 text-xs sm:text-sm font-semibold text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20"
+                          />
+                          <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                          {locationSearchQuery && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                setLocationSearchQuery('');
+                                setLocationSearchResults([]);
+                              }}
+                              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-zinc-200"
+                            >
+                              <X className="w-4 h-4" />
+                            </button>
+                          )}
+                        </div>
+
+                        <button
+                          type="button"
+                          onClick={() => handleSearchLocation()}
+                          disabled={isSearchingLocation || !locationSearchQuery.trim()}
+                          className="px-5 py-2.5 rounded-2xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-extrabold text-xs flex items-center gap-1.5 shadow-xs transition-all disabled:opacity-50 cursor-pointer shrink-0"
+                        >
+                          <Search className={`w-3.5 h-3.5 ${isSearchingLocation ? 'animate-spin' : ''}`} />
+                          <span>{isSearchingLocation ? 'Searching...' : 'Search'}</span>
+                        </button>
+                      </div>
+
+                      {/* Dropdown of Search Results */}
+                      {locationSearchResults.length > 0 && (
+                        <div className="absolute top-full left-0 right-0 mt-2 z-40 bg-white dark:bg-zinc-900 rounded-2xl border border-slate-200 dark:border-zinc-700 shadow-2xl overflow-hidden divide-y divide-slate-100 dark:divide-zinc-800 animate-fade-in max-h-64 overflow-y-auto">
+                          <div className="p-2.5 bg-slate-50 dark:bg-zinc-800/80 text-[10px] font-bold uppercase text-slate-500 dark:text-zinc-400 flex items-center justify-between">
+                            <span>Found Locations ({locationSearchResults.length})</span>
+                            <button
+                              type="button"
+                              onClick={() => setLocationSearchResults([])}
+                              className="text-slate-400 hover:text-slate-600"
+                            >
+                              Close
+                            </button>
+                          </div>
+                          {locationSearchResults.map((item, idx) => (
+                            <button
+                              key={idx}
+                              type="button"
+                              onClick={() => handleSelectSearchResult(item)}
+                              className="w-full p-3 text-left hover:bg-blue-50 dark:hover:bg-blue-950/40 flex items-start gap-2.5 transition-colors cursor-pointer"
+                            >
+                              <MapPin className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />
+                              <div className="flex-1 min-w-0">
+                                <p className="text-xs font-bold text-slate-900 dark:text-white line-clamp-1">
+                                  {item.display_name.split(',')[0]}
+                                </p>
+                                <p className="text-[11px] text-slate-500 dark:text-zinc-400 line-clamp-2 leading-relaxed">
+                                  {item.display_name}
+                                </p>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
                   {/* Interactive Map Display */}
                   <div className="space-y-2">
                     <div className="relative w-full h-64 sm:h-72 rounded-2xl overflow-hidden border border-slate-200 dark:border-zinc-700 bg-slate-100 dark:bg-zinc-800 shadow-inner">
@@ -1744,7 +1960,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                     </span>
                     <div className="flex flex-wrap gap-1.5">
                       {[
-                        { name: 'Classy Bling Showroom', lat: 11.5368, lng: 104.9124, label: '🏙️ Street 271 Showroom', addr: 'Street 271, Sangkat Phsar Doeum Thkov, Khan Chamkarmon, Phnom Penh, Cambodia' },
+                        { name: 'Classy Bling Flagship Showroom', lat: 11.523898, lng: 104.8247774, label: '✨ Official Classy Bling Showroom', addr: 'Classy Bling, Khan Por Senchey / Chom Chao, Phnom Penh, Cambodia' },
                         { name: 'Classy Bling BKK1', lat: 11.5516, lng: 104.9255, label: '🏢 BKK 1 (Boeung Keng Kang)', addr: 'Street 51 corner Street 302, Sangkat Boeung Keng Kang 1, Khan BKK, Phnom Penh' },
                         { name: 'Classy Bling Aeon 1', lat: 11.5484, lng: 104.9351, label: '🏬 Samdach Sothearos (Aeon 1)', addr: 'Samdach Sothearos Blvd, Sangkat Tonle Bassac, Khan Chamkarmon, Phnom Penh' },
                         { name: 'Classy Bling Tuol Kork', lat: 11.5794, lng: 104.8966, label: '🛍️ Tuol Kork (Street 289)', addr: 'Street 289, Sangkat Boeung Kak 1, Khan Tuol Kork, Phnom Penh' },
@@ -1840,8 +2056,16 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                       <input
                         type="text"
                         value={settings.googleMapsUrl}
-                        onChange={(e) => setSettings({ ...settings, googleMapsUrl: e.target.value })}
-                        placeholder="https://maps.google.com/?q=..."
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          const parsed = parseGoogleMapsCoords(val);
+                          if (parsed) {
+                            setLatitude(parsed.lat);
+                            setLongitude(parsed.lng);
+                          }
+                          setSettings(prev => ({ ...prev, googleMapsUrl: val }));
+                        }}
+                        placeholder="Paste Google Maps link or coordinates (e.g. 11.5368, 104.9124)"
                         className="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 font-mono text-xs"
                       />
                     </div>

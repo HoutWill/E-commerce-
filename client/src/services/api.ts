@@ -407,5 +407,47 @@ export const api = {
     } catch {
       // ignore
     }
+  },
+
+  async getSettings(): Promise<any> {
+    const LOCAL_SETTINGS_KEY = 'classybling_store_settings';
+    try {
+      const res = await fetchWithTimeout(`${API_BASE}/settings`);
+      if (res.ok) {
+        const data = await res.json();
+        if (data && typeof data === 'object') {
+          localStorage.setItem(LOCAL_SETTINGS_KEY, JSON.stringify(data));
+          return data;
+        }
+      }
+    } catch {
+      // ignore
+    }
+    const local = localStorage.getItem(LOCAL_SETTINGS_KEY);
+    if (local) {
+      try { return JSON.parse(local); } catch { }
+    }
+    return null;
+  },
+
+  async updateSettings(settings: any): Promise<any> {
+    const LOCAL_SETTINGS_KEY = 'classybling_store_settings';
+    localStorage.setItem(LOCAL_SETTINGS_KEY, JSON.stringify(settings));
+    try {
+      const res = await fetchWithTimeout(`${API_BASE}/settings`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          ...getAuthHeader()
+        },
+        body: JSON.stringify(settings)
+      }, 5000);
+      if (res.ok) {
+        return res.json();
+      }
+    } catch (e) {
+      console.error('Failed to sync settings to server:', e);
+    }
+    return settings;
   }
 };

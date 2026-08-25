@@ -93,3 +93,24 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Infinite Looping Smooth Horizontal Carousel Animation */
+@keyframes loopScrollLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-loop-scroll {
+  display: flex;
+  width: max-content;
+  animation: loopScrollLeft 38s linear infinite;
+  will-change: transform;
+}
+
+.animate-loop-scroll:hover {
+  animation-play-state: paused;
+}
