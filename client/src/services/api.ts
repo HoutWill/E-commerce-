@@ -411,18 +411,48 @@ export const api = {
 
   async getSettings(): Promise<any> {
     const LOCAL_SETTINGS_KEY = 'classybling_store_settings';
+    
+    // 1. Try static /settings.json with cache-busting timestamp (works on Netlify across all phones and laptops)
     try {
-      const res = await fetchWithTimeout(`${API_BASE}/settings`);
+      const res = await fetchWithTimeout(`/settings.json?t=${Date.now()}`);
       if (res.ok) {
-        const data = await res.json();
-        if (data && typeof data === 'object') {
-          localStorage.setItem(LOCAL_SETTINGS_KEY, JSON.stringify(data));
-          return data;
+        const contentType = res.headers.get('content-type') || '';
+        if (!contentType.includes('text/html')) {
+          const data = await res.json();
+          if (data && typeof data === 'object' && data.storeName) {
+            const local = localStorage.getItem(LOCAL_SETTINGS_KEY);
+            if (local) {
+              try {
+                const parsedLocal = JSON.parse(local);
+                return { ...data, ...parsedLocal };
+              } catch { }
+            }
+            localStorage.setItem(LOCAL_SETTINGS_KEY, JSON.stringify(data));
+            return data;
+          }
         }
       }
     } catch {
       // ignore
     }
+
+    // 2. Try backend API (/api/settings) if full-stack server is active
+    try {
+      const res = await fetchWithTimeout(`${API_BASE}/settings?t=${Date.now()}`);
+      if (res.ok) {
+        const contentType = res.headers.get('content-type') || '';
+        if (!contentType.includes('text/html')) {
+          const data = await res.json();
+          if (data && typeof data === 'object' && data.storeName) {
+            localStorage.setItem(LOCAL_SETTINGS_KEY, JSON.stringify(data));
+            return data;
+          }
+        }
+      }
+    } catch {
+      // ignore
+    }
+
     const local = localStorage.getItem(LOCAL_SETTINGS_KEY);
     if (local) {
       try { return JSON.parse(local); } catch { }
@@ -443,7 +473,10 @@ export const api = {
         body: JSON.stringify(settings)
       }, 5000);
       if (res.ok) {
-        return res.json();
+        const contentType = res.headers.get('content-type') || '';
+        if (!contentType.includes('text/html')) {
+          return res.json();
+        }
       }
     } catch (e) {
       console.error('Failed to sync settings to server:', e);

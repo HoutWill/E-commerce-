@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Send, ShieldCheck, Flame, Truck, MapPin, ExternalLink } from 'lucide-react';
 import { TikTokIcon } from './icons/TikTokIcon';
+import { api } from '../services/api';
 
 export const Footer: React.FC = () => {
   const [settings, setSettings] = useState({
@@ -24,6 +25,12 @@ export const Footer: React.FC = () => {
           setSettings(prev => ({ ...prev, ...parsed }));
         } catch (e) {}
       }
+      try {
+        const live = await api.getSettings();
+        if (live && typeof live === 'object') {
+          setSettings(prev => ({ ...prev, ...live }));
+        }
+      } catch (e) {}
     };
     loadSettings();
 

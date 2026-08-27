@@ -22,7 +22,7 @@ export const PromoCarousel: React.FC = () => {
         if (typeof parsed.showAnnouncement === 'boolean') return parsed.showAnnouncement;
       } catch (e) {}
     }
-    return true;
+    return false;
   });
 
   const [announcementText, setAnnouncementText] = useState<string>(() => {
