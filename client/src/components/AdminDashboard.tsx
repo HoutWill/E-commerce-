@@ -46,7 +46,10 @@ import {
   Crosshair,
   Navigation,
   Compass,
-  User
+  User,
+  Megaphone,
+  EyeOff,
+  MessageSquare
 } from 'lucide-react';
 import { TikTokIcon } from './icons/TikTokIcon';
 
@@ -78,6 +81,8 @@ export interface StoreSettingsData {
   instagramHandle: string;
   instagramUrl: string;
   khrRate: number;
+  showAnnouncement?: boolean;
+  announcementText?: string;
 }
 
 const DEFAULT_SETTINGS: StoreSettingsData = {
@@ -98,6 +103,8 @@ const DEFAULT_SETTINGS: StoreSettingsData = {
   instagramHandle: '@classybling.kh',
   instagramUrl: 'https://instagram.com',
   khrRate: 4100,
+  showAnnouncement: true,
+  announcementText: 'Hey , if you seeing this , i just want to let you use this for free , i hope you interest but you dont seem to interest so i just dont want to rush , the fact is just we can work it and complete the product. well i guess thats it . Doing this as a friend to help in needed. :)',
 };
 
 export const AdminDashboard: React.FC<AdminDashboardProps> = ({
@@ -457,6 +464,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     } catch (err) {
       console.error('Failed to save settings:', err);
       alert('Error saving settings. Please try again.');
+    }
+  };
+
+  // Toggle Announcement Status handler
+  const handleToggleAnnouncement = async () => {
+    const newStatus = !(settings.showAnnouncement ?? true);
+    const updated = { ...settings, showAnnouncement: newStatus };
+    setSettings(updated);
+    try {
+      await api.updateSettings(updated);
+      window.dispatchEvent(new CustomEvent('classybling_settings_updated', { detail: updated }));
+      setSettingsSavedToast(true);
+      setTimeout(() => setSettingsSavedToast(false), 3000);
+    } catch (err) {
+      console.error('Failed to toggle announcement:', err);
     }
   };
 
@@ -1703,6 +1725,71 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                 </button>
               </div>
 
+              {/* Quick Top Announcement Banner Control Card in Promotions Tab */}
+              <div className="p-5 rounded-3xl bg-gradient-to-r from-pink-500/10 via-rose-500/10 to-amber-500/10 dark:from-pink-500/20 dark:via-rose-500/15 dark:to-amber-500/15 border border-pink-200/80 dark:border-pink-900/40 shadow-xs space-y-3">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-pink-500 to-rose-500 text-white flex items-center justify-center shadow-xs">
+                      <Megaphone className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-sm font-black uppercase text-slate-900 dark:text-white font-display">
+                          Top Announcement & Message Section
+                        </h4>
+                        <span className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                          settings.showAnnouncement !== false
+                            ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800'
+                            : 'bg-slate-200 text-slate-700 dark:bg-zinc-800 dark:text-zinc-400 border border-slate-300 dark:border-zinc-700'
+                        }`}>
+                          {settings.showAnnouncement !== false ? '🟢 Active & Visible' : '⚪ Hidden / OFF'}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-slate-500 dark:text-zinc-400">
+                        Displays right above the carousel slides on the homepage. Turn ON/OFF with 1 click.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-2 w-full sm:w-auto">
+                    <button
+                      type="button"
+                      onClick={handleToggleAnnouncement}
+                      className={`flex-1 sm:flex-initial px-3.5 py-1.5 rounded-xl text-xs font-black transition-all shadow-xs flex items-center justify-center gap-1.5 cursor-pointer ${
+                        settings.showAnnouncement !== false
+                          ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                          : 'bg-slate-800 hover:bg-slate-900 text-white dark:bg-zinc-700 dark:hover:bg-zinc-600'
+                      }`}
+                    >
+                      {settings.showAnnouncement !== false ? (
+                        <>
+                          <Eye className="w-3.5 h-3.5" />
+                          <span>Turn OFF Banner</span>
+                        </>
+                      ) : (
+                        <>
+                          <EyeOff className="w-3.5 h-3.5" />
+                          <span>Turn ON Banner</span>
+                        </>
+                      )}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveSection('settings')}
+                      className="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:bg-slate-50 dark:hover:bg-zinc-700 text-xs font-extrabold text-slate-700 dark:text-zinc-300 cursor-pointer"
+                    >
+                      Edit Text in Settings &gt;
+                    </button>
+                  </div>
+                </div>
+
+                {settings.showAnnouncement !== false && (settings.announcementText || '').trim() && (
+                  <div className="p-3 rounded-xl bg-white/80 dark:bg-zinc-900/80 border border-pink-200/60 dark:border-pink-900/30 text-xs font-medium text-slate-800 dark:text-zinc-200 line-clamp-2">
+                    "{settings.announcementText}"
+                  </div>
+                )}
+              </div>
+
               <div className="p-4 sm:p-6 rounded-3xl bg-white dark:bg-zinc-900 border border-[#E0D7C6]/70 dark:border-zinc-800 shadow-xs space-y-4">
                 {promotions.length === 0 ? (
                   <div className="py-16 text-center text-slate-400 text-xs">
@@ -1778,7 +1865,134 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
 
               <form onSubmit={handleSaveSettings} className="space-y-6">
                 
-                {/* 1. Shop Owner Profile & Store Identity */}
+                {/* 1. Top Announcement & Homepage Text Section (Turn ON / OFF + Custom Text Editor) */}
+                <div className="p-6 rounded-3xl bg-white dark:bg-zinc-900 border border-[#E0D7C6]/60 dark:border-zinc-800 shadow-xs space-y-5">
+                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-100 dark:border-zinc-800 pb-4">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-9 h-9 rounded-2xl bg-gradient-to-tr from-pink-500 to-rose-500 text-white flex items-center justify-center shadow-xs">
+                        <Megaphone className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h4 className="text-sm sm:text-base font-black uppercase tracking-tight text-slate-900 dark:text-white font-display">
+                            Homepage Announcement & Text Section
+                          </h4>
+                          <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider ${
+                            settings.showAnnouncement !== false
+                              ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/80 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800'
+                              : 'bg-slate-100 text-slate-600 dark:bg-zinc-800 dark:text-zinc-400 border border-slate-200 dark:border-zinc-700'
+                          }`}>
+                            {settings.showAnnouncement !== false ? '🟢 Active & Visible' : '⚪ Turned OFF / Hidden'}
+                          </span>
+                        </div>
+                        <p className="text-xs text-slate-500 dark:text-zinc-400">
+                          Edit the text message and turn ON/OFF anytime without re-pushing code.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Master Turn ON / OFF Switch */}
+                    <button
+                      type="button"
+                      onClick={handleToggleAnnouncement}
+                      className={`relative inline-flex items-center gap-2 px-4 py-2 rounded-2xl text-xs font-black transition-all shadow-xs cursor-pointer ${
+                        settings.showAnnouncement !== false
+                          ? 'bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white shadow-emerald-500/20 active:scale-95'
+                          : 'bg-slate-200 dark:bg-zinc-800 text-slate-700 dark:text-zinc-300 hover:bg-slate-300 dark:hover:bg-zinc-700 active:scale-95'
+                      }`}
+                    >
+                      {settings.showAnnouncement !== false ? (
+                        <>
+                          <Eye className="w-4 h-4" />
+                          <span>Turned ON (Click to Hide)</span>
+                        </>
+                      ) : (
+                        <>
+                          <EyeOff className="w-4 h-4" />
+                          <span>Turned OFF (Click to Show)</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+
+                  {/* Textarea for Announcement Text */}
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <label className="block uppercase text-[10px] font-bold text-slate-500 dark:text-zinc-400">
+                        Custom Announcement / Notice Text
+                      </label>
+                      <span className="text-[10px] font-medium text-slate-400 dark:text-zinc-500">
+                        {(settings.announcementText || '').length} characters
+                      </span>
+                    </div>
+
+                    <textarea
+                      rows={3}
+                      value={settings.announcementText ?? ''}
+                      onChange={(e) => setSettings({ ...settings, announcementText: e.target.value })}
+                      placeholder="Type any message, store announcement, free offer, flash sale, live schedule..."
+                      className="w-full px-4 py-3 rounded-2xl border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 text-xs sm:text-sm font-medium text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 transition-all leading-relaxed"
+                    />
+                  </div>
+
+                  {/* Preset Template Chips */}
+                  <div>
+                    <span className="text-[11px] font-bold text-slate-500 dark:text-zinc-400 block mb-1.5">
+                      Quick Preset Templates (Click to apply):
+                    </span>
+                    <div className="flex flex-wrap gap-1.5">
+                      {[
+                        {
+                          label: '💬 Friend / Free Gift Note',
+                          text: 'Hey , if you seeing this , i just want to let you use this for free , i hope you interest but you dont seem to interest so i just dont want to rush , the fact is just we can work it and complete the product. well i guess thats it . Doing this as a friend to help in needed. :)'
+                        },
+                        {
+                          label: '🔥 TikTok Live Special Drops',
+                          text: '🔥 Catch our daily TikTok Live shows @classy.bling for live unboxings, secret chase drops, and exclusive free mystery gifts with every order! ✨'
+                        },
+                        {
+                          label: '🚚 Nationwide Fast Delivery',
+                          text: '🚚 Fast nationwide delivery across Phnom Penh & all Cambodia provinces! Order directly on Telegram @classybling_order (Hotline: 092917831).'
+                        },
+                        {
+                          label: '✨ New Pop Mart Blind Boxes',
+                          text: '✨ NEW ARRIVALS: 100% Authentic Pop Mart Labubu, Baby Three Zodiac, Nommi, and Mega Space Molly collections now in stock!'
+                        },
+                      ].map((preset, idx) => (
+                        <button
+                          key={idx}
+                          type="button"
+                          onClick={() => setSettings(prev => ({ ...prev, announcementText: preset.text, showAnnouncement: true }))}
+                          className="py-1 px-2.5 rounded-xl border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800 text-[11px] font-semibold text-slate-700 dark:text-zinc-300 hover:bg-pink-50 dark:hover:bg-pink-950/40 hover:border-pink-300 dark:hover:border-pink-800 transition-colors cursor-pointer"
+                        >
+                          {preset.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Live Homepage Banner Preview */}
+                  <div className="space-y-1.5 pt-2 border-t border-slate-100 dark:border-zinc-800">
+                    <span className="text-[10px] uppercase font-bold text-slate-400 dark:text-zinc-500 tracking-wider">
+                      Live Customer Homepage Preview:
+                    </span>
+                    {settings.showAnnouncement !== false && (settings.announcementText || '').trim() ? (
+                      <div className="px-4 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-pink-500/10 via-rose-500/10 to-amber-500/10 dark:from-pink-500/20 dark:via-rose-500/15 dark:to-amber-500/15 border border-pink-200/80 dark:border-pink-900/40 text-center shadow-xs">
+                        <p className="font-display text-xs sm:text-sm md:text-base font-medium text-slate-800 dark:text-zinc-100 leading-relaxed whitespace-pre-line max-w-3xl mx-auto">
+                          {settings.announcementText}
+                        </p>
+                      </div>
+                    ) : (
+                      <div className="px-4 py-3 rounded-2xl bg-slate-100 dark:bg-zinc-800/50 border border-dashed border-slate-300 dark:border-zinc-700 text-center text-slate-400 dark:text-zinc-500 text-xs italic">
+                        {settings.showAnnouncement === false
+                          ? '⚪ Text section is currently turned OFF. Customers will not see any message banner.'
+                          : '⚠️ Announcement text is empty. Enter text above to display the banner.'}
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* 2. Shop Owner Profile & Store Identity */}
                 <div className="p-6 rounded-3xl bg-white dark:bg-zinc-900 border border-[#E0D7C6]/60 dark:border-zinc-800 shadow-xs space-y-4">
                   <div className="flex items-center gap-2 text-sm font-black uppercase text-slate-900 dark:text-white border-b border-slate-100 dark:border-zinc-800 pb-3">
                     <User className="w-4 h-4 text-amber-500" />

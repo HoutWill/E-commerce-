@@ -140,7 +140,9 @@ export class ProductDatabase {
       facebookUrl: 'https://facebook.com',
       instagramHandle: '@classybling.kh',
       instagramUrl: 'https://instagram.com',
-      khrRate: 4100
+      khrRate: 4100,
+      showAnnouncement: true,
+      announcementText: 'Hey , if you seeing this , i just want to let you use this for free , i hope you interest but you dont seem to interest so i just dont want to rush , the fact is just we can work it and complete the product. well i guess thats it . Doing this as a friend to help in needed. :)'
     };
   }
 

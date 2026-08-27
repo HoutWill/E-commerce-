@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { api } from '../services/api';
+
+const DEFAULT_ANNOUNCEMENT = 'Hey , if you seeing this , i just want to let you use this for free , i hope you interest but you dont seem to interest so i just dont want to rush , the fact is just we can work it and complete the product. well i guess thats it . Doing this as a friend to help in needed. :)';
 
 interface BannerSlide {
   id: string;
@@ -10,6 +13,54 @@ interface BannerSlide {
 }
 
 export const PromoCarousel: React.FC = () => {
+  // Dynamic Announcement Text & On/Off State
+  const [showAnnouncement, setShowAnnouncement] = useState<boolean>(() => {
+    const saved = localStorage.getItem('classybling_store_settings');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (typeof parsed.showAnnouncement === 'boolean') return parsed.showAnnouncement;
+      } catch (e) {}
+    }
+    return true;
+  });
+
+  const [announcementText, setAnnouncementText] = useState<string>(() => {
+    const saved = localStorage.getItem('classybling_store_settings');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (typeof parsed.announcementText === 'string') return parsed.announcementText;
+      } catch (e) {}
+    }
+    return DEFAULT_ANNOUNCEMENT;
+  });
+
+  useEffect(() => {
+    // Initial fetch from API / backend
+    api.getSettings().then((data) => {
+      if (data && typeof data === 'object') {
+        if (typeof data.showAnnouncement === 'boolean') setShowAnnouncement(data.showAnnouncement);
+        if (typeof data.announcementText === 'string') setAnnouncementText(data.announcementText);
+      }
+    }).catch(() => {});
+
+    // Listen to live updates from Admin Settings without page reload
+    const handleUpdate = (e: any) => {
+      if (e.detail && typeof e.detail === 'object') {
+        if (typeof e.detail.showAnnouncement === 'boolean') {
+          setShowAnnouncement(e.detail.showAnnouncement);
+        }
+        if (typeof e.detail.announcementText === 'string') {
+          setAnnouncementText(e.detail.announcementText);
+        }
+      }
+    };
+
+    window.addEventListener('classybling_settings_updated', handleUpdate);
+    return () => window.removeEventListener('classybling_settings_updated', handleUpdate);
+  }, []);
+
   const slides: BannerSlide[] = [
     {
       id: 'classybling-baby-three',
@@ -86,12 +137,14 @@ export const PromoCarousel: React.FC = () => {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Top Message Banner */}
-      <div className="mb-3 sm:mb-4 px-4 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-pink-500/10 via-rose-500/10 to-amber-500/10 dark:from-pink-500/20 dark:via-rose-500/15 dark:to-amber-500/15 border border-pink-200/80 dark:border-pink-900/40 text-center shadow-sm backdrop-blur-sm">
-        <p className="text-center font-display text-sm sm:text-base md:text-lg font-medium text-slate-800 dark:text-zinc-100 leading-relaxed max-w-3xl mx-auto">
-          Hey , if you seeing this , i just want to let you use this for free , i hope you interest but you dont seem to interest so i just dont want to rush , the fact is just we can work it and complete the product. well i guess thats it . Doing this as a friend to help in needed. :)
-        </p>
-      </div>
+      {/* Top Message Banner with Turn ON/OFF and Custom Text */}
+      {showAnnouncement && announcementText && announcementText.trim() !== '' && (
+        <div className="mb-3 sm:mb-4 px-4 py-3 sm:py-4 rounded-2xl bg-gradient-to-r from-pink-500/10 via-rose-500/10 to-amber-500/10 dark:from-pink-500/20 dark:via-rose-500/15 dark:to-amber-500/15 border border-pink-200/80 dark:border-pink-900/40 text-center shadow-sm backdrop-blur-sm transition-all duration-300">
+          <p className="text-center font-display text-sm sm:text-base md:text-lg font-medium text-slate-800 dark:text-zinc-100 leading-relaxed max-w-3xl mx-auto whitespace-pre-line">
+            {announcementText}
+          </p>
+        </div>
+      )}
 
       {/* Banner Container with Touch Swipe */}
       <div
