@@ -1,148 +1,192 @@
 import React, { useState } from 'react';
-import { Sun, Moon, Flame, Home, Package, Sparkles } from 'lucide-react';
-import { TikTokIcon } from './icons/TikTokIcon';
+import { Search, Heart, Bag, List, XLg, Sun, Moon } from 'react-bootstrap-icons';
 
 interface NavbarProps {
   theme: 'light' | 'dark';
   onToggleTheme: () => void;
+  onSearchClick?: () => void;
+  cartCount?: number;
+  wishlistCount?: number;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   theme,
   onToggleTheme,
+  onSearchClick,
+  cartCount = 0,
+  wishlistCount = 0
 }) => {
-  const [activeLink, setActiveLink] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState('Home');
 
-  const scrollTo = (id: string, name: string) => {
-    setActiveLink(name);
-    if (id === 'home') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  const navLinks = [
+    { label: 'Home', href: '#home', targetId: 'home' },
+    { label: 'Products', href: '#catalog', targetId: 'catalog' },
+    { label: 'Contact', href: '#footer', targetId: 'footer' }
+  ];
+
+  const handleNavClick = (item: typeof navLinks[0]) => {
+    setActiveItem(item.label);
+    setMobileMenuOpen(false);
+    const el = document.getElementById(item.targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const handleOpenSearch = () => {
+    if (onSearchClick) {
+      onSearchClick();
     } else {
-      const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      const searchInput = document.querySelector('input[type="text"]') as HTMLInputElement;
+      if (searchInput) {
+        searchInput.focus();
+        searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full py-2 sm:py-3 px-3 sm:px-6 lg:px-8 bg-white/95 dark:bg-[#121214]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-zinc-800 transition-colors">
-      <div className="max-w-7xl mx-auto flex items-center justify-between h-11 sm:h-14">
+    <header className="sticky top-0 z-40 w-full bg-white/95 dark:bg-[#121214]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-zinc-800 transition-colors">
+      <div className="w-full px-4 sm:px-6 lg:px-8 h-14 sm:h-16 flex items-center justify-between">
         
-        {/* Left: Vibrant High-Contrast Logo & Brand Name */}
-        <a
-          href="#home"
-          onClick={() => scrollTo('home', 'home')}
-          className="flex items-center gap-2 sm:gap-3 group select-none shrink-0"
-        >
-          {/* Logo Badge */}
-          <div className="relative w-8 h-8 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl overflow-hidden shadow-xs border border-rose-200/80 dark:border-rose-500/30 bg-white p-0.5 group-hover:scale-105 transition-all flex items-center justify-center shrink-0">
-            <img
-              src="/logo_crisp.png"
-              alt="Classy Bling Logo"
-              className="w-full h-full object-cover rounded-lg sm:rounded-xl"
-              loading="eager"
-            />
-          </div>
-
-          <div className="flex items-center gap-1.5">
-            <span className="text-sm sm:text-2xl font-black tracking-tight font-display leading-tight text-slate-900 dark:text-white group-hover:text-[#229ED9] dark:group-hover:text-[#38bdf8] transition-colors">
+        {/* 1. Start: Title & Icon (Left) */}
+        <div className="flex-1 flex items-center justify-start">
+          <a
+            href="#home"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="flex items-center gap-2.5 sm:gap-3 group select-none shrink-0"
+          >
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-slate-200/90 dark:border-zinc-700 bg-white p-0.5 group-hover:scale-105 transition-all flex items-center justify-center shrink-0">
+              <img
+                src="/logo_crisp.png"
+                alt="Classy Bling Logo"
+                className="w-full h-full object-cover rounded-full"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = '/logo.png';
+                }}
+              />
+            </div>
+            <span className="text-sm sm:text-base font-bold tracking-widest uppercase font-sans leading-tight text-slate-900 dark:text-white group-hover:text-[#229ED9] transition-colors">
               CLASSY BLING
             </span>
-            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400 fill-amber-400 animate-pulse hidden sm:inline-block" />
-          </div>
-        </a>
+          </a>
+        </div>
 
-        {/* Center: 3-Item Capsule Nav Links for Laptop/Desktop */}
-        <nav className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100/90 dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 text-xs font-bold tracking-wide">
-          
-          {/* 1. Home */}
-          <button
-            onClick={() => scrollTo('home', 'home')}
-            className={`px-4 py-1.5 rounded-full transition-all flex items-center gap-1.5 ${
-              activeLink === 'home'
-                ? 'bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-xs font-extrabold'
-                : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            <Home className="w-3.5 h-3.5" />
-            <span>Home</span>
-          </button>
-
-          {/* 2. POP NOW */}
-          <button
-            onClick={() => scrollTo('pop-now', 'pop-now')}
-            className={`px-4 py-1.5 rounded-full transition-all flex items-center gap-1.5 ${
-              activeLink === 'pop-now'
-                ? 'bg-[#E50012] text-white shadow-xs font-extrabold'
-                : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            <Flame className="w-3.5 h-3.5 text-[#E50012] group-hover:text-white fill-current" />
-            <span>POP NOW</span>
-          </button>
-
-          {/* 3. Catalog */}
-          <button
-            onClick={() => scrollTo('catalog', 'catalog')}
-            className={`px-4 py-1.5 rounded-full transition-all flex items-center gap-1.5 ${
-              activeLink === 'catalog'
-                ? 'bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-xs font-extrabold'
-                : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'
-            }`}
-          >
-            <Package className="w-3.5 h-3.5" />
-            <span>Catalog</span>
-          </button>
-
+        {/* 2. Middle: 3 Links (Center) - Same font, weight, and size */}
+        <nav className="hidden md:flex items-center justify-center gap-8 lg:gap-12 shrink-0">
+          {navLinks.map((link) => (
+            <button
+              key={link.label}
+              onClick={() => handleNavClick(link)}
+              className={`transition-colors py-1 relative font-bold text-sm tracking-widest uppercase font-sans ${
+                activeItem === link.label
+                  ? 'text-slate-950 dark:text-white'
+                  : 'text-slate-500 hover:text-slate-950 dark:text-zinc-400 dark:hover:text-white'
+              }`}
+            >
+              <span>{link.label}</span>
+              {activeItem === link.label && (
+                <span className="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-slate-900 dark:bg-white rounded-full" />
+              )}
+            </button>
+          ))}
         </nav>
 
-        {/* Right: Clean Action Controls (TikTok, Telegram, Theme) */}
-        <div className="flex items-center gap-1.5 sm:gap-2.5">
+        {/* 3. End: The last controls (Right) */}
+        <div className="flex-1 flex items-center justify-end gap-2 sm:gap-4">
           
-          {/* TikTok Official Live Link Button */}
-          <a
-            href="https://www.tiktok.com/@classy.bling"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="TikTok Live"
-            title="Watch TikTok Live @classy.bling"
-            className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full bg-black hover:bg-neutral-900 text-white transition-all shadow-xs hover:scale-105 active:scale-95 border border-zinc-800"
+          {/* Search Button */}
+          <button
+            onClick={handleOpenSearch}
+            aria-label="Search catalog"
+            className="p-2 text-[#71717A] hover:text-[#1A1A1A] dark:text-[#A1A1AA] dark:hover:text-[#F4F4F5] hover:bg-[#F5F3EF] dark:hover:bg-[#1F1F23] rounded-lg transition-colors"
           >
-            <TikTokIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
-            <span className="text-[11px] sm:text-xs font-black tracking-tight">TikTok</span>
+            <Search className="w-4 h-4" />
+          </button>
+
+          {/* Wishlist */}
+          <a
+            href="#catalog"
+            onClick={(e) => {
+              e.preventDefault();
+              const el = document.getElementById('catalog');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }}
+            aria-label="Wishlist"
+            className="relative p-2 text-[#71717A] hover:text-[#1A1A1A] dark:text-[#A1A1AA] dark:hover:text-[#F4F4F5] hover:bg-[#F5F3EF] dark:hover:bg-[#1F1F23] rounded-lg transition-colors"
+          >
+            <Heart className="w-4 h-4" />
+            {wishlistCount > 0 && (
+              <span className="absolute top-1 right-1 w-2 h-2 bg-[#C25E3E] rounded-full" />
+            )}
           </a>
 
-          {/* Telegram Order Pill Button (Desktop & Tablet) */}
-          <a
-            href="https://t.me/+85592917831"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Order on Telegram"
-            title="Chat & Order on Telegram"
-            className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#229ED9]/10 hover:bg-[#229ED9]/20 text-[#229ED9] text-xs font-bold transition-all border border-[#229ED9]/20"
+          {/* Cart / Bag */}
+          <button
+            onClick={() => window.open('https://t.me/+85592917831', '_blank')}
+            aria-label="Telegram Order Bag"
+            className="relative p-2 text-[#71717A] hover:text-[#1A1A1A] dark:text-[#A1A1AA] dark:hover:text-[#F4F4F5] hover:bg-[#F5F3EF] dark:hover:bg-[#1F1F23] rounded-lg transition-colors"
+            title="Orders via Telegram"
           >
-            <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .37z"/>
-            </svg>
-            <span>Telegram</span>
-          </a>
+            <Bag className="w-3.5 h-3.5" />
+            {cartCount > 0 && (
+              <span className="absolute top-1 right-1 px-1 min-w-[14px] h-[14px] bg-[#C25E3E] text-white text-[9px] font-bold rounded-full flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </button>
 
-          {/* Theme Toggle Button */}
+          {/* Theme Toggle */}
           <button
             onClick={onToggleTheme}
-            aria-label={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-300 border border-slate-200/80 dark:border-zinc-700/80 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-2xs cursor-pointer shrink-0"
+            aria-label="Toggle theme"
+            className="p-2 text-[#71717A] hover:text-[#1A1A1A] dark:text-[#A1A1AA] dark:hover:text-[#F4F4F5] hover:bg-[#F5F3EF] dark:hover:bg-[#1F1F23] rounded-lg transition-colors"
           >
-            {theme === 'dark' ? (
-              <Sun className="w-4 h-4 text-amber-400 fill-amber-400" />
-            ) : (
-              <Moon className="w-4 h-4 text-slate-700 dark:text-zinc-200" />
-            )}
+            {theme === 'dark' ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
+          </button>
+
+          {/* Mobile Hamburger Menu Trigger */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+            className="md:hidden p-2 text-[#71717A] hover:text-[#1A1A1A] dark:text-[#A1A1AA] dark:hover:text-[#F4F4F5] hover:bg-[#F5F3EF] dark:hover:bg-[#1F1F23] rounded-lg transition-colors"
+          >
+            {mobileMenuOpen ? <XLg className="w-4 h-4" /> : <List className="w-5 h-5" />}
           </button>
 
         </div>
 
       </div>
+
+      {/* Mobile Drawer Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t border-[#EAE7E1] dark:border-[#2C2C30] bg-[#FBFBFA] dark:bg-[#121214] px-4 py-4 space-y-1">
+          {navLinks.map((link) => (
+            <button
+              key={link.label}
+              onClick={() => handleNavClick(link)}
+              className="w-full text-left px-3 py-2.5 rounded-lg text-sm font-medium text-[#1A1A1A] dark:text-[#F4F4F5] hover:bg-[#F5F3EF] dark:hover:bg-[#1F1F23] transition-colors"
+            >
+              {link.label}
+            </button>
+          ))}
+          <div className="pt-2 mt-2 border-t border-[#EAE7E1] dark:border-[#2C2C30] flex items-center justify-between px-3">
+            <span className="text-xs text-[#71717A] dark:text-[#A1A1AA]">Orders via Telegram</span>
+            <a
+              href="https://t.me/+85592917831"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-semibold text-[#C25E3E] hover:underline"
+            >
+              @classy.bling
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

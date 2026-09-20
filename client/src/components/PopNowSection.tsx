@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Send, Sparkles, X, ShieldCheck, Flame, Pause, Play } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, XLg, Send } from 'react-bootstrap-icons';
 
 interface PopBoxItem {
   id: string;
@@ -19,13 +19,22 @@ interface PopNowSectionProps {
 export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedBox, setSelectedBox] = useState<PopBoxItem | null>(null);
-  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     onModalChange?.(Boolean(selectedBox));
   }, [selectedBox, onModalChange]);
 
   const popBoxes: PopBoxItem[] = [
+    {
+      id: 'prod_claw_machine_rabbit_space',
+      name: 'Rabbit Space Mini Arcade Claw Machine',
+      series: 'Doll Machine Game Series',
+      brand: 'Classy Bling Arcade',
+      price: 25.00,
+      image: '/3d_boxes/claw_machine_rabbit_space_ai.jpg',
+      secretRate: 'Available in 3 Colors (Pink, Green, Yellow)',
+      description: 'Authentic TikTok viral tabletop mini arcade claw machine (Size L) with motorized crane claw, 3 joystick controls, LED timer, sound effects, and doll capsules.'
+    },
     {
       id: 'labubu_macaron',
       name: 'Pop Mart Labubu Tasty Macarons Series',
@@ -98,72 +107,19 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
     },
     {
       id: 'baby_three_bunny',
-      name: 'Baby Three 3-Year-Old Cutie Series',
-      series: 'Cutie Plush Series',
+      name: 'Baby Three Pocket Bunny Treasure Series',
+      series: 'Pocket Bunny Series 1',
       brand: 'Baby Three',
       price: 12.50,
       image: '/3d_boxes/baby_three_bunny_box_ai.jpg',
-      secretRate: '1/72 Secret Fluffy Angel Bunny',
-      description: 'Soft pastel plush bunny doll with large glossy starry eyes and cute lace collar.'
-    },
-    {
-      id: 'cinnamoroll_bakery',
-      name: 'Sanrio Cinnamoroll Cloud Bakery Series',
-      series: 'Sweet Pastry Collection',
-      brand: 'Sanrio',
-      price: 13.00,
-      image: '/3d_boxes/cinnamoroll_bakery_box_ai.jpg',
-      secretRate: '1/96 Rainbow Cupcake Chase',
-      description: 'Fluffy white puppy Cinnamoroll wearing a baker chef hat holding a warm cinnamon pastry roll.'
-    },
-    {
-      id: 'mini_animal',
-      name: 'Baby Three Mini Animal Party Series',
-      series: 'Mini Animals Vol. 1',
-      brand: 'Baby Three',
-      price: 14.00,
-      image: '/3d_boxes/mini_animal_box_ai.jpg',
-      secretRate: '1/72 Secret Golden Panda',
-      description: 'Chibi baby panda in sweet animal onesie on a soft lavender studio display.'
-    },
-    {
-      id: 'fantasy_world',
-      name: 'Fantasy World Pastel Plush Bunny',
-      series: 'Pastel Fantasy Series',
-      brand: 'Baby Three',
-      price: 14.00,
-      image: '/3d_boxes/fantasy_world_box_ai.jpg',
-      secretRate: '1/72 Secret Glitter Wing Fairy',
-      description: 'Dreamy sky-blue and pastel pink fairy bunny with sparkling eyes and delicate wings.'
-    },
-    {
-      id: 'samuel_ocean',
-      name: 'Samuel Ocean Series Shark Hood',
-      series: 'Deep Ocean Friends',
-      brand: 'MEI YI YOU ART TOY',
-      price: 13.00,
-      image: '/3d_boxes/samuel_ocean_box_ai.jpg',
-      secretRate: '1/96 Secret Hammerhead Chase',
-      description: 'Plush doll in cute blue shark hooded onesie with white teeth on an ocean gradient studio pedestal.'
-    },
-    {
-      id: 'skullpanda_sound',
-      name: 'Pop Mart SKULLPANDA The Sound Series',
-      series: 'The Sound Avant-Garde',
-      brand: 'Pop Mart',
-      price: 15.00,
-      image: '/3d_boxes/skullpanda_sound_box_ai.jpg',
-      secretRate: '1/144 The Silence Secret Chase',
-      description: 'Matte black box with iridescent holographic lettering featuring avant-garde earbuds cyber girl.'
+      secretRate: '1/96 Golden Crown Bunny Chase',
+      description: 'Plush rabbit doll with glossy cartoon eyes in baby pink romper box.'
     }
   ];
 
-  // Duplicate for seamless infinite loop
-  const loopBoxes = [...popBoxes, ...popBoxes];
-
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
-      const scrollAmount = direction === 'left' ? -340 : 340;
+      const scrollAmount = direction === 'left' ? -320 : 320;
       scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
   };
@@ -175,221 +131,156 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
   };
 
   return (
-    <section className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 overflow-hidden" id="pop-now">
+    <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8" id="pop-now">
       
-      {/* Section Header */}
-      <div className="flex flex-col items-center justify-center text-center mb-5 sm:mb-8 space-y-1.5">
-        <div className="flex items-center gap-2 sm:gap-2.5">
-          {/* Red POP NOW badge */}
-          <div className="px-2 py-0.5 sm:py-1 rounded bg-[#E50012] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs flex items-center gap-1">
-            <Flame className="w-3 h-3 fill-current animate-pulse" />
-            <span>POP NOW</span>
-          </div>
-          <h2 className="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase font-display">
-            POP NOW Drops
+      {/* Compact Section Header */}
+      <div className="flex items-end justify-between mb-4 sm:mb-6">
+        <div>
+          <span className="text-[11px] font-bold text-[#8C7E72] dark:text-[#A1A1AA] uppercase tracking-wider block mb-1">
+            Featured Highlight
+          </span>
+          <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[#1A1A1A] dark:text-[#F4F4F5]">
+            Popular Drops
           </h2>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <a
             href="#catalog"
             onClick={handleExploreMore}
-            className="text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors underline-offset-4 hover:underline cursor-pointer"
+            className="text-xs font-semibold text-[#71717A] dark:text-[#A1A1AA] hover:text-[#1A1A1A] dark:hover:text-[#F4F4F5] transition-colors mr-2 hidden sm:inline-flex items-center gap-1"
           >
-            Explore More Series &gt;
+            <span>View All</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </a>
 
-          {/* Pause / Play Loop Toggle */}
           <button
-            onClick={() => setIsPaused(!isPaused)}
-            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-600 dark:text-zinc-300 transition-all cursor-pointer"
-            title={isPaused ? "Resume Auto Scroll" : "Pause Auto Scroll"}
+            onClick={() => scroll('left')}
+            aria-label="Scroll Left"
+            className="w-8 h-8 rounded-lg border border-[#EAE7E1] dark:border-[#2C2C30] bg-white dark:bg-[#18181B] hover:bg-[#F5F3EF] dark:hover:bg-[#202024] flex items-center justify-center text-[#71717A] dark:text-[#A1A1AA] transition-colors cursor-pointer"
           >
-            {isPaused ? <Play className="w-3 h-3 fill-current" /> : <Pause className="w-3 h-3" />}
-            <span>{isPaused ? "Play" : "Pause"}</span>
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+
+          <button
+            onClick={() => scroll('right')}
+            aria-label="Scroll Right"
+            className="w-8 h-8 rounded-lg border border-[#EAE7E1] dark:border-[#2C2C30] bg-white dark:bg-[#18181B] hover:bg-[#F5F3EF] dark:hover:bg-[#202024] flex items-center justify-center text-[#71717A] dark:text-[#A1A1AA] transition-colors cursor-pointer"
+          >
+            <ChevronRight className="w-4 h-4" />
           </button>
         </div>
       </div>
 
-      {/* Pop Up Carousel Container with Left/Right Arrows */}
-      <div 
-        className="relative group/track overflow-hidden py-2"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
+      {/* Horizontal Carousel */}
+      <div
+        ref={scrollRef}
+        className="flex gap-3 sm:gap-4 overflow-x-auto no-scrollbar scroll-smooth pb-2 pt-1"
       >
-        
-        {/* Left Arrow Button (Desktop/Tablet) */}
-        <button
-          onClick={() => scroll('left')}
-          aria-label="Previous Blind Box"
-          className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-zinc-900/95 text-slate-800 dark:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 shadow-xl border border-slate-200/80 dark:border-zinc-700 items-center justify-center transition-all hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs"
-        >
-          <ChevronLeft className="w-6 h-6" />
-        </button>
+        {popBoxes.map((box) => (
+          <div
+            key={box.id}
+            onClick={() => setSelectedBox(box)}
+            className="shrink-0 w-[190px] sm:w-[230px] rounded-xl bg-white dark:bg-[#18181B] border border-[#EAE7E1] dark:border-[#2C2C30] hover:border-[#D6D2C9] dark:hover:border-[#3F3F46] p-3 flex flex-col group cursor-pointer transition-all shadow-2xs"
+          >
+            {/* 1:1 Product Image */}
+            <div className="relative aspect-square w-full rounded-lg bg-[#F5F3EF] dark:bg-[#202024] overflow-hidden p-2 flex items-center justify-center mb-2.5">
+              <img
+                src={box.image}
+                alt={box.name}
+                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
+              {box.id === 'prod_claw_machine_rabbit_space' ? (
+                <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold tracking-wider uppercase bg-[#C25E3E] text-white">
+                  NEW
+                </span>
+              ) : (
+                <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[9px] font-bold tracking-wider uppercase bg-white/90 dark:bg-[#18181B]/90 text-[#71717A] dark:text-[#A1A1AA] border border-[#EAE7E1] dark:border-[#2C2C30]">
+                  POP
+                </span>
+              )}
+            </div>
 
-        {/* Right Arrow Button (Desktop/Tablet) */}
-        <button
-          onClick={() => scroll('right')}
-          aria-label="Next Blind Box"
-          className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/95 dark:bg-zinc-900/95 text-slate-800 dark:text-zinc-100 hover:bg-white dark:hover:bg-zinc-800 shadow-xl border border-slate-200/80 dark:border-zinc-700 items-center justify-center transition-all hover:scale-110 active:scale-95 cursor-pointer backdrop-blur-xs"
-        >
-          <ChevronRight className="w-6 h-6" />
-        </button>
-
-        {/* Animated Infinite Loop Scroll Track */}
-        <div
-          ref={scrollRef}
-          className={`flex gap-4 sm:gap-6 pb-4 pt-2 px-1 ${
-            isPaused ? 'overflow-x-auto no-scrollbar scroll-smooth' : 'animate-loop-scroll'
-          }`}
-          style={isPaused ? { animationPlayState: 'paused' } : undefined}
-        >
-          {loopBoxes.map((box, idx) => (
-            <div
-              key={`${box.id}-${idx}`}
-              className="shrink-0 w-[220px] sm:w-[270px] flex flex-col items-center text-center group/card cursor-pointer bg-white dark:bg-zinc-900 p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-zinc-800 shadow-xs hover:shadow-xl hover:border-slate-300 dark:hover:border-zinc-700 transition-all duration-300"
-              onClick={() => setSelectedBox(box)}
-            >
-              {/* Product Box Image Container */}
-              <div className="relative aspect-[1/1] w-full rounded-xl bg-slate-50 dark:bg-zinc-950 p-2 sm:p-2.5 flex items-center justify-center mb-3 transition-all duration-300 transform group-hover/card:-translate-y-2 group-hover/card:scale-102 border border-slate-100 dark:border-zinc-800/80 overflow-hidden">
-                <img
-                  src={box.image}
-                  alt={box.name}
-                  className="w-full h-full object-contain filter drop-shadow-sm group-hover/card:drop-shadow-lg transition-all"
-                  loading="lazy"
-                />
+            {/* Product Meta */}
+            <div className="flex-1 flex flex-col justify-between space-y-1">
+              <div>
+                <span className="text-[10px] font-semibold text-[#8C7E72] dark:text-[#A1A1AA] uppercase tracking-wider block line-clamp-1">
+                  {box.series}
+                </span>
+                <h3 className="text-xs sm:text-sm font-semibold text-[#1A1A1A] dark:text-[#F4F4F5] line-clamp-1 group-hover:text-[#C25E3E] transition-colors">
+                  {box.name}
+                </h3>
               </div>
-
-              {/* Product Title */}
-              <h3 className="text-xs sm:text-sm font-bold text-slate-800 dark:text-zinc-200 line-clamp-2 px-1 mb-1.5 leading-snug min-h-[32px] sm:min-h-[36px]">
-                {box.name}
-              </h3>
-
-              {/* Price Tag ($XX.XX / PICK) */}
-              <div className="text-xs sm:text-base font-black text-slate-900 dark:text-white mb-2.5 flex items-center justify-center gap-1">
-                <span>${box.price.toFixed(2)}</span>
-                <span className="text-[10px] sm:text-xs font-bold text-[#229ED9]">
-                  ({Math.round(box.price * 4100).toLocaleString()} ៛)
+              <div className="pt-1 flex items-center justify-between">
+                <span className="text-sm font-bold text-[#1A1A1A] dark:text-[#F4F4F5]">
+                  ${box.price.toFixed(2)}
+                </span>
+                <span className="text-[11px] font-medium text-[#71717A] dark:text-[#A1A1AA]">
+                  In Stock
                 </span>
               </div>
-
-              {/* Action Button */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedBox(box);
-                }}
-                className="w-full py-2 px-3 rounded-xl border border-slate-900 dark:border-zinc-300 bg-transparent text-slate-900 dark:text-zinc-100 text-[11px] sm:text-xs font-bold uppercase tracking-wider hover:bg-slate-900 hover:text-white dark:hover:bg-zinc-100 dark:hover:text-slate-900 transition-all active:scale-95 shadow-xs cursor-pointer"
-              >
-                Pick Now
-              </button>
-
             </div>
-          ))}
-        </div>
 
-        {/* Mobile Swipe Hint */}
-        <div className="sm:hidden flex items-center justify-center gap-1 text-[11px] font-medium text-slate-400 dark:text-zinc-500 pt-1">
-          <span>← Auto-scrolling loop • Touch to inspect →</span>
-        </div>
-
+          </div>
+        ))}
       </div>
 
-      {/* Pop Up Inspection Modal */}
+      {/* Modal Detail for PopBox */}
       {selectedBox && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-slate-900/80 dark:bg-black/90 backdrop-blur-md animate-fade-in select-none"
+          className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fade-in select-none"
           onClick={() => setSelectedBox(null)}
         >
           <div
-            className="relative w-full max-w-2xl max-h-[94vh] sm:max-h-[90vh] rounded-3xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-2xl overflow-hidden flex flex-col my-auto transition-all"
+            className="relative w-full max-w-lg rounded-2xl bg-white dark:bg-[#18181B] border border-[#EAE7E1] dark:border-[#2C2C30] shadow-xl overflow-hidden p-5 sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
-            
-            {/* Modal Header */}
-            <div className="p-3.5 sm:p-4 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between bg-slate-50/90 dark:bg-zinc-950/90 shrink-0">
-              <div className="flex items-center gap-2 sm:gap-2.5">
-                <div className="px-2 py-0.5 rounded bg-[#E50012] text-white text-[10px] font-black uppercase tracking-wider shrink-0 flex items-center gap-1">
-                  <Flame className="w-3 h-3 fill-current" />
-                  <span>POP NOW</span>
-                </div>
-                <div>
-                  <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white line-clamp-1">
-                    {selectedBox.name}
-                  </h3>
-                  <p className="text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400 line-clamp-1">
-                    {selectedBox.brand} • {selectedBox.series}
-                  </p>
-                </div>
-              </div>
+            <button
+              onClick={() => setSelectedBox(null)}
+              aria-label="Close"
+              className="absolute top-4 right-4 p-1.5 rounded-lg text-[#71717A] hover:text-[#1A1A1A] dark:text-[#A1A1AA] dark:hover:text-[#F4F4F5] hover:bg-[#F5F3EF] dark:hover:bg-[#202024] transition-colors"
+            >
+              <XLg className="w-4 h-4" />
+            </button>
 
-              <button
-                onClick={() => setSelectedBox(null)}
-                aria-label="Close modal"
-                className="p-2 rounded-full text-slate-400 hover:text-slate-700 dark:text-zinc-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-zinc-800 transition-colors shrink-0 cursor-pointer"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Modal Body */}
-            <div className="p-4 sm:p-6 overflow-y-auto flex-1 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 bg-slate-50/40 dark:bg-zinc-900/40">
-              {/* Product Box Image */}
-              <div className="w-48 sm:w-60 shrink-0 aspect-[1/1] rounded-2xl bg-white dark:bg-zinc-950 p-3 border border-slate-200/80 dark:border-zinc-800 flex items-center justify-center shadow-lg">
+            <div className="flex flex-col sm:flex-row gap-5 items-center">
+              <div className="w-44 h-44 sm:w-48 sm:h-48 rounded-xl bg-[#F5F3EF] dark:bg-[#202024] p-3 flex items-center justify-center shrink-0">
                 <img
                   src={selectedBox.image}
                   alt={selectedBox.name}
-                  className="w-full h-full object-contain filter drop-shadow-md"
+                  className="w-full h-full object-contain"
                 />
               </div>
 
-              {/* Product Details */}
-              <div className="flex-1 flex flex-col justify-between space-y-3 sm:space-y-4 text-left w-full">
-                <div>
-                  <span className="inline-block px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
-                    In Stock • Ready to Ship
-                  </span>
-                  <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight">
-                    {selectedBox.name}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 mt-1 leading-relaxed">
-                    {selectedBox.description}
-                  </p>
+              <div className="space-y-2 text-left flex-1">
+                <span className="text-[10px] uppercase font-bold text-[#8C7E72] dark:text-[#A1A1AA] tracking-wider">
+                  {selectedBox.brand} · {selectedBox.series}
+                </span>
+                <h3 className="text-base sm:text-lg font-bold text-[#1A1A1A] dark:text-[#F4F4F5] leading-tight">
+                  {selectedBox.name}
+                </h3>
+                <div className="text-lg font-extrabold text-[#C25E3E]">
+                  ${selectedBox.price.toFixed(2)} USD
                 </div>
+                <p className="text-xs text-[#71717A] dark:text-[#A1A1AA] leading-relaxed">
+                  {selectedBox.description}
+                </p>
 
-                {/* Secret Chase Rate */}
-                <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center gap-2 text-amber-700 dark:text-amber-300 text-xs font-bold">
-                  <Sparkles className="w-4 h-4 text-amber-500 shrink-0" />
-                  <span>{selectedBox.secretRate}</span>
+                <div className="pt-3">
+                  <a
+                    href={`https://t.me/+85592917831?text=${encodeURIComponent(
+                      `Hello Classy Bling! I would like to order: ${selectedBox.name} ($${selectedBox.price.toFixed(2)})`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 px-4 rounded-lg bg-[#C25E3E] hover:bg-[#A94F32] text-white text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
+                  >
+                    <Send className="w-3.5 h-3.5" />
+                    <span>Order via Telegram</span>
+                  </a>
                 </div>
-
-                {/* Price Display */}
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-black text-slate-900 dark:text-white">
-                    ${selectedBox.price.toFixed(2)}
-                  </span>
-                  <span className="text-xs sm:text-sm font-bold text-[#229ED9]">
-                    ({Math.round(selectedBox.price * 4100).toLocaleString()} ៛)
-                  </span>
-                </div>
-
-                {/* Order Action Button */}
-                <a
-                  href={`https://t.me/+85592917831?text=${encodeURIComponent(`Hello Classy Bling! I want to pick & order: ${selectedBox.name} ($${selectedBox.price.toFixed(2)})`)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-3 px-4 rounded-xl bg-[#229ED9] hover:bg-[#1e8bc0] text-white font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 cursor-pointer"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>Direct Order via Telegram</span>
-                </a>
               </div>
-            </div>
-
-            {/* Modal Footer */}
-            <div className="p-3 border-t border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 flex items-center justify-center gap-2 text-[11px] text-slate-500 dark:text-zinc-400 shrink-0">
-              <ShieldCheck className="w-4 h-4 text-emerald-500" />
-              <span>100% Guaranteed Authentic • Brand New Sealed Blind Box</span>
             </div>
 
           </div>

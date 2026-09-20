@@ -2,6 +2,38 @@ import { Product } from '../types';
 
 export const INITIAL_PRODUCTS: Product[] = [
   {
+    "id": "prod_claw_machine_rabbit_space",
+    "name": "Doll Machine Game - Rabbit Space Claw Machine",
+    "price": 25.0,
+    "currency": "USD",
+    "stockStatus": "In Stock",
+    "category": "Limited Edition",
+    "subcategory": "Mini Arcade Claw Machine",
+    "brand": "Classy Bling Arcade",
+    "series": "Doll Machine Game Collection",
+    "description": "Authentic TikTok viral tabletop mini arcade claw machine (Size L) with motorized crane claw, 3 joystick controls, LED countdown timer, sound effects, and doll capsules. Available in 3 colors (Rabbit Space Pink, Lime Green, Yellow Bear).",
+    "croppedImageUrl": "/3d_boxes/claw_machine_rabbit_space_ai.jpg",
+    "originalScreenshotUrl": "/3d_boxes/claw_machine_tiktok_real.jpg",
+    "tiktokVideoUrl": "https://www.tiktok.com/@classy.bling/video/7686000918407515412",
+    "tiktokPostId": "7686000918407515412",
+    "contactTelegram": "https://t.me/+85592917831",
+    "contactFacebook": "https://facebook.com",
+    "angleMatched": true,
+    "confidence": 0.98,
+    "createdAt": "2026-09-16T14:30:00.000Z",
+    "updatedAt": "2026-09-20T15:45:00.000Z",
+    "featured": true,
+    "tags": [
+      "Claw Machine",
+      "Rabbit Space",
+      "Doll Machine Game",
+      "TikTok Viral",
+      "Limited Edition",
+      "Arcade",
+      "In Stock"
+    ]
+  },
+  {
     "id": "prod_labubu_macaron",
     "name": "Pop Mart Labubu Tasty Macarons",
     "price": 19.5,
@@ -581,6 +613,7 @@ export const INITIAL_CATEGORIES = [
 ];
 export const INITIAL_BRANDS = [
   "Baby Three",
+  "Classy Bling Arcade",
   "DOTEBABY",
   "Disney",
   "Fox & Bunny",

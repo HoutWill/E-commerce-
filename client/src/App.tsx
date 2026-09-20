@@ -185,7 +185,7 @@ export function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 transition-colors duration-200" id="home">
+    <div className="min-h-screen flex flex-col bg-[#FBFBFA] dark:bg-[#121214] text-[#1A1A1A] dark:text-[#F4F4F5] transition-colors duration-200 font-sans" id="home">
       
       {/* Top Header with Classy Bling Logo, Telegram, TikTok & Theme */}
       <Navbar

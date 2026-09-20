@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Send, ShieldCheck, Flame, Truck, MapPin, ExternalLink } from 'lucide-react';
+import { Send, ShieldCheck, Fire, Truck, GeoAlt, BoxArrowUpRight } from 'react-bootstrap-icons';
 import { TikTokIcon } from './icons/TikTokIcon';
 import { api } from '../services/api';
 
@@ -138,7 +138,7 @@ export const Footer: React.FC = () => {
             <div className="p-3.5 rounded-2xl bg-stone-200/50 dark:bg-zinc-900/60 border border-stone-300/40 dark:border-zinc-800 space-y-2 text-xs">
               <div className="flex items-start gap-2.5 text-slate-800 dark:text-zinc-200 font-semibold">
                 <div className="w-6 h-6 rounded-lg bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
-                  <MapPin className="w-3.5 h-3.5" />
+                  <GeoAlt className="w-3.5 h-3.5" />
                 </div>
                 <span className="leading-snug pt-0.5">{settings.address}</span>
               </div>
@@ -152,7 +152,7 @@ export const Footer: React.FC = () => {
                     className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white dark:bg-zinc-800 text-slate-800 dark:text-zinc-200 hover:text-rose-600 dark:hover:text-rose-400 font-bold shadow-2xs border border-stone-300/50 dark:border-zinc-700/60 transition-all text-[11px]"
                   >
                     <span>View on Google Maps</span>
-                    <ExternalLink className="w-3 h-3 text-slate-400" />
+                    <BoxArrowUpRight className="w-2.5 h-2.5 text-slate-400" />
                   </a>
                 </div>
               )}
@@ -172,7 +172,7 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-xs sm:text-sm">
               <li>
                 <a href="#pop-now" className="hover:text-rose-600 dark:hover:text-rose-400 transition-colors flex items-center gap-1.5">
-                  <Flame className="w-3.5 h-3.5 text-[#E50012] shrink-0 fill-current" />
+                  <Fire className="w-3.5 h-3.5 text-[#E50012] shrink-0" />
                   <span>Baby Three Zodiac Plush</span>
                 </a>
               </li>

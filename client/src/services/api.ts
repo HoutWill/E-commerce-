@@ -2,7 +2,7 @@ import { Product, BotStatus } from '../types';
 import { INITIAL_PRODUCTS, INITIAL_CATEGORIES, INITIAL_BRANDS } from '../data/initialProducts';
 
 const API_BASE = '/api';
-const LOCAL_STORAGE_KEY = 'cb_store_products_v1';
+const LOCAL_STORAGE_KEY = 'cb_store_products_v2';
 const REQUEST_TIMEOUT_MS = 3500; // 3.5s timeout to prevent hanging on cold backend
 
 // In-memory cache for ultra-fast instant lookups

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Product } from '../types';
 import { ProductCard } from './ProductCard';
-import { PackageOpen, Bot, Loader2 } from 'lucide-react';
+import { BoxSeam, Robot, ArrowRepeat } from 'react-bootstrap-icons';
 
 interface ProductGridProps {
   products: Product[];
@@ -25,7 +25,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   if (isLoading) {
     return (
       <div className="flex-1 py-20 flex flex-col items-center justify-center space-y-4">
-        <Loader2 className="w-8 h-8 text-rose-600 dark:text-rose-500 animate-spin" />
+        <ArrowRepeat className="w-8 h-8 text-rose-600 dark:text-rose-500 animate-spin" />
         <p className="text-sm font-semibold text-slate-500 dark:text-zinc-400">
           Loading catalog products...
         </p>
@@ -37,7 +37,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
     return (
       <div className="flex-1 py-16 text-center">
         <div className="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 mx-auto flex items-center justify-center text-slate-400 dark:text-zinc-500 mb-4 shadow-xs">
-          <PackageOpen className="w-8 h-8" />
+          <BoxSeam className="w-8 h-8" />
         </div>
         <h3 className="text-lg font-bold text-slate-900 dark:text-white">
           No matching products found

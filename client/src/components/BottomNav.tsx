@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Package, Flame } from 'lucide-react';
+import { House, BoxSeam, Fire } from 'react-bootstrap-icons';
 
 interface BottomNavProps {
   isHidden?: boolean;
@@ -21,9 +21,8 @@ export const BottomNav: React.FC<BottomNavProps> = ({ isHidden = false }) => {
   };
 
   return (
-    // Visible ONLY on Phone and Tablet (hidden on desktop >= 1024px)
     <div
-      className={`lg:hidden fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 select-none transition-all duration-300 ease-in-out ${
+      className={`lg:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 select-none transition-all duration-300 ease-in-out ${
         isHidden
           ? 'translate-y-28 opacity-0 pointer-events-none'
           : 'translate-y-0 opacity-100'
@@ -32,48 +31,48 @@ export const BottomNav: React.FC<BottomNavProps> = ({ isHidden = false }) => {
         paddingBottom: 'env(safe-area-inset-bottom, 0px)'
       }}
     >
-      <nav className="flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 rounded-full bg-white/95 dark:bg-zinc-900/95 border border-slate-200/90 dark:border-zinc-700/80 backdrop-blur-xl shadow-2xl transition-all">
+      <nav className="flex items-center gap-1 p-1 rounded-xl bg-[#FBFBFA]/95 dark:bg-[#18181B]/95 border border-[#EAE7E1] dark:border-[#2C2C30] backdrop-blur-md shadow-lg transition-all">
         
         {/* 1. Home */}
         <button
           onClick={() => scrollToSection('home', 'home')}
           aria-label="Home"
-          className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full transition-all duration-200 active:scale-95 min-h-[44px] ${
+          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg transition-colors text-xs font-semibold ${
             activeTab === 'home'
-              ? 'bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-md font-bold'
-              : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800'
+              ? 'bg-[#1A1A1A] dark:bg-[#F4F4F5] text-white dark:text-[#1A1A1A]'
+              : 'text-[#71717A] dark:text-[#A1A1AA] hover:text-[#1A1A1A]'
           }`}
         >
-          <Home className="w-5 h-5 sm:w-5.5 sm:h-5.5 shrink-0" />
-          <span className="text-xs sm:text-sm font-bold tracking-tight">Home</span>
+          <House className="w-3.5 h-3.5" />
+          <span>Home</span>
         </button>
 
         {/* 2. Catalog */}
         <button
           onClick={() => scrollToSection('catalog', 'catalog')}
           aria-label="Catalog"
-          className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full transition-all duration-200 active:scale-95 min-h-[44px] ${
+          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg transition-colors text-xs font-semibold ${
             activeTab === 'catalog'
-              ? 'bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900 shadow-md font-bold'
-              : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-zinc-800'
+              ? 'bg-[#1A1A1A] dark:bg-[#F4F4F5] text-white dark:text-[#1A1A1A]'
+              : 'text-[#71717A] dark:text-[#A1A1AA] hover:text-[#1A1A1A]'
           }`}
         >
-          <Package className="w-5 h-5 sm:w-5.5 sm:h-5.5 shrink-0" />
-          <span className="text-xs sm:text-sm font-bold tracking-tight">Catalog</span>
+          <BoxSeam className="w-3.5 h-3.5" />
+          <span>Catalog</span>
         </button>
 
-        {/* 3. Promo / POP NOW */}
+        {/* 3. Promo / Drops */}
         <button
           onClick={() => scrollToSection('pop-now', 'promo')}
-          aria-label="POP NOW Drops"
-          className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-full transition-all duration-200 active:scale-95 min-h-[44px] ${
+          aria-label="Popular Drops"
+          className={`flex items-center gap-1.5 px-3.5 py-2 rounded-lg transition-colors text-xs font-semibold ${
             activeTab === 'promo'
-              ? 'bg-[#E50012] text-white shadow-md font-bold'
-              : 'text-slate-600 dark:text-zinc-400 hover:text-[#E50012] hover:bg-rose-50 dark:hover:bg-rose-950/40'
+              ? 'bg-[#C25E3E] text-white'
+              : 'text-[#71717A] dark:text-[#A1A1AA] hover:text-[#C25E3E]'
           }`}
         >
-          <Flame className="w-5 h-5 sm:w-5.5 sm:h-5.5 shrink-0 fill-current text-[#E50012] group-hover:text-white" />
-          <span className="text-xs sm:text-sm font-bold tracking-tight">Promo</span>
+          <Fire className="w-3.5 h-3.5" />
+          <span>Drops</span>
         </button>
 
       </nav>

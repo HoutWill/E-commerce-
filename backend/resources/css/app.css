@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@import "../../vendor/sparrowhawk-labs/pinion-ui/src/resources/css/pinion-ui.css";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+@source "../**/*.blade.php";
+@source "../**/*.js";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+    :root {
+        --color-bg-primary: #ffffff;
+        --color-bg-surface: #f8fafc;
+        --color-bg-card: #ffffff;
+        --color-border-subtle: #e2e8f0;
+        --color-border-strong: #cbd5e1;
+        --color-text-main: #0f172a;
+        --color-text-muted: #64748b;
+        --color-accent: #229ed9;
+    }
+
+    .dark {
+        --color-bg-primary: #09090b;
+        --color-bg-surface: #121215;
+        --color-bg-card: #18181b;
+        --color-border-subtle: #27272a;
+        --color-border-strong: #3f3f46;
+        --color-text-main: #f8fafc;
+        --color-text-muted: #a1a1aa;
+        --color-accent: #38bdf8;
+    }
+
+    html:not(.dark) {
+        color-scheme: light;
+    }
+
+    html.dark {
+        color-scheme: dark;
+    }
+
+    body {
+        margin: 0;
+        background-color: #ffffff;
+        color: #0f172a;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .dark body {
+        background-color: #09090b;
+        color: #f8fafc;
+    }
+}
