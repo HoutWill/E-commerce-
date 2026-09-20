@@ -133,43 +133,25 @@ export const PopNowSection: React.FC<PopNowSectionProps> = ({ onModalChange }) =
   return (
     <section className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8" id="pop-now">
       
-      {/* Compact Section Header */}
-      <div className="flex items-end justify-between mb-4 sm:mb-6">
-        <div>
-          <span className="text-[11px] font-bold text-[#8C7E72] dark:text-[#A1A1AA] uppercase tracking-wider block mb-1">
-            Featured Highlight
+      {/* Signature Section Header: Centered with Red POP NOW Badge */}
+      <div className="text-center mb-4 sm:mb-6">
+        <div className="inline-flex items-center gap-2">
+          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-[#E50012] text-white shadow-xs">
+            POP NOW
           </span>
-          <h2 className="text-xl sm:text-2xl font-black tracking-tight text-[#1A1A1A] dark:text-[#F4F4F5]">
-            Popular Drops
+          <h2 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+            POP NOW DROPS
           </h2>
         </div>
-
-        <div className="flex items-center gap-2">
+        <p className="text-xs text-slate-500 dark:text-zinc-400 mt-1">
           <a
             href="#catalog"
             onClick={handleExploreMore}
-            className="text-xs font-semibold text-[#71717A] dark:text-[#A1A1AA] hover:text-[#1A1A1A] dark:hover:text-[#F4F4F5] transition-colors mr-2 hidden sm:inline-flex items-center gap-1"
+            className="hover:underline text-slate-600 dark:text-zinc-300 font-medium cursor-pointer"
           >
-            <span>View All</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            Explore More Series &gt;
           </a>
-
-          <button
-            onClick={() => scroll('left')}
-            aria-label="Scroll Left"
-            className="w-8 h-8 rounded-lg border border-[#EAE7E1] dark:border-[#2C2C30] bg-white dark:bg-[#18181B] hover:bg-[#F5F3EF] dark:hover:bg-[#202024] flex items-center justify-center text-[#71717A] dark:text-[#A1A1AA] transition-colors cursor-pointer"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-
-          <button
-            onClick={() => scroll('right')}
-            aria-label="Scroll Right"
-            className="w-8 h-8 rounded-lg border border-[#EAE7E1] dark:border-[#2C2C30] bg-white dark:bg-[#18181B] hover:bg-[#F5F3EF] dark:hover:bg-[#202024] flex items-center justify-center text-[#71717A] dark:text-[#A1A1AA] transition-colors cursor-pointer"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-        </div>
+        </p>
       </div>
 
       {/* Horizontal Carousel */}
