@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="pinion" data-tune="editorial" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="csrf-token" content="gWX9JS5tOEkDauHK7WIiqfompa2DJ3NW6ikzpxZO">
+    <title>CLASSY BLING — Viral Blind Boxes, Plush Dolls &amp; Designer Toys</title>
+    <meta name="description" content="Discover viral designer toys, authentic blind boxes, Pop Mart, Baby Three, and mini claw machines at Classy Bling Phnom Penh. Direct TikTok unboxings and express dispatch.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Immediate Theme Initialization Script (Zero FOUC / Pure White Mode Default) -->
+    <script>
+        (function() {
+            const saved = localStorage.getItem('classybling_theme');
+            const theme = (saved === 'dark' || saved === 'light') ? saved : 'light';
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.documentElement.setAttribute('data-theme', 'light');
+            }
+        })();
+    </script>
+
+    <!-- Vite Assets -->
+    <link rel="preload" as="style" href="/build/assets/app-BeiUMX4v.css" /><link rel="modulepreload" href="/build/assets/app-Cgjv38q8.js" /><link rel="stylesheet" href="/build/assets/app-BeiUMX4v.css" /><script type="module" src="/build/assets/app-Cgjv38q8.js"></script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .font-heading {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        /* Custom smooth scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.03);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 9999px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+    </head>
+<body class="min-h-screen bg-white dark:bg-zinc-950 text-slate-900 dark:text-zinc-100 antialiased flex flex-col selection:bg-[#229ED9]/20 selection:text-[#229ED9] pb-20 md:pb-0"
+      x-data="{
+          mobileSearchOpen: false,
+          authModalOpen: false,
+          authMode: 'login',
+          activeProduct: null,
+          productModalOpen: false,
+          cartCount: 0,
+          theme: localStorage.getItem('classybling_theme') || 'light',
+          toggleTheme() {
+              this.theme = this.theme === 'dark' ? 'light' : 'dark';
+              if (this.theme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                  document.documentElement.setAttribute('data-theme', 'dark');
+              } else {
+                  document.documentElement.classList.remove('dark');
+                  document.documentElement.setAttribute('data-theme', 'light');
+              }
+              localStorage.setItem('classybling_theme', this.theme);
+          },
+          openProductModal(product) {
+              this.activeProduct = product;
+              this.productModalOpen = true;
+          }
+      }"
+      x-init="
+          if (theme === 'dark') {
+              document.documentElement.classList.add('dark');
+              document.documentElement.setAttribute('data-theme', 'dark');
+          } else {
+              document.documentElement.classList.remove('dark');
+              document.documentElement.setAttribute('data-theme', 'light');
+          }
+      ">
+
+
+    <!-- Main Navigation Header (Ref 3 Flexible Header) -->
+    <header
+    class="sticky top-0 z-40 w-full bg-white/95 dark:bg-[#121214]/95 backdrop-blur-xl border-b border-slate-200/80 dark:border-zinc-800 transition-colors"
+    x-data="{
+        headerSearch: '',
+        executeSearch() {
+            if (this.headerSearch.trim() === '') return;
+            if (window.location.pathname !== '/' && !window.location.pathname.endsWith('home')) {
+                window.location.href = '/?q=' + encodeURIComponent(this.headerSearch) + '#products';
+            } else {
+                const el = document.getElementById('products');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                const catInput = document.querySelector('#catalog input[type=text]');
+                if (catInput) {
+                    catInput.value = this.headerSearch;
+                    catInput.dispatchEvent(new Event('input', { bubbles: true }));
+                }
+            }
+        }
+    }"
+>
+    <div class="w-full flex items-center justify-between h-14 sm:h-16 px-4 sm:px-6 lg:px-8">
+        
+        <!-- 1. Start: Title & Icon (Left) -->
+        <div class="flex-1 flex items-center justify-start">
+            <a href="/" class="flex items-center gap-2.5 sm:gap-3 group select-none shrink-0">
+                <!-- Circular Logo Badge -->
+                <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden shadow-2xs border border-slate-200/90 dark:border-zinc-700 bg-white p-0.5 group-hover:scale-105 transition-all flex items-center justify-center shrink-0">
+                    <img
+                        src="/logo_crisp.png"
+                        alt="Classy Bling Logo"
+                        class="w-full h-full object-cover rounded-full"
+                        loading="eager"
+                        onerror="this.src='/logo.png'"
+                    />
+                </div>
+
+                <!-- Brand Typography: Same font, bold, and balanced text size -->
+                <span class="text-sm sm:text-base font-bold tracking-widest uppercase font-sans leading-tight text-slate-900 dark:text-white group-hover:text-[#229ED9] transition-colors">
+                    CLASSY BLING
+                </span>
+            </a>
+        </div>
+
+        <!-- 2. Middle: 3 Links (Center) - Identical font, weight, size, and crisp color -->
+        <nav class="hidden md:flex items-center justify-center gap-8 lg:gap-12 shrink-0">
+            
+            <!-- 1. HOME -->
+            <a href="/"
+               class="transition-colors py-1 relative font-bold text-sm tracking-widest uppercase font-sans text-slate-900 dark:text-white hover:text-[#229ED9] dark:hover:text-[#38bdf8]">
+                <span>HOME</span>
+                                    <span class="absolute -bottom-1.5 left-0 right-0 h-0.5 bg-slate-900 dark:bg-white rounded-full"></span>
+                            </a>
+
+            <!-- 2. PRODUCTS (Acts as section on homepage) -->
+                            <a href="#products"
+                   @click.prevent="document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })"
+                   class="transition-colors py-1 relative font-bold text-sm tracking-widest uppercase font-sans text-slate-900 dark:text-white hover:text-[#229ED9] dark:hover:text-[#38bdf8] cursor-pointer">
+                    <span>PRODUCTS</span>
+                </a>
+            
+            <!-- 3. CONTACT (Dedicated Showroom Page) -->
+            <a href="/contact"
+               class="transition-colors py-1 relative font-bold text-sm tracking-widest uppercase font-sans text-slate-900 dark:text-white hover:text-[#229ED9] dark:hover:text-[#38bdf8]">
+                <span>CONTACT</span>
+                            </a>
+
+        </nav>
+
+        <!-- 3. End: The last controls (Right) -->
+        <div class="flex-1 flex items-center justify-end gap-2 sm:gap-3">
+            
+            <!-- Poseidon Style Search Bar Pill (Header 2 Reference) -->
+            <div class="relative hidden lg:flex items-center">
+                <input
+                    type="text"
+                    placeholder="Search collectibles..."
+                    x-model="headerSearch"
+                    @keydown.enter="executeSearch()"
+                    class="w-40 xl:w-52 pl-3.5 pr-8 py-1.5 rounded-full border border-slate-200 dark:border-zinc-700 bg-slate-50 dark:bg-zinc-800/80 text-xs sm:text-sm text-slate-800 dark:text-zinc-200 placeholder:text-slate-400 focus:outline-none focus:border-slate-900 dark:focus:border-zinc-300 focus:bg-white dark:focus:bg-zinc-900 transition-all shadow-2xs font-sans"
+                />
+                <button
+                    type="button"
+                    @click="executeSearch()"
+                    title="Search"
+                    class="absolute right-2.5 text-slate-400 hover:text-slate-700 dark:hover:text-zinc-200 transition cursor-pointer"
+                >
+                    <i class="bi bi-search text-xs"></i>
+                </button>
+            </div>
+
+            <!-- TikTok Official Live Link Button -->
+            <a
+                href="https://www.tiktok.com/@classy.bling"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="TikTok Live"
+                title="Watch TikTok Live @classy.bling"
+                class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black hover:bg-neutral-800 text-white transition-all shadow-2xs hover:scale-105 active:scale-95 border border-zinc-800 font-sans"
+            >
+                <i class="bi bi-tiktok text-xs shrink-0"></i>
+                <span class="text-xs sm:text-sm font-bold tracking-tight hidden sm:inline">TikTok</span>
+            </a>
+
+            <!-- Telegram Order Pill Button -->
+            <a
+                href="https://t.me/+85592917831"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Order on Telegram"
+                title="Chat & Order on Telegram"
+                class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#229ED9]/10 hover:bg-[#229ED9]/20 text-[#229ED9] text-xs sm:text-sm font-bold transition-all border border-[#229ED9]/20 font-sans"
+            >
+                <i class="bi bi-send-fill text-xs"></i>
+                <span>Telegram</span>
+            </a>
+
+            <!-- Theme Toggle Button (No Stars) -->
+            <button
+                id="theme-toggle-btn"
+                @click="toggleTheme()"
+                title="Toggle Theme"
+                :aria-label="theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'"
+                class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-700 dark:text-zinc-300 border border-slate-200/80 dark:border-zinc-700/80 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-2xs cursor-pointer shrink-0"
+            >
+                <i class="bi" :class="theme === 'dark' ? 'bi-sun-fill text-amber-400 text-xs sm:text-sm' : 'bi-moon-fill text-slate-700 text-xs sm:text-sm'"></i>
+            </button>
+
+            <!-- Staff / Admin Auth Button (Poseidon Pill Button Style) -->
+                            <button
+                    @click="authModalOpen = true; authMode = 'login'"
+                    title="Staff / Admin Login"
+                    class="px-3.5 sm:px-4 py-1.5 rounded-full border border-slate-900 dark:border-zinc-200 text-slate-900 dark:text-zinc-100 hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-zinc-900 text-xs sm:text-sm font-bold transition-all shadow-2xs hover:scale-105 active:scale-95 cursor-pointer flex items-center gap-1.5 font-sans"
+                >
+                    <i class="bi bi-person-fill text-xs sm:text-sm"></i>
+                    <span>Login</span>
+                </button>
+            
+        </div>
+
+    </div>
+</header>
+
+    <!-- Flash Notifications -->
+    <div class="fixed top-20 right-4 z-50 flex flex-col gap-2 max-w-sm pointer-events-none">
+        
+        
+            </div>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow">
+            <!-- 1. Original Wavy Promotional Split Carousel Banner -->
+    <section
+    class="w-full relative select-none"
+    id="home"
+    x-data="{
+        currentIndex: 0,
+        slidesCount: 4,
+        isPaused: false,
+        timer: null,
+        init() {
+            this.startTimer();
+        },
+        startTimer() {
+            this.timer = setInterval(() => {
+                if (!this.isPaused) {
+                    this.next();
+                }
+            }, 5000);
+        },
+        next() {
+            this.currentIndex = (this.currentIndex + 1) % this.slidesCount;
+        },
+        prev() {
+            this.currentIndex = (this.currentIndex - 1 + this.slidesCount) % this.slidesCount;
+        },
+        goTo(index) {
+            this.currentIndex = index;
+        },
+        handleBannerClick() {
+            const el = document.getElementById('pop-now');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+    }"
+    @mouseenter="isPaused = true"
+    @mouseleave="isPaused = false"
+>
+
+    <!-- Banner Container: Full Width Edge-to-Edge with compact height -->
+    <div
+        @click="handleBannerClick()"
+        class="relative w-full aspect-[16/8] sm:aspect-[3.43/1] min-h-[160px] sm:min-h-[220px] md:min-h-[300px] lg:min-h-[340px] max-h-[420px] overflow-hidden bg-slate-100 dark:bg-zinc-900 group cursor-pointer border-b border-slate-200/80 dark:border-zinc-800"
+    >
+        <!-- Slide 1: Rabbit Space Claw Machine Special Promotion -->
+        <div
+            class="absolute inset-0 transition-opacity duration-700 ease-in-out"
+            :class="currentIndex === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'"
+        >
+            <img
+                src="/banner_classybling_clawmachine.png"
+                alt="Classy Bling Rabbit Space Mini Arcade Claw Machine Special Promotion Banner"
+                class="w-full h-full object-cover"
+                loading="eager"
+            />
+        </div>
+
+        <!-- Slide 2: Baby Three Zodiac -->
+        <div
+            class="absolute inset-0 transition-opacity duration-700 ease-in-out"
+            :class="currentIndex === 1 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'"
+        >
+            <img
+                src="/banner_classybling_babythree.png"
+                alt="Classy Bling Baby Three Zodiac Blind Box Official Banner"
+                class="w-full h-full object-cover"
+                loading="lazy"
+            />
+        </div>
+
+        <!-- Slide 3: Nommi Pinky Energy -->
+        <div
+            class="absolute inset-0 transition-opacity duration-700 ease-in-out"
+            :class="currentIndex === 2 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'"
+        >
+            <img
+                src="/banner_classybling_nommi.png"
+                alt="Classy Bling Nommi Pinky Energy Plush Blind Box Official Banner"
+                class="w-full h-full object-cover"
+                loading="lazy"
+            />
+        </div>
+
+        <!-- Slide 4: Mega Space Molly -->
+        <div
+            class="absolute inset-0 transition-opacity duration-700 ease-in-out"
+            :class="currentIndex === 3 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'"
+        >
+            <img
+                src="/banner_classybling_spacemolly.png"
+                alt="Classy Bling Mega Space Molly Blind Box Official Banner"
+                class="w-full h-full object-cover"
+                loading="lazy"
+            />
+        </div>
+
+        <!-- Left Arrow Navigation Button -->
+        <button
+            type="button"
+            @click.stop="prev()"
+            aria-label="Previous Slide"
+            class="hidden sm:flex absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-black/30 hover:bg-black/60 dark:bg-zinc-900/60 dark:hover:bg-zinc-900/90 text-white backdrop-blur-sm border border-white/20 items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg cursor-pointer"
+        >
+            <i class="bi bi-chevron-left text-base sm:text-xl font-bold"></i>
+        </button>
+
+        <!-- Right Arrow Navigation Button -->
+        <button
+            type="button"
+            @click.stop="next()"
+            aria-label="Next Slide"
+            class="hidden sm:flex absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-black/30 hover:bg-black/60 dark:bg-zinc-900/60 dark:hover:bg-zinc-900/90 text-white backdrop-blur-sm border border-white/20 items-center justify-center transition-all opacity-80 hover:opacity-100 hover:scale-105 active:scale-95 shadow-lg cursor-pointer"
+        >
+            <i class="bi bi-chevron-right text-base sm:text-xl font-bold"></i>
+        </button>
+
+        <!-- Top-Right Slide Indicator Dots with Signature Red Active Pill -->
+        <div class="absolute top-3 right-3 sm:top-5 sm:right-6 z-20 flex items-center gap-1.5 bg-black/40 backdrop-blur-sm px-2 sm:px-2.5 py-1 rounded-full border border-white/10">
+            <button
+                type="button"
+                @click.stop="goTo(0)"
+                aria-label="Go to slide 1"
+                class="transition-all rounded-full cursor-pointer"
+                :class="currentIndex === 0 ? 'w-4 sm:w-6 h-1.5 sm:h-2 bg-[#E50012]' : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/50 hover:bg-white/80'"
+            ></button>
+            <button
+                type="button"
+                @click.stop="goTo(1)"
+                aria-label="Go to slide 2"
+                class="transition-all rounded-full cursor-pointer"
+                :class="currentIndex === 1 ? 'w-4 sm:w-6 h-1.5 sm:h-2 bg-[#E50012]' : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/50 hover:bg-white/80'"
+            ></button>
+            <button
+                type="button"
+                @click.stop="goTo(2)"
+                aria-label="Go to slide 3"
+                class="transition-all rounded-full cursor-pointer"
+                :class="currentIndex === 2 ? 'w-4 sm:w-6 h-1.5 sm:h-2 bg-[#E50012]' : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/50 hover:bg-white/80'"
+            ></button>
+            <button
+                type="button"
+                @click.stop="goTo(3)"
+                aria-label="Go to slide 4"
+                class="transition-all rounded-full cursor-pointer"
+                :class="currentIndex === 3 ? 'w-4 sm:w-6 h-1.5 sm:h-2 bg-[#E50012]' : 'w-1.5 sm:w-2 h-1.5 sm:h-2 bg-white/50 hover:bg-white/80'"
+            ></button>
+        </div>
+
+    </div>
+</section>
+
+    <!-- 2. Original POP NOW Drops Shelf with Pick Now Modal -->
+    <section
+    class="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 overflow-hidden select-none"
+    id="pop-now"
+    x-data="{
+        selectedBox: null,
+        scrollAmount: 340,
+        scrollShelf(direction) {
+            const shelf = this.$refs.shelf;
+            if (shelf) {
+                shelf.scrollBy({
+                    left: direction === 'left' ? -this.scrollAmount : this.scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
+        },
+        boxes: [
+            {
+                id: 'labubu_macaron',
+                name: 'Pop Mart Labubu Tasty Macarons Series',
+                series: 'The Monsters Tasty Macarons',
+                brand: 'Pop Mart',
+                price: 19.50,
+                khr: '80,000',
+                image: '/3d_boxes/labubu_macaron_box_ai.jpg',
+                secretRate: '1/72 Secret Chestnut Macaron Chase',
+                description: 'Viral fluffy vinyl plush monster with mischievous sharp tooth smile holding a strawberry macaron.'
+            },
+            {
+                id: 'crybaby_concert',
+                name: 'Pop Mart CRYBABY Sunset Concert Series',
+                series: 'Sunset Concert Rock Band',
+                brand: 'Pop Mart',
+                price: 16.50,
+                khr: '67,500',
+                image: '/3d_boxes/crybaby_concert_box_ai.jpg',
+                secretRate: '1/144 Ultra Rare Golden Guitarist',
+                description: 'Rockstar blonde girl in leather jacket with electric guitar, star tears, and band accessories.'
+            },
+            {
+                id: 'zootopia_fox',
+                name: 'Disney Zootopia Nick Wilde Series 1',
+                series: 'Zootopia Art Toy Collection',
+                brand: 'Disney x Pop Mart',
+                price: 14.00,
+                khr: '57,500',
+                image: '/3d_boxes/zootopia_fox_box_ai.jpg',
+                secretRate: '1/72 Secret Gold Badge Officer',
+                description: 'Official Disney licensed Nick Wilde collectible in green shirt and tie on white studio podium.'
+            },
+            {
+                id: 'kuromi_dreamland',
+                name: 'Sanrio Kuromi Dreamland Starry Series',
+                series: 'Kuromi Star Magic Vol. 1',
+                brand: 'Sanrio',
+                price: 12.50,
+                khr: '51,000',
+                image: '/3d_boxes/kuromi_dreamland_box_ai.jpg',
+                secretRate: '1/96 Secret Midnight Glitter Chase',
+                description: 'Sanrio licensed gothic jester hat Kuromi with magical star wand on a pastel lavender podium.'
+            },
+            {
+                id: 'kfc_dimoo',
+                name: 'Pop Mart KFC x DIMOO Aviator Series',
+                series: 'Pilot Colonel 35th Anniversary',
+                brand: 'Pop Mart x KFC',
+                price: 14.00,
+                khr: '57,500',
+                image: '/3d_boxes/kfc_dimoo_box_ai.jpg',
+                secretRate: '1/144 Golden Colonel Secret',
+                description: 'Limited edition DIMOO pilot in aviator jacket with cloud hair and signature fried chicken bucket.'
+            },
+            {
+                id: 'hirono_mischief',
+                name: 'Pop Mart Hirono Little Mischief Series',
+                series: 'Hirono Streetwear Edition',
+                brand: 'Pop Mart',
+                price: 15.00,
+                khr: '61,500',
+                image: '/3d_boxes/hirono_mischief_box_ai.jpg',
+                secretRate: '1/72 The Vagrant Secret Chase',
+                description: 'Moody expressive boy in oversized textured streetwear hoodie on a minimalist concrete pedestal.'
+            },
+            {
+                id: 'yumi_dream',
+                name: 'YuMi Dreamy Girl Collection Vol. 1',
+                series: 'Pastel Gothic Lolita Series',
+                brand: 'DOTEBABY',
+                price: 14.00,
+                khr: '57,500',
+                image: '/3d_boxes/yumi_dream_box_ai.jpg',
+                secretRate: '1/72 Secret Starlight Princess',
+                description: 'Anime twintail pink haired cutie in lolita dress with silver foil star accents on studio podium.'
+            },
+            {
+                id: 'baby_three_bunny',
+                name: 'Baby Three 3-Year-Old Cutie Series',
+                series: 'Cutie Plush Series',
+                brand: 'Baby Three',
+                price: 12.50,
+                khr: '51,000',
+                image: '/3d_boxes/baby_three_bunny_box_ai.jpg',
+                secretRate: '1/72 Secret Fluffy Angel Bunny',
+                description: 'Soft pastel plush bunny doll with large glossy starry eyes and cute lace collar.'
+            },
+            {
+                id: 'cinnamoroll_bakery',
+                name: 'Sanrio Cinnamoroll Cloud Bakery Series',
+                series: 'Sweet Pastry Collection',
+                brand: 'Sanrio',
+                price: 13.00,
+                khr: '53,500',
+                image: '/3d_boxes/cinnamoroll_bakery_box_ai.jpg',
+                secretRate: '1/96 Rainbow Cupcake Chase',
+                description: 'Fluffy white puppy Cinnamoroll wearing a baker chef hat holding a warm cinnamon pastry roll.'
+            },
+            {
+                id: 'mini_animal',
+                name: 'Baby Three Mini Animal Party Series',
+                series: 'Mini Animals Vol. 1',
+                brand: 'Baby Three',
+                price: 14.00,
+                khr: '57,500',
+                image: '/3d_boxes/mini_animal_box_ai.jpg',
+                secretRate: '1/72 Secret Golden Panda',
+                description: 'Chibi baby panda in sweet animal onesie on a soft lavender studio display.'
+            },
+            {
+                id: 'fantasy_world',
+                name: 'Fantasy World Pastel Plush Bunny',
+                series: 'Pastel Fantasy Series',
+                brand: 'Baby Three',
+                price: 14.00,
+                khr: '57,500',
+                image: '/3d_boxes/fantasy_world_box_ai.jpg',
+                secretRate: '1/72 Secret Glitter Wing Fairy',
+                description: 'Dreamy sky-blue and pastel pink fairy bunny with sparkling eyes and delicate wings.'
+            },
+            {
+                id: 'samuel_ocean',
+                name: 'Samuel Ocean Series Shark Hood',
+                series: 'Deep Ocean Friends',
+                brand: 'MEI YI YOU ART TOY',
+                price: 13.00,
+                khr: '53,500',
+                image: '/3d_boxes/samuel_ocean_box_ai.jpg',
+                secretRate: '1/96 Secret Hammerhead Chase',
+                description: 'Plush doll in cute blue shark hooded onesie with white teeth on an ocean gradient studio pedestal.'
+            },
+            {
+                id: 'skullpanda_sound',
+                name: 'Pop Mart SKULLPANDA The Sound Series',
+                series: 'The Sound Avant-Garde',
+                brand: 'Pop Mart',
+                price: 15.00,
+                khr: '61,500',
+                image: '/3d_boxes/skullpanda_sound_box_ai.jpg',
+                secretRate: '1/144 The Silence Secret Chase',
+                description: 'Matte black box with iridescent holographic lettering featuring avant-garde earbuds cyber girl.'
+            }
+        ]
+    }"
+>
+    <!-- Section Header -->
+    <div class="flex flex-col items-center justify-center text-center mb-5 sm:mb-8 space-y-1.5">
+        <div class="flex items-center gap-2 sm:gap-2.5">
+            <!-- Red POP NOW badge -->
+            <div class="px-2 py-0.5 sm:py-1 rounded bg-[#E50012] text-white text-[10px] sm:text-[11px] font-black uppercase tracking-wider shadow-xs flex items-center gap-1">
+                <i class="bi bi-fire animate-pulse text-xs"></i>
+                <span>POP NOW</span>
+            </div>
+            <h2 class="text-xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white uppercase font-display">
+                POP NOW Drops
+            </h2>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <a
+                href="#catalog"
+                class="text-xs sm:text-sm font-semibold text-slate-500 hover:text-slate-900 dark:text-zinc-400 dark:hover:text-white transition-colors underline-offset-4 hover:underline cursor-pointer"
+            >
+                Explore More Series &gt;
+            </a>
+        </div>
+    </div>
+
+    <!-- Horizontal Product Shelf Container with Left/Right Navigation -->
+    <div class="relative group/shelf">
+        <!-- Left Arrow Button -->
+        <button
+            type="button"
+            @click="scrollShelf('left')"
+            class="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/90 dark:bg-zinc-900/90 text-slate-800 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition cursor-pointer"
+        >
+            <i class="bi bi-chevron-left text-sm font-bold"></i>
+        </button>
+
+        <!-- Right Arrow Button -->
+        <button
+            type="button"
+            @click="scrollShelf('right')"
+            class="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-white/90 dark:bg-zinc-900/90 text-slate-800 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition cursor-pointer"
+        >
+            <i class="bi bi-chevron-right text-sm font-bold"></i>
+        </button>
+
+        <!-- Product Shelf -->
+        <div
+            x-ref="shelf"
+            class="flex gap-3 sm:gap-4 overflow-x-auto py-2 sm:py-3 hide-scrollbar scroll-smooth"
+        >
+            <template x-for="box in boxes" :key="box.id">
+                <div
+                    @click="selectedBox = box"
+                    class="shrink-0 w-[180px] sm:w-[220px] flex flex-col group/card cursor-pointer select-none font-sans bg-white dark:bg-zinc-900 rounded-xl overflow-hidden border border-slate-200/60 dark:border-zinc-800/80 hover:shadow-lg transition-all duration-300"
+                >
+                    <!-- Product Box Image: Portrait Aspect Ratio (3/4) -->
+                    <div class="relative aspect-[3/4] w-full bg-slate-50 dark:bg-zinc-950 overflow-hidden">
+                        <img
+                            :src="box.image"
+                            :alt="box.name"
+                            class="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                        />
+                    </div>
+
+                    <!-- Product Info: Clean Title & Price -->
+                    <div class="p-2.5 sm:p-3 flex flex-col justify-between flex-grow text-left">
+                        <h3 class="text-xs sm:text-[13px] font-medium text-slate-900 dark:text-zinc-100 line-clamp-2 leading-snug group-hover/card:text-[#229ED9] dark:group-hover/card:text-[#38bdf8] transition-colors min-h-[34px] sm:min-h-[36px]" x-text="box.name"></h3>
+
+                        <div class="mt-2 flex items-baseline gap-1.5">
+                            <span class="text-sm sm:text-base font-bold text-slate-900 dark:text-white" x-text="'$' + box.price.toFixed(2)"></span>
+                            <span class="text-[11px] text-slate-400 dark:text-zinc-500 font-normal" x-text="'• ' + box.khr + ' ៛'"></span>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+        <!-- Mobile Swipe Hint -->
+        <div class="sm:hidden flex items-center justify-center gap-1 text-[11px] font-medium text-slate-400 dark:text-zinc-500 pt-1">
+            <span>← Swipe to explore POP NOW shelf →</span>
+        </div>
+    </div>
+
+    <!-- POP NOW Inspection Modal -->
+    <template x-teleport="body">
+        <div
+            x-show="selectedBox !== null"
+            x-transition.opacity
+            class="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-slate-900/80 dark:bg-black/90 backdrop-blur-md select-none"
+            @click="selectedBox = null"
+            style="display: none;"
+        >
+            <div
+                x-show="selectedBox !== null"
+                x-transition.scale.95
+                class="relative w-full max-w-2xl max-h-[94vh] sm:max-h-[90vh] rounded-3xl bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-2xl overflow-hidden flex flex-col my-auto transition-all"
+                @click.stop
+            >
+                <!-- Modal Header -->
+                <div class="p-3.5 sm:p-4 border-b border-slate-200 dark:border-zinc-800 flex items-center justify-between bg-slate-50/90 dark:bg-zinc-950/90 shrink-0">
+                    <div class="flex items-center gap-2 sm:gap-2.5">
+                        <div class="px-2 py-0.5 rounded bg-[#E50012] text-white text-[10px] font-black uppercase tracking-wider shrink-0 flex items-center gap-1">
+                            <i class="bi bi-fire text-xs"></i>
+                            <span>POP NOW</span>
+                        </div>
+                        <div>
+                            <h3 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white line-clamp-1" x-text="selectedBox?.name"></h3>
+                            <p class="text-[11px] sm:text-xs text-slate-500 dark:text-zinc-400 line-clamp-1" x-text="(selectedBox?.brand || '') + ' • ' + (selectedBox?.series || '')"></p>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        @click="selectedBox = null"
+                        aria-label="Close modal"
+                        class="p-2 rounded-full text-slate-400 hover:text-slate-700 dark:text-zinc-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-zinc-800 transition-colors shrink-0 cursor-pointer"
+                    >
+                        <i class="bi bi-x-lg text-sm"></i>
+                    </button>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="p-4 sm:p-6 overflow-y-auto flex-1 flex flex-col sm:flex-row items-center gap-4 sm:gap-6 bg-slate-50/40 dark:bg-zinc-900/40">
+                    <!-- Product Box Image -->
+                    <div class="w-48 sm:w-60 shrink-0 aspect-[1/1] rounded-2xl bg-white dark:bg-zinc-950 p-3 border border-slate-200/80 dark:border-zinc-800 flex items-center justify-center shadow-lg">
+                        <img
+                            :src="selectedBox?.image"
+                            :alt="selectedBox?.name"
+                            class="w-full h-full object-contain filter drop-shadow-md"
+                        />
+                    </div>
+
+                    <!-- Product Details -->
+                    <div class="flex-1 flex flex-col justify-between space-y-3 sm:space-y-4 text-left w-full">
+                        <div>
+                            <span class="inline-block px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-2">
+                                In Stock • Ready to Ship
+                            </span>
+                            <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-tight" x-text="selectedBox?.name"></h4>
+                            <p class="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 mt-1 leading-relaxed" x-text="selectedBox?.description"></p>
+                        </div>
+
+                        <!-- Secret Chase Rate -->
+                        <div class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center gap-2 text-amber-700 dark:text-amber-300 text-xs font-bold">
+                            <i class="bi bi-award text-amber-500 text-sm"></i>
+                            <span x-text="selectedBox?.secretRate"></span>
+                        </div>
+
+                        <!-- Price Display -->
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-2xl font-black text-slate-900 dark:text-white" x-text="'$' + (selectedBox?.price?.toFixed(2) || '0.00')"></span>
+                            <span class="text-xs sm:text-sm font-bold text-[#229ED9]" x-text="'(' + (selectedBox?.khr || '') + ' ៛)'"></span>
+                        </div>
+
+                        <!-- Order Action Button -->
+                        <a
+                            :href="'https://t.me/+85592917831?text=' + encodeURIComponent('Hello Classy Bling! I want to pick & order: ' + (selectedBox?.name || '') + ' ($' + (selectedBox?.price?.toFixed(2) || '') + ')')"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="w-full py-3 px-4 rounded-xl bg-[#229ED9] hover:bg-[#1e8bc0] text-white font-bold text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-all active:scale-95 cursor-pointer"
+                        >
+                            <i class="bi bi-send-fill text-sm"></i>
+                            <span>Direct Order via Telegram</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <div class="p-3 border-t border-slate-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 flex items-center justify-center gap-2 text-[11px] text-slate-500 dark:text-zinc-400 shrink-0">
+                    <i class="bi bi-shield-check text-emerald-500 text-sm"></i>
+                    <span>100% Guaranteed Authentic • Brand New Sealed Blind Box</span>
+                </div>
+            </div>
+        </div>
+    </template>
+</section>
+
+    <!-- 3. Full Product Catalog Section (Direct on Homepage) -->
+    <div id="products" class="scroll-mt-20">
+        <section
+    class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-4 sm:py-6 select-none"
+    id="catalog"
+    x-data="{
+        allProducts: [{&quot;id&quot;:&quot;prod_claw_machine_rabbit_space&quot;,&quot;name&quot;:&quot;Doll Machine Game - Rabbit Space Claw Machine&quot;,&quot;price&quot;:25,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;Sold Out&quot;,&quot;category&quot;:&quot;Limited Edition&quot;,&quot;subcategory&quot;:&quot;Mini Arcade Claw Machine&quot;,&quot;brand&quot;:&quot;Classy Bling Arcade&quot;,&quot;series&quot;:&quot;Doll Machine Game Collection&quot;,&quot;description&quot;:&quot;Authentic TikTok viral tabletop mini arcade claw machine (Size L) with motorized crane claw, 3 joystick controls, LED countdown timer, sound effects, and doll capsules. Available in 3 colors (Rabbit Space Pink, Lime Green, Yellow Bear).&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/claw_machine_rabbit_space_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/claw_machine_tiktok_real.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling\/video\/7686000918407515412&quot;,&quot;tiktok_post_id&quot;:&quot;7686000918407515412&quot;,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:true,&quot;tags&quot;:[&quot;Claw Machine&quot;,&quot;Rabbit Space&quot;,&quot;Doll Machine Game&quot;,&quot;TikTok Viral&quot;,&quot;Limited Edition&quot;,&quot;Arcade&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T10:03:02.000000Z&quot;},{&quot;id&quot;:&quot;prod_baby_three_zodiac&quot;,&quot;name&quot;:&quot;Baby Three Zodiac 12 Stars&quot;,&quot;price&quot;:14.5,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Plush Dolls&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Baby Three&quot;,&quot;series&quot;:&quot;Zodiac Star Signs&quot;,&quot;description&quot;:&quot;Baby Three Constellation Zodiac plush doll keychain series on studio stand.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/baby_three_zodiac_studio_box_1787476804515.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/baby_three_zodiac_studio_box_1787476804515.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Baby Three&quot;,&quot;Zodiac&quot;,&quot;Plush Dolls&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_fox_bunny&quot;,&quot;name&quot;:&quot;Fox &amp; Bunny Trick or Treat&quot;,&quot;price&quot;:14,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Fox &amp; Bunny&quot;,&quot;series&quot;:&quot;Halloween Series&quot;,&quot;description&quot;:&quot;Fox &amp; Bunny Halloween trick or treat special edition blind box.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/fox_bunny_trick_treat_box_1787473734642.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/fox_bunny_trick_treat_box_1787473734642.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Fox &amp; Bunny&quot;,&quot;Halloween&quot;,&quot;Blind Box&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_yumi_edm&quot;,&quot;name&quot;:&quot;YuMi Bestie EDM Festival&quot;,&quot;price&quot;:13.5,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Plush Dolls&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;DOTEBABY&quot;,&quot;series&quot;:&quot;YuMi EDM Festival&quot;,&quot;description&quot;:&quot;Yumi Bestie EDM festival vinyl plush blind box with headphones.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/yumi_edm_festival_box_1787473599903.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/yumi_edm_festival_box_1787473599903.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;DOTEBABY&quot;,&quot;YuMi&quot;,&quot;EDM Festival&quot;,&quot;Plush Dolls&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_baby_molly_three&quot;,&quot;name&quot;:&quot;Baby Molly When I Was Three&quot;,&quot;price&quot;:15,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Pop Mart&quot;,&quot;series&quot;:&quot;Baby Molly&quot;,&quot;description&quot;:&quot;Baby Molly When I Was Three original POP MART collectible blind box.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/baby_molly_baby_tabby_box_1787473570037.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/baby_molly_baby_tabby_box_1787473570037.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Pop Mart&quot;,&quot;Baby Molly&quot;,&quot;Blind Box&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_baby_three_lolita&quot;,&quot;name&quot;:&quot;Baby Three Lolita&#039;s Dream&quot;,&quot;price&quot;:14,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Plush Dolls&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Baby Three&quot;,&quot;series&quot;:&quot;Lolita&#039;s Dream&quot;,&quot;description&quot;:&quot;Baby Three Lolita&#039;s Dream mini plush doll blind box on studio table.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/baby_three_lolita_dream_box_1787473539024.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/baby_three_lolita_dream_box_1787473539024.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Baby Three&quot;,&quot;Lolita Dream&quot;,&quot;Plush Dolls&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_molly_baking&quot;,&quot;name&quot;:&quot;Molly Baking Time Carb Lover&quot;,&quot;price&quot;:14.5,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Pop Mart&quot;,&quot;series&quot;:&quot;Molly Baking Time&quot;,&quot;description&quot;:&quot;Molly Baking Time Carb-Lover series collectible box with chef hat.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/molly_baking_time_box_1787473509030.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/molly_baking_time_box_1787473509030.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Pop Mart&quot;,&quot;Molly&quot;,&quot;Baking Time&quot;,&quot;Blind Box&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_baby_three_weirdly&quot;,&quot;name&quot;:&quot;Baby Three Weirdly Adorable Mini&quot;,&quot;price&quot;:12.5,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Plush Dolls&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Baby Three&quot;,&quot;series&quot;:&quot;Weirdly Adorable&quot;,&quot;description&quot;:&quot;Baby Three Weirdly Adorable mini plush doll on warm studio floor.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/baby_three_weirdly_adorable_box_1787473293359.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/baby_three_weirdly_adorable_box_1787473293359.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Baby Three&quot;,&quot;Weirdly Adorable&quot;,&quot;Plush Dolls&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_space_molly&quot;,&quot;name&quot;:&quot;Mega Space Molly V2 100%&quot;,&quot;price&quot;:18.5,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Action Figures&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Pop Mart&quot;,&quot;series&quot;:&quot;Mega Space Molly Series 2&quot;,&quot;description&quot;:&quot;Iconic Pop Mart MEGA Space Molly Series 02 blind box with glossy astronaut suit on dark studio podium.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/mega_space_molly_box_1787473086799.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/mega_space_molly_box_1787473086799.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Pop Mart&quot;,&quot;Space Molly&quot;,&quot;Action Figures&quot;,&quot;Limited&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_skullpanda_sound&quot;,&quot;name&quot;:&quot;SKULLPANDA The Sound Series&quot;,&quot;price&quot;:15,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Pop Mart&quot;,&quot;series&quot;:&quot;The Sound Series&quot;,&quot;description&quot;:&quot;Pop Mart SKULLPANDA The Sound Series designer art toy collectible blind box on dark stone pedestal.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/skullpanda_sound_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/skullpanda_sound_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Pop Mart&quot;,&quot;SKULLPANDA&quot;,&quot;The Sound&quot;,&quot;Blind Box&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_samuel_ocean&quot;,&quot;name&quot;:&quot;Samuel Ocean Series Shark Hood&quot;,&quot;price&quot;:13,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Plush Dolls&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;MEI YI YOU ART TOY&quot;,&quot;series&quot;:&quot;Samuel Ocean Series&quot;,&quot;description&quot;:&quot;Samuel Ocean Series collectible blind box with plush shark hoodie doll on cyan studio podium.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/samuel_ocean_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/samuel_ocean_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;MEI YI YOU&quot;,&quot;Samuel Ocean&quot;,&quot;Shark&quot;,&quot;Plush Dolls&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_fantasy_world&quot;,&quot;name&quot;:&quot;Fantasy World Pastel Plush Bunny&quot;,&quot;price&quot;:14,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Plush Dolls&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Baby Three&quot;,&quot;series&quot;:&quot;Fantasy World Series 1&quot;,&quot;description&quot;:&quot;Dreamy Fantasy World pastel plush fairy bunny blind box with wings on studio pedestal.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/fantasy_world_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/fantasy_world_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Baby Three&quot;,&quot;Fantasy World&quot;,&quot;Pastel&quot;,&quot;Plush Dolls&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_kfc_dimoo&quot;,&quot;name&quot;:&quot;Pop Mart KFC x DIMOO Aviator&quot;,&quot;price&quot;:14,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Limited Edition&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Pop Mart&quot;,&quot;series&quot;:&quot;KFC x DIMOO Aviator Series&quot;,&quot;description&quot;:&quot;Limited Edition Pop Mart KFC x DIMOO Aviator Series pilot colonel collectible blind box on white studio display.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/kfc_dimoo_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/kfc_dimoo_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Pop Mart&quot;,&quot;DIMOO&quot;,&quot;KFC&quot;,&quot;Limited Edition&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_mini_animal&quot;,&quot;name&quot;:&quot;Baby Three Mini Animal Party&quot;,&quot;price&quot;:14,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Plush Dolls&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Baby Three&quot;,&quot;series&quot;:&quot;Mini Animal Party Series&quot;,&quot;description&quot;:&quot;Baby Three Mini Animal Party collectible blind box with panda onesie character on lavender studio pedestal.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/mini_animal_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/mini_animal_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Baby Three&quot;,&quot;Mini Animal&quot;,&quot;Panda&quot;,&quot;Plush Dolls&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_baby_three_bunny&quot;,&quot;name&quot;:&quot;Baby Three 3-Year-Old Cutie&quot;,&quot;price&quot;:12.5,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Plush Dolls&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Baby Three&quot;,&quot;series&quot;:&quot;3-Year-Old Cutie Series&quot;,&quot;description&quot;:&quot;Authentic Baby Three 3-year-old cutie plush doll blind box with soft bunny hood on studio podium.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/baby_three_bunny_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/baby_three_bunny_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Baby Three&quot;,&quot;Plush Dolls&quot;,&quot;Cute Bunny&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_yumi_dream&quot;,&quot;name&quot;:&quot;YuMi Dreamy Girl Collection&quot;,&quot;price&quot;:14,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;DOTEBABY&quot;,&quot;series&quot;:&quot;Dreamy Girl Vol. 1&quot;,&quot;description&quot;:&quot;YuMi Dreamy Girl art toy collection blind box featuring anime twintail figure on pastel pink studio pedestal.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/yumi_dream_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/yumi_dream_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;DOTEBABY&quot;,&quot;YuMi&quot;,&quot;Dreamy Girl&quot;,&quot;Blind Box&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_zootopia_fox&quot;,&quot;name&quot;:&quot;Disney Zootopia Nick Wilde&quot;,&quot;price&quot;:14,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Disney&quot;,&quot;series&quot;:&quot;Zootopia Series 1&quot;,&quot;description&quot;:&quot;Official Disney Zootopia Nick Wilde collectible blind box figure on minimalist studio podium.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/zootopia_fox_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/zootopia_fox_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Disney&quot;,&quot;Zootopia&quot;,&quot;Nick Wilde&quot;,&quot;Blind Box&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_stitch_sleep&quot;,&quot;name&quot;:&quot;Disney Stitch Sleepy Dreamland&quot;,&quot;price&quot;:13.5,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Disney&quot;,&quot;series&quot;:&quot;Stitch Dreamland Series&quot;,&quot;description&quot;:&quot;Disney licensed Stitch Sleepy Dreamland blind box figure with pajamas and star pillow on studio podium.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/stitch_sleep_box_1787473179186.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/stitch_sleep_box_1787473179186.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Disney&quot;,&quot;Stitch&quot;,&quot;Plush Dolls&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_nommi_pinky&quot;,&quot;name&quot;:&quot;Nommi Pinky Energy&quot;,&quot;price&quot;:14,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Plush Dolls&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Nommi&quot;,&quot;series&quot;:&quot;Pinky Energy Series&quot;,&quot;description&quot;:&quot;Authentic Nommi Pinky Energy plush doll designer art toy collectible by SURE FUN x TOP TOY.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/nommi_pinky_energy_box_1787473059976.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/nommi_pinky_energy_box_1787473059976.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Nommi&quot;,&quot;Pinky Energy&quot;,&quot;Plush Dolls&quot;,&quot;Popular&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_molly_watermelon&quot;,&quot;name&quot;:&quot;Molly Fruit Party Watermelon&quot;,&quot;price&quot;:14,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Pop Mart&quot;,&quot;series&quot;:&quot;Fruit Party Series&quot;,&quot;description&quot;:&quot;Authentic Pop Mart Molly Fruit Party Watermelon collectible blind box figure on studio display podium.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/molly_fruit_watermelon_box_1787473215089.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/molly_fruit_watermelon_box_1787473215089.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Pop Mart&quot;,&quot;Molly&quot;,&quot;Watermelon&quot;,&quot;Blind Box&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_cinnamoroll_bakery&quot;,&quot;name&quot;:&quot;Sanrio Cinnamoroll Cloud Bakery&quot;,&quot;price&quot;:13,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Sanrio&quot;,&quot;series&quot;:&quot;Cloud Bakery Series&quot;,&quot;description&quot;:&quot;Sanrio licensed Cinnamoroll Cloud Bakery Series cute puppy chef blind box with golden cinnamon roll.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/cinnamoroll_bakery_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/cinnamoroll_bakery_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Sanrio&quot;,&quot;Cinnamoroll&quot;,&quot;Bakery&quot;,&quot;Blind Box&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_hirono_mischief&quot;,&quot;name&quot;:&quot;Pop Mart Hirono Little Mischief&quot;,&quot;price&quot;:15,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Pop Mart&quot;,&quot;series&quot;:&quot;Hirono Little Mischief&quot;,&quot;description&quot;:&quot;Iconic Pop Mart Hirono Little Mischief Series art toy collectible blind box on concrete studio pedestal.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/hirono_mischief_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/hirono_mischief_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Pop Mart&quot;,&quot;Hirono&quot;,&quot;Streetwear&quot;,&quot;Blind Box&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_kuromi_dreamland&quot;,&quot;name&quot;:&quot;Sanrio Kuromi Dreamland Starry&quot;,&quot;price&quot;:12.5,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Sanrio&quot;,&quot;series&quot;:&quot;Kuromi Starry Series&quot;,&quot;description&quot;:&quot;Sanrio licensed Kuromi Dreamland Starry Series collectible blind box with star wand on lavender podium.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/kuromi_dreamland_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/kuromi_dreamland_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Sanrio&quot;,&quot;Kuromi&quot;,&quot;Dreamland&quot;,&quot;Blind Box&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_crybaby_concert&quot;,&quot;name&quot;:&quot;Pop Mart CRYBABY Sunset Concert&quot;,&quot;price&quot;:16.5,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Blind Box&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Pop Mart&quot;,&quot;series&quot;:&quot;Sunset Concert Series&quot;,&quot;description&quot;:&quot;Authentic Pop Mart CRYBABY Sunset Concert collectible blind box figure with guitar and star tears.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/crybaby_concert_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/crybaby_concert_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Pop Mart&quot;,&quot;CRYBABY&quot;,&quot;Blind Box&quot;,&quot;Limited&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;},{&quot;id&quot;:&quot;prod_labubu_macaron&quot;,&quot;name&quot;:&quot;Pop Mart Labubu Tasty Macarons&quot;,&quot;price&quot;:19.5,&quot;currency&quot;:&quot;USD&quot;,&quot;stock_status&quot;:&quot;In Stock&quot;,&quot;category&quot;:&quot;Plush Dolls&quot;,&quot;subcategory&quot;:null,&quot;brand&quot;:&quot;Pop Mart&quot;,&quot;series&quot;:&quot;The Monsters Tasty Macarons&quot;,&quot;description&quot;:&quot;Viral Pop Mart Labubu The Monsters Tasty Macarons Series fluffy vinyl plush blind box with strawberry macaron.&quot;,&quot;image_url&quot;:&quot;\/3d_boxes\/labubu_macaron_box_ai.jpg&quot;,&quot;original_screenshot_url&quot;:&quot;\/3d_boxes\/labubu_macaron_box_ai.jpg&quot;,&quot;tiktok_video_url&quot;:&quot;https:\/\/www.tiktok.com\/@classy.bling&quot;,&quot;tiktok_post_id&quot;:null,&quot;contact_telegram&quot;:&quot;https:\/\/t.me\/+85592917831&quot;,&quot;contact_facebook&quot;:&quot;https:\/\/facebook.com&quot;,&quot;featured&quot;:false,&quot;tags&quot;:[&quot;Pop Mart&quot;,&quot;Labubu&quot;,&quot;Plush Dolls&quot;,&quot;Trending&quot;,&quot;In Stock&quot;],&quot;created_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;,&quot;updated_at&quot;:&quot;2026-09-20T09:56:44.000000Z&quot;}],
+        selectedCategory: 'All',
+        selectedSubFilter: 'all',
+        searchQuery: '',
+        sortBy: 'newest',
+        
+        get filteredProducts() {
+            let list = [...this.allProducts];
+
+            // 1. Search Query
+            if (this.searchQuery.trim() !== '') {
+                const q = this.searchQuery.toLowerCase();
+                list = list.filter(p => 
+                    (p.name && p.name.toLowerCase().includes(q)) ||
+                    (p.brand && p.brand.toLowerCase().includes(q)) ||
+                    (p.series && p.series.toLowerCase().includes(q)) ||
+                    (p.category && p.category.toLowerCase().includes(q))
+                );
+            }
+
+            // 2. Top Category Tabs
+            if (this.selectedCategory !== 'All') {
+                if (this.selectedCategory === 'Plush Dolls') {
+                    list = list.filter(p => (p.category && p.category.includes('Plush')) || (p.name && p.name.toLowerCase().includes('plush')));
+                } else if (this.selectedCategory === 'Blind Box') {
+                    list = list.filter(p => (p.category && (p.category.includes('Blind Box') || p.category.includes('Series'))) || (p.name && p.name.toLowerCase().includes('blind box')));
+                } else if (this.selectedCategory === 'Action Figures') {
+                    list = list.filter(p => (p.category && (p.category.includes('Figure') || p.category.includes('Limited Edition'))) || (p.brand && p.brand.includes('Pop Mart')));
+                }
+            }
+
+            // 3. Sub-filter Icon Rail
+            if (this.selectedSubFilter === 'plush') {
+                list = list.filter(p => (p.category && p.category.includes('Plush')) || (p.name && p.name.toLowerCase().includes('plush')));
+            } else if (this.selectedSubFilter === 'box') {
+                list = list.filter(p => (p.category && p.category.includes('Blind Box')) || (p.name && p.name.toLowerCase().includes('box')));
+            } else if (this.selectedSubFilter === 'rare') {
+                list = list.filter(p => p.featured || (p.category && p.category.includes('Limited')) || (p.stock_status && p.stock_status.includes('Low')));
+            } else if (this.selectedSubFilter === 'in_stock') {
+                list = list.filter(p => p.stock_status === 'In Stock');
+            } else if (this.selectedSubFilter === 'under_12') {
+                list = list.filter(p => parseFloat(p.price) < 12);
+            } else if (this.selectedSubFilter === '12_15') {
+                list = list.filter(p => parseFloat(p.price) >= 12 && parseFloat(p.price) <= 15);
+            } else if (this.selectedSubFilter === 'over_15') {
+                list = list.filter(p => parseFloat(p.price) > 15);
+            }
+
+            // 4. Sort
+            if (this.sortBy === 'price_asc') {
+                list.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+            } else if (this.sortBy === 'price_desc') {
+                list.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+            } else {
+                // newest / featured
+                list.sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+            }
+
+            return list;
+        },
+
+        handleTopTab(val) {
+            if (val === 'POP NOW') {
+                const el = document.getElementById('pop-now');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                this.selectedCategory = val;
+            }
+        },
+
+        formatKhr(usdPrice) {
+            return Math.round(parseFloat(usdPrice || 0) * 4100).toLocaleString();
+        },
+
+        telegramOrderUrl(product) {
+            const khr = this.formatKhr(product.price);
+            const msg = `Hello Classy Bling! I would like to order:\nProduct: ${product.name}\nPrice: $${parseFloat(product.price).toFixed(2)} USD (~${khr} ៛)\nBrand: ${product.brand || 'Classy Bling'}`;
+            return `https://t.me/+85592917831?text=${encodeURIComponent(msg)}`;
+        }
+    }"
+>
+    <!-- Top Header Category Tabs -->
+    <div class="border-b border-slate-200 dark:border-zinc-800 mb-4 sm:mb-6 overflow-x-auto hide-scrollbar">
+        <div class="flex items-center gap-4 sm:gap-10 pb-0.5 min-w-max">
+            <!-- Tab 1: All Items -->
+            <button
+                type="button"
+                @click="handleTopTab('All')"
+                class="pb-2.5 sm:pb-3 text-xs sm:text-base font-bold transition-all relative whitespace-nowrap cursor-pointer"
+                :class="selectedCategory === 'All' ? 'text-[#229ED9] dark:text-[#38bdf8] font-black' : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'"
+            >
+                <span>All Items</span>
+                <span x-show="selectedCategory === 'All'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#229ED9] dark:bg-[#38bdf8] rounded-full"></span>
+            </button>
+
+            <!-- Tab 2: Plush Dolls -->
+            <button
+                type="button"
+                @click="handleTopTab('Plush Dolls')"
+                class="pb-2.5 sm:pb-3 text-xs sm:text-base font-bold transition-all relative whitespace-nowrap cursor-pointer"
+                :class="selectedCategory === 'Plush Dolls' ? 'text-[#229ED9] dark:text-[#38bdf8] font-black' : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'"
+            >
+                <span>Plush Dolls</span>
+                <span x-show="selectedCategory === 'Plush Dolls'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#229ED9] dark:bg-[#38bdf8] rounded-full"></span>
+            </button>
+
+            <!-- Tab 3: Blind Box -->
+            <button
+                type="button"
+                @click="handleTopTab('Blind Box')"
+                class="pb-2.5 sm:pb-3 text-xs sm:text-base font-bold transition-all relative whitespace-nowrap cursor-pointer"
+                :class="selectedCategory === 'Blind Box' ? 'text-[#229ED9] dark:text-[#38bdf8] font-black' : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'"
+            >
+                <span>Blind Box</span>
+                <span x-show="selectedCategory === 'Blind Box'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#229ED9] dark:bg-[#38bdf8] rounded-full"></span>
+            </button>
+
+            <!-- Tab 4: Action Figures -->
+            <button
+                type="button"
+                @click="handleTopTab('Action Figures')"
+                class="pb-2.5 sm:pb-3 text-xs sm:text-base font-bold transition-all relative whitespace-nowrap cursor-pointer"
+                :class="selectedCategory === 'Action Figures' ? 'text-[#229ED9] dark:text-[#38bdf8] font-black' : 'text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white'"
+            >
+                <span>Action Figures</span>
+                <span x-show="selectedCategory === 'Action Figures'" class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#229ED9] dark:bg-[#38bdf8] rounded-full"></span>
+            </button>
+
+            <!-- Tab 5: POP NOW Drops -->
+            <button
+                type="button"
+                @click="handleTopTab('POP NOW')"
+                class="pb-2.5 sm:pb-3 text-xs sm:text-base font-bold transition-all relative whitespace-nowrap text-slate-600 dark:text-zinc-400 hover:text-[#E50012] cursor-pointer flex items-center gap-1"
+            >
+                <i class="bi bi-fire text-[#E50012] text-xs"></i>
+                <span>POP NOW Drops</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Search Bar & Sort Controls -->
+    <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+        <!-- Search Input -->
+        <div class="relative flex-1">
+            <i class="bi bi-search absolute left-3 sm:left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs sm:text-sm"></i>
+            <input
+                type="text"
+                x-model="searchQuery"
+                placeholder="Search character, series, or brand..."
+                class="w-full pl-9 sm:pl-10 pr-8 sm:pr-10 py-2 sm:py-2.5 rounded-xl border border-slate-200 dark:border-zinc-800 bg-slate-50 dark:bg-zinc-900 text-slate-900 dark:text-zinc-100 text-xs sm:text-sm focus:outline-none focus:border-[#229ED9] transition-colors"
+            />
+            <button
+                type="button"
+                x-show="searchQuery"
+                @click="searchQuery = ''"
+                class="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 cursor-pointer"
+            >
+                <i class="bi bi-x-circle-fill text-xs"></i>
+            </button>
+        </div>
+
+        <!-- Sort Select -->
+        <div class="flex items-center gap-1.5 shrink-0">
+            <span class="text-[10px] sm:text-xs font-bold text-slate-400 dark:text-zinc-500 uppercase hidden sm:inline">SORT:</span>
+            <select
+                x-model="sortBy"
+                aria-label="Sort products"
+                class="text-[11px] sm:text-xs font-bold bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 rounded-xl px-2.5 sm:px-3 py-2 text-slate-800 dark:text-zinc-200 focus:outline-none focus:border-[#229ED9] cursor-pointer"
+            >
+                <option value="newest">Featured & Newest</option>
+                <option value="price_asc">Price: Low to High</option>
+                <option value="price_desc">Price: High to Low</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Two Column Signature Layout (Left Vertical Icon Rail + Right Product Grid) -->
+    <div class="flex items-start gap-2.5 sm:gap-6">
+        
+        <!-- Left Subcategory Vertical Icon Rail -->
+        <div class="flex flex-col gap-2 sm:gap-3 shrink-0 py-0.5 select-none w-11 sm:w-16">
+            <!-- 1. All -->
+            <button
+                type="button"
+                @click="selectedSubFilter = 'all'"
+                class="flex flex-col items-center justify-center py-2 px-1 sm:p-2 rounded-xl sm:rounded-2xl transition-all cursor-pointer"
+                :class="selectedSubFilter === 'all' ? 'border-2 border-[#229ED9] bg-white dark:bg-zinc-900 shadow-md text-[#229ED9]' : 'border border-slate-200/80 dark:border-zinc-800/80 bg-slate-50/70 dark:bg-zinc-950/60 hover:bg-slate-100 dark:hover:bg-zinc-900 text-slate-600 dark:text-zinc-400'"
+                title="All Products"
+            >
+                <div class="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center mb-0.5 sm:mb-1">
+                    <i class="bi bi-plus-lg text-sm sm:text-base font-bold"></i>
+                </div>
+                <span class="text-[9px] sm:text-[10px] font-bold tracking-tight text-center leading-tight">All</span>
+            </button>
+
+            <!-- 2. Plush -->
+            <button
+                type="button"
+                @click="selectedSubFilter = 'plush'"
+                class="flex flex-col items-center justify-center py-2 px-1 sm:p-2 rounded-xl sm:rounded-2xl transition-all cursor-pointer"
+                :class="selectedSubFilter === 'plush' ? 'border-2 border-[#229ED9] bg-white dark:bg-zinc-900 shadow-md text-[#229ED9]' : 'border border-slate-200/80 dark:border-zinc-800/80 bg-slate-50/70 dark:bg-zinc-950/60 hover:bg-slate-100 dark:hover:bg-zinc-900 text-slate-600 dark:text-zinc-400'"
+                title="Plush Dolls"
+            >
+                <div class="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center mb-0.5 sm:mb-1">
+                    <i class="bi bi-heart text-xs sm:text-sm"></i>
+                </div>
+                <span class="text-[9px] sm:text-[10px] font-bold tracking-tight text-center leading-tight">Plush</span>
+            </button>
+
+            <!-- 3. Box -->
+            <button
+                type="button"
+                @click="selectedSubFilter = 'box'"
+                class="flex flex-col items-center justify-center py-2 px-1 sm:p-2 rounded-xl sm:rounded-2xl transition-all cursor-pointer"
+                :class="selectedSubFilter === 'box' ? 'border-2 border-[#229ED9] bg-white dark:bg-zinc-900 shadow-md text-[#229ED9]' : 'border border-slate-200/80 dark:border-zinc-800/80 bg-slate-50/70 dark:bg-zinc-950/60 hover:bg-slate-100 dark:hover:bg-zinc-900 text-slate-600 dark:text-zinc-400'"
+                title="Blind Boxes"
+            >
+                <div class="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center mb-0.5 sm:mb-1">
+                    <i class="bi bi-box-seam text-xs sm:text-sm"></i>
+                </div>
+                <span class="text-[9px] sm:text-[10px] font-bold tracking-tight text-center leading-tight">Box</span>
+            </button>
+
+            <!-- 4. Rare -->
+            <button
+                type="button"
+                @click="selectedSubFilter = 'rare'"
+                class="flex flex-col items-center justify-center py-2 px-1 sm:p-2 rounded-xl sm:rounded-2xl transition-all cursor-pointer"
+                :class="selectedSubFilter === 'rare' ? 'border-2 border-[#229ED9] bg-white dark:bg-zinc-900 shadow-md text-[#229ED9]' : 'border border-slate-200/80 dark:border-zinc-800/80 bg-slate-50/70 dark:bg-zinc-950/60 hover:bg-slate-100 dark:hover:bg-zinc-900 text-slate-600 dark:text-zinc-400'"
+                title="Rare & Limited"
+            >
+                <div class="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center mb-0.5 sm:mb-1">
+                    <i class="bi bi-gem text-xs sm:text-sm"></i>
+                </div>
+                <span class="text-[9px] sm:text-[10px] font-bold tracking-tight text-center leading-tight">Rare</span>
+            </button>
+
+            <!-- 5. In Stock -->
+            <button
+                type="button"
+                @click="selectedSubFilter = 'in_stock'"
+                class="flex flex-col items-center justify-center py-2 px-1 sm:p-2 rounded-xl sm:rounded-2xl transition-all cursor-pointer"
+                :class="selectedSubFilter === 'in_stock' ? 'border-2 border-[#229ED9] bg-white dark:bg-zinc-900 shadow-md text-[#229ED9]' : 'border border-slate-200/80 dark:border-zinc-800/80 bg-slate-50/70 dark:bg-zinc-950/60 hover:bg-slate-100 dark:hover:bg-zinc-900 text-slate-600 dark:text-zinc-400'"
+                title="Ready to Ship"
+            >
+                <div class="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center mb-0.5 sm:mb-1">
+                    <i class="bi bi-check-circle text-xs sm:text-sm"></i>
+                </div>
+                <span class="text-[9px] sm:text-[10px] font-bold tracking-tight text-center leading-tight">In Stock</span>
+            </button>
+
+            <!-- 6. < $12 -->
+            <button
+                type="button"
+                @click="selectedSubFilter = 'under_12'"
+                class="flex flex-col items-center justify-center py-2 px-1 sm:p-2 rounded-xl sm:rounded-2xl transition-all cursor-pointer"
+                :class="selectedSubFilter === 'under_12' ? 'border-2 border-[#229ED9] bg-white dark:bg-zinc-900 shadow-md text-[#229ED9]' : 'border border-slate-200/80 dark:border-zinc-800/80 bg-slate-50/70 dark:bg-zinc-950/60 hover:bg-slate-100 dark:hover:bg-zinc-900 text-slate-600 dark:text-zinc-400'"
+                title="Under $12"
+            >
+                <div class="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center mb-0.5 sm:mb-1">
+                    <i class="bi bi-currency-dollar text-xs sm:text-sm"></i>
+                </div>
+                <span class="text-[9px] sm:text-[10px] font-bold tracking-tight text-center leading-tight">&lt; $12</span>
+            </button>
+
+            <!-- 7. $12-$15 -->
+            <button
+                type="button"
+                @click="selectedSubFilter = '12_15'"
+                class="flex flex-col items-center justify-center py-2 px-1 sm:p-2 rounded-xl sm:rounded-2xl transition-all cursor-pointer"
+                :class="selectedSubFilter === '12_15' ? 'border-2 border-[#229ED9] bg-white dark:bg-zinc-900 shadow-md text-[#229ED9]' : 'border border-slate-200/80 dark:border-zinc-800/80 bg-slate-50/70 dark:bg-zinc-950/60 hover:bg-slate-100 dark:hover:bg-zinc-900 text-slate-600 dark:text-zinc-400'"
+                title="$12 to $15"
+            >
+                <div class="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center mb-0.5 sm:mb-1">
+                    <i class="bi bi-currency-dollar text-xs sm:text-sm"></i>
+                </div>
+                <span class="text-[9px] sm:text-[10px] font-bold tracking-tight text-center leading-tight">$12-15</span>
+            </button>
+
+            <!-- 8. $15+ -->
+            <button
+                type="button"
+                @click="selectedSubFilter = 'over_15'"
+                class="flex flex-col items-center justify-center py-2 px-1 sm:p-2 rounded-xl sm:rounded-2xl transition-all cursor-pointer"
+                :class="selectedSubFilter === 'over_15' ? 'border-2 border-[#229ED9] bg-white dark:bg-zinc-900 shadow-md text-[#229ED9]' : 'border border-slate-200/80 dark:border-zinc-800/80 bg-slate-50/70 dark:bg-zinc-950/60 hover:bg-slate-100 dark:hover:bg-zinc-900 text-slate-600 dark:text-zinc-400'"
+                title="$15 and above"
+            >
+                <div class="w-5 h-5 sm:w-7 sm:h-7 rounded-full flex items-center justify-center mb-0.5 sm:mb-1">
+                    <i class="bi bi-fire text-xs sm:text-sm text-rose-500"></i>
+                </div>
+                <span class="text-[9px] sm:text-[10px] font-bold tracking-tight text-center leading-tight">$15+</span>
+            </button>
+        </div>
+
+        <!-- Right Main Product Grid -->
+        <div class="flex-1 w-full min-w-0">
+            
+            <!-- Empty State -->
+            <div x-show="filteredProducts.length === 0" class="py-14 text-center">
+                <div class="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-zinc-800 border border-slate-200 dark:border-zinc-700 mx-auto flex items-center justify-center text-slate-400 dark:text-zinc-500 mb-3 shadow-xs">
+                    <i class="bi bi-box-seam text-2xl"></i>
+                </div>
+                <h3 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+                    No matching products
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-zinc-400 mt-1">
+                    Try switching the category or resetting your filters.
+                </p>
+                <button
+                    type="button"
+                    @click="selectedCategory = 'All'; selectedSubFilter = 'all'; searchQuery = ''"
+                    class="mt-3 px-4 py-1.5 rounded-full bg-[#229ED9] text-white text-xs font-bold hover:bg-[#1e8bc0] transition cursor-pointer"
+                >
+                    Reset All Filters
+                </button>
+            </div>
+
+            <!-- Product Grid -->
+            <div
+                x-show="filteredProducts.length > 0"
+                class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2.5 sm:gap-5"
+            >
+                <template x-for="product in filteredProducts" :key="product.id">
+                    <div
+                        @click="openProductModal(product)"
+                        class="group flex flex-col cursor-pointer select-none font-sans bg-white dark:bg-zinc-900 rounded-xl overflow-hidden border border-slate-200/60 dark:border-zinc-800/80 hover:shadow-lg transition-all duration-300"
+                    >
+                        <!-- 1. Product Image: Portrait Aspect Ratio (3/4) filling top of card -->
+                        <div class="relative aspect-[3/4] w-full bg-slate-50 dark:bg-zinc-950 overflow-hidden">
+                            <!-- Subtle Sold Out Badge only if Sold Out -->
+                            <template x-if="product.stock_status === 'Sold Out'">
+                                <div class="absolute top-2 left-2 z-10">
+                                    <span class="px-2 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-black/75 text-white backdrop-blur-xs">
+                                        Sold Out
+                                    </span>
+                                </div>
+                            </template>
+
+                            <img
+                                :src="product.image_url"
+                                :alt="product.name"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                loading="lazy"
+                            />
+                        </div>
+
+                        <!-- 2. Product Info: Title & Price Exactly like Reference -->
+                        <div class="p-2.5 sm:p-3 flex flex-col justify-between flex-grow">
+                            <!-- Clean 2-line title -->
+                            <h3
+                                class="text-xs sm:text-[13px] font-medium text-slate-900 dark:text-zinc-100 line-clamp-2 leading-snug group-hover:text-[#229ED9] dark:group-hover:text-[#38bdf8] transition-colors min-h-[34px] sm:min-h-[36px]"
+                                x-text="product.name"
+                            ></h3>
+
+                            <!-- Price Display -->
+                            <div class="mt-2 flex items-baseline gap-1.5">
+                                <span class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                                    $<span x-text="parseFloat(product.price).toFixed(2)"></span>
+                                </span>
+                                <span class="text-[11px] text-slate-400 dark:text-zinc-500 font-normal" x-text="'• ' + formatKhr(product.price) + ' ៛'"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </template>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+    </div>
+
+
+    </main>
+
+    <!-- Footer (Original Classy Bling Signature Design) -->
+    <footer class="bg-slate-50/80 dark:bg-[#121214] text-slate-600 dark:text-zinc-400 border-t border-slate-200/80 dark:border-zinc-800 transition-colors select-none mt-12" id="about">
+        <!-- 1. Top Social Bar -->
+        <div class="border-b border-slate-200/80 dark:border-zinc-800/80 py-3.5 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+                <span class="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white">
+                    FOLLOW US ON
+                </span>
+
+                <div class="flex items-center gap-2">
+                    <!-- TikTok -->
+                    <a
+                        href="https://www.tiktok.com/@classy.bling"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="TikTok"
+                        class="p-2 rounded-full bg-slate-200/70 dark:bg-zinc-900 hover:bg-black hover:text-white text-slate-700 dark:text-zinc-300 transition-colors"
+                        title="Follow on TikTok"
+                    >
+                        <i class="bi bi-tiktok text-sm"></i>
+                    </a>
+
+                    <!-- Telegram -->
+                    <a
+                        href="https://t.me/+85592917831"
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label="Telegram"
+                        class="p-2 rounded-full bg-slate-200/70 dark:bg-zinc-900 hover:bg-[#229ED9]/10 text-slate-700 dark:text-zinc-300 hover:text-[#229ED9] transition-colors"
+                        title="Order on Telegram"
+                    >
+                        <i class="bi bi-send-fill text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. 3-Column Clean Main Content -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
+                
+                <!-- Column 1: Brand & Physical Location Badge -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img
+                            src="/logo_crisp.png"
+                            alt="Classy Bling Logo"
+                            class="w-11 h-11 rounded-xl object-contain bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 shadow-xs"
+                            onerror="this.src='/logo.png'"
+                        />
+                        <span class="text-xl font-black tracking-tight text-slate-900 dark:text-white font-display">
+                            CLASSY BLING
+                        </span>
+                    </div>
+                    
+                    <p class="text-xs sm:text-sm text-slate-600 dark:text-zinc-400 leading-relaxed">
+                        Curated viral TikTok blind boxes, luxury plush charms, and authentic designer art toys directly indexed from live unboxing streams.
+                    </p>
+
+                    <!-- Seamless Blended Location Address & Map Pin -->
+                    <div class="p-3.5 rounded-2xl bg-white dark:bg-zinc-900/60 border border-slate-200/90 dark:border-zinc-800 space-y-2 text-xs shadow-2xs">
+                        <div class="flex items-start gap-2.5 text-slate-800 dark:text-zinc-200 font-semibold">
+                            <div class="w-6 h-6 rounded-lg bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center shrink-0 mt-0.5">
+                                <i class="bi bi-geo-alt-fill text-xs"></i>
+                            </div>
+                            <span class="leading-snug pt-0.5">Classy Bling, Khan Por Senchey / Chom Chao, Phnom Penh, Cambodia</span>
+                        </div>
+
+                                                    <div class="pl-8.5">
+                                <a
+                                    href="https://www.google.com/maps/place/Classy+Bling/@11.523509,104.8231466,17z/data=!4m6!3m5!1s0x31094f007dfd6273:0xc9cc25eb1b5cb249!8m2!3d11.523898!4d104.8247774!16s%2Fg%2F11xm5ndfpm?entry=ttu&amp;g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-50 hover:bg-slate-100 dark:bg-zinc-800 text-slate-800 dark:text-zinc-200 hover:text-rose-600 dark:hover:text-rose-400 font-bold shadow-2xs border border-slate-200 dark:border-zinc-700/60 transition-all text-[11px]"
+                                >
+                                    <span>View on Google Maps</span>
+                                    <i class="bi bi-box-arrow-up-right text-[10px] text-slate-400"></i>
+                                </a>
+                            </div>
+                                            </div>
+
+                    <div class="flex items-center gap-2 text-xs font-bold text-emerald-600 dark:text-emerald-400 pt-0.5">
+                        <i class="bi bi-shield-check text-sm shrink-0"></i>
+                        <span>100% Genuine Factory Sealed Guarantee</span>
+                    </div>
+                </div>
+
+                <!-- Column 2: Popular Series -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white">
+                        POPULAR SERIES
+                    </h4>
+                    <ul class="space-y-2.5 text-xs sm:text-sm">
+                        <li>
+                            <a href="#pop-now" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors flex items-center gap-1.5">
+                                <i class="bi bi-fire text-[#E50012] text-xs shrink-0"></i>
+                                <span>Baby Three Zodiac Plush</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#pop-now" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">
+                                MEGA SPACE MOLLY 100%
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#pop-now" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">
+                                Nommi Pinky Energy Series
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#pop-now" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">
+                                Disney Stitch Sweet Dreams
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#pop-now" class="hover:text-rose-600 dark:hover:text-rose-400 transition-colors">
+                                Molly Baking Time Collection
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Orders & Customer Support -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-black uppercase tracking-wider text-slate-900 dark:text-white">
+                        ORDERS & SUPPORT
+                    </h4>
+                    <ul class="space-y-2.5 text-xs sm:text-sm">
+                        <li>
+                            <a
+                                href="https://t.me/+85592917831"
+                                target="_blank"
+                                rel="noreferrer"
+                                class="hover:text-[#229ED9] transition-colors flex items-center gap-2 font-bold text-[#229ED9]"
+                            >
+                                <i class="bi bi-send-fill text-xs shrink-0"></i>
+                                <span>Telegram Order: 092917831 (+85592917831)</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="https://www.tiktok.com/@classy.bling"
+                                target="_blank"
+                                rel="noreferrer"
+                                class="hover:text-slate-900 dark:hover:text-white transition-colors flex items-center gap-2"
+                            >
+                                <i class="bi bi-tiktok text-xs shrink-0 text-slate-800 dark:text-zinc-200"></i>
+                                <span>TikTok Live: @classy.bling</span>
+                            </a>
+                        </li>
+                        <li class="flex items-center gap-2 text-slate-600 dark:text-zinc-400">
+                            <i class="bi bi-truck text-emerald-600 dark:text-emerald-400 text-xs shrink-0"></i>
+                            <span>Fast Express Dispatch & Secure Packing</span>
+                        </li>
+                        <li>
+                            <span class="text-slate-500 dark:text-zinc-400">
+                                Verified Chase & Secret Probabilities
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 3. Bottom Copyright Bar -->
+        <div class="border-t border-slate-200/80 dark:border-zinc-800/80 py-6 px-4 sm:px-6 lg:px-8 bg-slate-100/70 dark:bg-zinc-950">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-500 dark:text-zinc-400">
+                <p>© 2026 CLASSY BLING. All rights reserved.</p>
+                
+                <div class="flex items-center gap-3 font-medium">
+                    <span>Verified Authenticity</span>
+                    <span>•</span>
+                    <span>Fast Dispatch</span>
+                    <span>•</span>
+                    <span>100% Genuine</span>
+                </div>
+
+                <div class="flex items-center gap-3">
+                                            <button @click="authModalOpen = true; authMode = 'login'" class="font-semibold text-slate-600 dark:text-zinc-300 hover:text-[#229ED9] cursor-pointer">
+                            Staff / Admin Login
+                        </button>
+                                    </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Global Modals & Navigation Components -->
+    <!-- Authentication Modal (Sign In / Register) -->
+<div x-show="authModalOpen"
+     x-transition:enter="transition ease-out duration-200"
+     x-transition:enter-start="opacity-0"
+     x-transition:enter-end="opacity-100"
+     x-transition:leave="transition ease-in duration-150"
+     x-transition:leave-start="opacity-100"
+     x-transition:leave-end="opacity-0"
+     class="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+     style="display: none;"
+     @keydown.escape.window="authModalOpen = false">
+
+    <!-- Modal Box -->
+    <div x-show="authModalOpen"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         @click.outside="authModalOpen = false"
+         class="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 w-full max-w-md rounded-3xl shadow-2xl p-6 sm:p-8 relative text-slate-900 dark:text-zinc-100">
+
+        <!-- Close Button -->
+        <button @click="authModalOpen = false"
+                class="w-8 h-8 rounded-full flex items-center justify-center absolute right-4 top-4 text-slate-400 hover:text-slate-700 dark:text-zinc-400 dark:hover:text-white transition cursor-pointer">
+            <i class="bi bi-x text-lg"></i>
+        </button>
+
+        <!-- Brand Icon -->
+        <div class="text-center mb-6">
+            <img src="/logo.png" alt="Classy Bling" class="w-12 h-12 mx-auto object-contain rounded-2xl bg-white p-1 shadow-sm border border-slate-200 dark:border-zinc-800 mb-2">
+            <h3 class="font-heading font-extrabold text-xl text-slate-900 dark:text-white" x-text="authMode === 'login' ? 'Welcome to Classy Bling' : 'Create an Account'"></h3>
+            <p class="text-xs text-slate-500 dark:text-zinc-400 mt-1" x-text="authMode === 'login' ? 'Sign in to access VIP orders & Admin Control Panel' : 'Register to track your viral collectible drops'"></p>
+        </div>
+
+        <!-- Mode Tabs -->
+        <div class="flex rounded-xl bg-slate-100 dark:bg-zinc-800/80 p-1 mb-6 border border-slate-200/70 dark:border-zinc-700/60">
+            <button type="button" @click="authMode = 'login'"
+                    :class="authMode === 'login' ? 'bg-white dark:bg-zinc-900 text-slate-900 dark:text-white font-bold shadow-xs' : 'text-slate-500 dark:text-zinc-400 font-medium hover:text-slate-800 dark:hover:text-zinc-200'"
+                    class="flex-1 py-1.5 text-xs rounded-lg transition text-center cursor-pointer">
+                Sign In
+            </button>
+            <button type="button" @click="authMode = 'register'"
+                    :class="authMode === 'register' ? 'bg-white dark:bg-zinc-900 text-slate-900 dark:text-white font-bold shadow-xs' : 'text-slate-500 dark:text-zinc-400 font-medium hover:text-slate-800 dark:hover:text-zinc-200'"
+                    class="flex-1 py-1.5 text-xs rounded-lg transition text-center cursor-pointer">
+                Register
+            </button>
+        </div>
+
+        <!-- Quick 1-Click Admin Demo Fill Badge -->
+        <div x-show="authMode === 'login'" class="mb-5 p-3 rounded-2xl bg-[#229ED9]/10 border border-[#229ED9]/20 flex items-center justify-between">
+            <div class="text-[11px] text-slate-700 dark:text-zinc-300">
+                <span class="font-bold text-[#229ED9] block">Admin Demo Credentials</span>
+                <span>admin@gmail.com / 123456</span>
+            </div>
+            <button type="button"
+                    @click="
+                        document.getElementById('login-email').value = 'admin@gmail.com';
+                        document.getElementById('login-password').value = '123456';
+                    "
+                    class="px-3 py-1 rounded-lg bg-[#229ED9] text-white text-xs font-bold hover:bg-[#1e8bc0] transition cursor-pointer">
+                Auto Fill
+            </button>
+        </div>
+
+        <!-- Login Form -->
+        <form x-show="authMode === 'login'" method="POST" action="/login" class="space-y-4">
+            <input type="hidden" name="_token" value="gWX9JS5tOEkDauHK7WIiqfompa2DJ3NW6ikzpxZO" autocomplete="off">            <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-zinc-300 mb-1">Email Address</label>
+                <div class="relative">
+                    <input id="login-email" type="email" name="email" value="" required autofocus
+                           placeholder="admin@gmail.com"
+                           class="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-zinc-100 focus:outline-none focus:border-[#229ED9]">
+                    <i class="bi bi-envelope text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-xs"></i>
+                </div>
+                            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-zinc-300 mb-1">Password</label>
+                <div class="relative">
+                    <input id="login-password" type="password" name="password" required
+                           placeholder="••••••"
+                           class="w-full pl-9 pr-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-zinc-100 focus:outline-none focus:border-[#229ED9]">
+                    <i class="bi bi-lock text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-xs"></i>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-between text-xs pt-1">
+                <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" name="remember" checked class="rounded border-slate-300 text-[#229ED9] focus:ring-0">
+                    <span class="text-slate-600 dark:text-zinc-400 text-[11px]">Remember me</span>
+                </label>
+            </div>
+
+            <button type="submit" class="w-full py-2.5 rounded-xl bg-[#229ED9] hover:bg-[#1d8cc2] text-white font-bold text-xs shadow-md transition cursor-pointer mt-2">
+                Sign In to Account
+            </button>
+        </form>
+
+        <!-- Register Form -->
+        <form x-show="authMode === 'register'" method="POST" action="/register" class="space-y-3" style="display: none;">
+            <input type="hidden" name="_token" value="gWX9JS5tOEkDauHK7WIiqfompa2DJ3NW6ikzpxZO" autocomplete="off">            <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-zinc-300 mb-1">Full Name</label>
+                <input type="text" name="name" required placeholder="Collector Name"
+                       class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-zinc-100 focus:outline-none focus:border-[#229ED9]">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-zinc-300 mb-1">Email Address</label>
+                <input type="email" name="email" required placeholder="collector@gmail.com"
+                       class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-zinc-100 focus:outline-none focus:border-[#229ED9]">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-zinc-300 mb-1">Password</label>
+                <input type="password" name="password" required minlength="6" placeholder="At least 6 characters"
+                       class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-zinc-100 focus:outline-none focus:border-[#229ED9]">
+            </div>
+
+            <div>
+                <label class="block text-xs font-bold text-slate-700 dark:text-zinc-300 mb-1">Confirm Password</label>
+                <input type="password" name="password_confirmation" required minlength="6" placeholder="Repeat password"
+                       class="w-full px-3 py-2 text-xs rounded-xl bg-slate-50 dark:bg-zinc-950 border border-slate-200 dark:border-zinc-800 text-slate-900 dark:text-zinc-100 focus:outline-none focus:border-[#229ED9]">
+            </div>
+
+            <button type="submit" class="w-full py-2.5 rounded-xl bg-[#229ED9] hover:bg-[#1d8cc2] text-white font-bold text-xs shadow-md transition cursor-pointer mt-3">
+                Create Account
+            </button>
+        </form>
+
+    </div>
+</div>
+    <!-- Product Detail Modal (Alpine.js Controlled) -->
+<div x-show="productModalOpen"
+     x-transition:enter="transition ease-out duration-200"
+     x-transition:enter-start="opacity-0"
+     x-transition:enter-end="opacity-100"
+     x-transition:leave="transition ease-in duration-150"
+     x-transition:leave-start="opacity-100"
+     x-transition:leave-end="opacity-0"
+     class="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4"
+     style="display: none;"
+     @keydown.escape.window="productModalOpen = false">
+
+    <!-- Modal Card Box -->
+    <div x-show="productModalOpen"
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0 scale-95"
+         x-transition:enter-end="opacity-100 scale-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100 scale-100"
+         x-transition:leave-end="opacity-0 scale-95"
+         @click.outside="productModalOpen = false"
+         class="bg-white dark:bg-zinc-900 border border-slate-200 dark:border-zinc-800 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden relative text-slate-900 dark:text-zinc-100">
+
+        <!-- Close Button -->
+        <button @click="productModalOpen = false"
+                class="w-8 h-8 rounded-full flex items-center justify-center absolute right-3 top-3 z-20 bg-white/90 dark:bg-zinc-800/90 backdrop-blur border border-slate-200 dark:border-zinc-700 text-slate-600 dark:text-zinc-300 hover:bg-slate-100 dark:hover:bg-zinc-700 transition cursor-pointer">
+            <i class="bi bi-x text-lg"></i>
+        </button>
+
+        <template x-if="activeProduct">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                <!-- Left: 3D Box / Product Photo -->
+                <div class="bg-slate-50 dark:bg-zinc-950 p-6 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-200 dark:border-zinc-800 relative">
+                    <img :src="activeProduct.image_url" :alt="activeProduct.name"
+                         class="max-h-64 object-contain rounded-2xl shadow-md transition duration-300 hover:scale-105"
+                         onerror="this.onerror=null; this.src='/logo.png';">
+                    
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-xs mt-3"
+                          :class="{
+                              'bg-emerald-500 text-white': activeProduct.stock_status === 'In Stock',
+                              'bg-amber-500 text-white': activeProduct.stock_status === 'Low Stock',
+                              'bg-sky-500 text-white': activeProduct.stock_status === 'Pre-order',
+                              'bg-rose-500 text-white': activeProduct.stock_status === 'Sold Out'
+                          }"
+                          x-text="activeProduct.stock_status">
+                    </span>
+                </div>
+
+                <!-- Right: Information & Order Action -->
+                <div class="p-6 flex flex-col justify-between space-y-4 bg-white dark:bg-zinc-900">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-zinc-500" x-text="activeProduct.brand || 'Classy Bling'"></span>
+                            <span class="text-xs text-slate-300 dark:text-zinc-600">•</span>
+                            <span class="text-xs text-[#229ED9] font-semibold" x-text="activeProduct.category"></span>
+                        </div>
+
+                        <h3 class="font-heading font-extrabold text-xl text-slate-900 dark:text-white leading-snug" x-text="activeProduct.name"></h3>
+
+                        <div class="flex items-baseline gap-3 py-1">
+                            <span class="font-heading font-black text-2xl text-slate-900 dark:text-white" x-text="'$' + Number(activeProduct.price).toFixed(2)"></span>
+                            <span class="text-xs font-bold text-[#229ED9]" x-text="'~ ' + (activeProduct.price * 4100).toLocaleString() + ' ៛'"></span>
+                        </div>
+
+                        <p class="text-xs text-slate-600 dark:text-zinc-300 leading-relaxed" x-text="activeProduct.description || 'Authentic designer toy blind box directly sourced for Classy Bling showroom Phnom Penh.'"></p>
+
+                        <!-- TikTok video link if available -->
+                        <template x-if="activeProduct.tiktok_video_url">
+                            <div class="pt-1">
+                                <a :href="activeProduct.tiktok_video_url" target="_blank"
+                                   class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-slate-800 dark:text-zinc-200 border border-slate-200 dark:border-zinc-700 transition">
+                                    <i class="bi bi-tiktok text-[#E50012]"></i>
+                                    <span>Watch TikTok Unboxing Video</span>
+                                    <i class="bi bi-box-arrow-up-right text-[10px] text-slate-400"></i>
+                                </a>
+                            </div>
+                        </template>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="pt-3 border-t border-slate-200 dark:border-zinc-800 space-y-2.5">
+                        <a :href="'https://t.me/+85592917831?text=' + encodeURIComponent('Hello Xiao yi, I would like to reserve/order: ' + activeProduct.name + ' ($' + Number(activeProduct.price).toFixed(2) + ')')"
+                           target="_blank"
+                           class="w-full py-2.5 px-4 rounded-xl bg-[#229ED9] hover:bg-[#1d8cc2] text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md hover:scale-[1.01] active:scale-[0.99] transition-all">
+                            <i class="bi bi-telegram text-base"></i>
+                            <span>Order via Telegram Hotline</span>
+                        </a>
+
+                        <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-zinc-400 pt-1">
+                            <span class="flex items-center gap-1"><i class="bi bi-shield-check text-emerald-500"></i> 100% Sealed</span>
+                            <span class="flex items-center gap-1"><i class="bi bi-truck text-[#229ED9]"></i> Fast PP Dispatch</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+</div>
+    <!-- Mobile Bottom Navigation Bar (btmnavbar) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 dark:bg-[#121214]/95 backdrop-blur-xl border-t border-slate-200/80 dark:border-zinc-800 px-4 py-2 shadow-2xl transition-colors duration-200">
+    <div class="flex items-center justify-around max-w-md mx-auto">
+        
+        <!-- Action 1: Home -->
+        <a href="/"
+           class="flex flex-col items-center gap-0.5 text-center py-1 px-2.5 rounded-xl transition text-[#229ED9] font-black">
+            <i class="bi bi-house-door-fill text-lg"></i>
+            <span class="text-[10px] font-bold">Home</span>
+        </a>
+
+        <!-- Action 2: Product (Section on Homepage) -->
+                    <a href="#products"
+               @click.prevent="document.getElementById('products')?.scrollIntoView({ behavior: 'smooth' })"
+               class="flex flex-col items-center gap-0.5 text-center py-1 px-2.5 rounded-xl transition text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white cursor-pointer">
+                <i class="bi bi-box-seam-fill text-lg"></i>
+                <span class="text-[10px] font-bold">Product</span>
+            </a>
+        
+        <!-- Action 3: Contact -->
+        <a href="/contact"
+           class="flex flex-col items-center gap-0.5 text-center py-1 px-2.5 rounded-xl transition text-slate-600 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white">
+            <i class="bi bi-telephone-fill text-lg"></i>
+            <span class="text-[10px] font-bold">Contact</span>
+        </a>
+
+        <!-- Action 4: Telegram -->
+        <a href="https://t.me/+85592917831" target="_blank"
+           class="flex flex-col items-center gap-0.5 text-center py-1 px-2.5 rounded-xl transition text-[#229ED9] hover:opacity-80">
+            <div class="relative">
+                <i class="bi bi-send-fill text-lg"></i>
+                <span class="w-2 h-2 rounded-full bg-emerald-500 absolute -top-0.5 -right-0.5 animate-pulse"></span>
+            </div>
+            <span class="text-[10px] font-bold">Telegram</span>
+        </a>
+
+        <!-- Action 5: Account / Admin Panel -->
+                    <button @click="authModalOpen = true; authMode = 'login'"
+                    class="flex flex-col items-center gap-0.5 text-center py-1 px-3 rounded-xl text-slate-600 dark:text-zinc-400 hover:text-[#229ED9] transition">
+                <i class="bi bi-person-fill text-lg"></i>
+                <span class="text-[10px]">Login</span>
+            </button>
+        
+    </div>
+</nav>
+
+    </body>
+</html>

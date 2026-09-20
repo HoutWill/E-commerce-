@@ -1,0 +1,37 @@
+{
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff": {
+    "file": "assets/bootstrap-icons-BeopsB42.woff",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff"
+  },
+  "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2": {
+    "file": "assets/bootstrap-icons-mSm7cUeB.woff2",
+    "src": "node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-BeiUMX4v.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Cgjv38q8.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "vendor/sparrowhawk-labs/pinion-ui/src/resources/fonts/pixelmplus/PixelMplus10-Bold.latin.woff2": {
+    "file": "assets/PixelMplus10-Bold.latin-e1pMlaaO.woff2",
+    "src": "vendor/sparrowhawk-labs/pinion-ui/src/resources/fonts/pixelmplus/PixelMplus10-Bold.latin.woff2"
+  },
+  "vendor/sparrowhawk-labs/pinion-ui/src/resources/fonts/pixelmplus/PixelMplus10-Bold.woff2": {
+    "file": "assets/PixelMplus10-Bold-B9O76Cqj.woff2",
+    "src": "vendor/sparrowhawk-labs/pinion-ui/src/resources/fonts/pixelmplus/PixelMplus10-Bold.woff2"
+  },
+  "vendor/sparrowhawk-labs/pinion-ui/src/resources/fonts/pixelmplus/PixelMplus10-Regular.latin.woff2": {
+    "file": "assets/PixelMplus10-Regular.latin-DL4w5ZUn.woff2",
+    "src": "vendor/sparrowhawk-labs/pinion-ui/src/resources/fonts/pixelmplus/PixelMplus10-Regular.latin.woff2"
+  },
+  "vendor/sparrowhawk-labs/pinion-ui/src/resources/fonts/pixelmplus/PixelMplus10-Regular.woff2": {
+    "file": "assets/PixelMplus10-Regular-DOkt6iZl.woff2",
+    "src": "vendor/sparrowhawk-labs/pinion-ui/src/resources/fonts/pixelmplus/PixelMplus10-Regular.woff2"
+  }
+}
